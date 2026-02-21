@@ -2,7 +2,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  metadataBase: new URL("https://YOUR_DOMAIN.com"),
+  metadataBase: new URL("https://billsmarter.app"),
   title: {
     default: "BillSmart - Travel Expense Calculator",
     template: "%s | BillSmart",
