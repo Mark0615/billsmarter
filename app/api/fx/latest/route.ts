@@ -1,33 +1,42 @@
 import { NextResponse } from "next/server";
 
+// ⚠️ 這是關鍵！必須宣告為 edge 才能在 Cloudflare Pages 執行
+export const runtime = 'edge';
+
 const DEFAULT_BASE = "USD";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
+  try {
+    const { searchParams } = new URL(req.url);
 
-  // 你前端傳的 symbols 可以是 "TWD,EUR,GBP"
-  const symbolsRaw = (searchParams.get("symbols") || "").toUpperCase().trim();
+    // 處理前端傳過來的幣別，例如 ?symbols=TWD,EUR
+    const symbolsRaw = (searchParams.get("symbols") || "").toUpperCase().trim();
 
-  // 最少也要有 USD，避免算 cross rate 時缺資料
-  const symbols = symbolsRaw
-    ? Array.from(new Set([DEFAULT_BASE, ...symbolsRaw.split(",").map(s => s.trim()).filter(Boolean)])).join(",")
-    : "";
+    // 確保包含基礎幣別
+    const symbols = symbolsRaw
+      ? Array.from(new Set([DEFAULT_BASE, ...symbolsRaw.split(",").map(s => s.trim()).filter(Boolean)])).join(",")
+      : DEFAULT_BASE;
 
-  const url = new URL("https://api.frankfurter.dev/v1/latest");
-  url.searchParams.set("base", DEFAULT_BASE);
-  if (symbols) url.searchParams.set("symbols", symbols);
+    const url = new URL("https://api.frankfurter.dev/v1/latest");
+    url.searchParams.set("base", DEFAULT_BASE);
+    if (symbols) url.searchParams.set("symbols", symbols);
 
-  const resp = await fetch(url.toString(), {
-    next: { revalidate: 3600 }, // 1 小時快取
-  });
+    // 使用 Edge Runtime 的 fetch，並設定 1 小時快取
+    const resp = await fetch(url.toString(), {
+      next: { revalidate: 3600 }, 
+    });
 
-  if (!resp.ok) {
+    if (!resp.ok) {
+      throw new Error("Frankfurter API responded with error");
+    }
+
+    const data = await resp.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("FX Rate API Error:", error);
     return NextResponse.json(
       { error: "Failed to fetch FX rates" },
       { status: 500 }
     );
   }
-
-  const data = await resp.json();
-  return NextResponse.json(data);
 }
