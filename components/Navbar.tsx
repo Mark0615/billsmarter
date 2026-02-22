@@ -1,17 +1,26 @@
 import Link from "next/link";
 
+const links = [
+  { href: "/calculator", label: "Calculator" },
+  { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact" },
+];
+
 export default function Navbar() {
   return (
-    <nav className="border-b p-4 flex justify-between">
-      <Link href="/" className="font-bold text-xl">
-        BillSmart
-      </Link>
-      <div className="space-x-4">
-        <Link href="/calculator">Calculator</Link>
-        <Link href="/how-it-works">How it works</Link>
-        <Link href="/faq">FAQ</Link>
-        <Link href="/blog">Blog</Link>
-      </div>
-    </nav>
+    <header className="siteHeader">
+      <nav className="siteNav">
+        <Link href="/" className="brand">
+          BillSmart
+        </Link>
+        <div className="navLinks">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </nav>
+    </header>
   );
 }
