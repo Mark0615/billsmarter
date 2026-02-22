@@ -18,7 +18,6 @@ type Payment = {
 const CURRENCIES = ["USD", "EUR", "JPY", "KRW", "TWD", "THB", "SGD", "HKD", "CNY", "GBP", "AUD", "CAD", "CHF"];
 
 const nf2 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
 const uid = () => Math.random().toString(36).slice(2, 10);
 const fmt2 = (n: number) => (Number.isFinite(n) ? nf2.format(n) : "0.00");
 
@@ -33,6 +32,7 @@ export default function CalculatorClient() {
   const [baseCurrency, setBaseCurrency] = useState<string>("USD");
   const [count, setCount] = useState<number>(3);
   const [names, setNames] = useState<string[]>(["Alice", "Bob", "Charlie"]);
+  const [fxError, setFxError] = useState<string>("");
 
   const filled = useMemo(() => names.map((n) => n.trim()).filter(Boolean), [names]);
 
@@ -55,7 +55,10 @@ export default function CalculatorClient() {
     if (cached && Number.isFinite(cached)) return cached;
 
     const res = await fetch(`/api/fx/latest?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`, { cache: "no-store" });
-    if (!res.ok) throw new Error(`FX API failed (${res.status})`);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data?.error || `FX API failed (${res.status})`);
+    }
 
     const data = await res.json();
     const rate = data?.rate;
@@ -66,6 +69,7 @@ export default function CalculatorClient() {
   }
 
   async function handleBaseCurrencyChange(nextBase: string) {
+    setFxError("");
     setBaseCurrency(nextBase);
     setTemp((prev) => ({ ...prev, currency: nextBase }));
 
@@ -77,16 +81,15 @@ export default function CalculatorClient() {
           return { ...payment, baseCurrency: nextBase, baseAmount: payment.amount, rateUsed: 1 };
         }
 
-        try {
-          const rate = await getFxRate(payment.currency, nextBase);
-          return { ...payment, baseCurrency: nextBase, baseAmount: payment.amount * rate, rateUsed: rate };
-        } catch {
-          return payment;
-        }
+        const rate = await getFxRate(payment.currency, nextBase);
+        return { ...payment, baseCurrency: nextBase, baseAmount: payment.amount * rate, rateUsed: rate };
       }),
-    );
+    ).catch((error: Error) => {
+      setFxError(error.message || "Cannot refresh exchange rates right now.");
+      return null;
+    });
 
-    setPayments(converted);
+    if (converted) setPayments(converted);
   }
 
   const canAdd = useMemo(() => {
@@ -99,6 +102,7 @@ export default function CalculatorClient() {
 
   async function handleAdd() {
     if (!canAdd) return;
+    setFxError("");
 
     const amountNum = Number(temp.amount);
     const from = temp.currency;
@@ -108,8 +112,8 @@ export default function CalculatorClient() {
     try {
       rate = await getFxRate(from, to);
     } catch (error) {
-      console.error(error);
-      rate = from === to ? 1 : NaN;
+      setFxError(error instanceof Error ? error.message : "FX conversion failed.");
+      return;
     }
 
     const p: Payment = {
@@ -119,8 +123,8 @@ export default function CalculatorClient() {
       currency: from,
       amount: amountNum,
       baseCurrency: to,
-      baseAmount: Number.isFinite(rate) ? amountNum * rate : amountNum,
-      rateUsed: Number.isFinite(rate) ? rate : 1,
+      baseAmount: amountNum * rate,
+      rateUsed: rate,
       note: temp.note?.trim() || "",
     };
 
@@ -203,6 +207,7 @@ export default function CalculatorClient() {
               <div className="fxText">Auto-convert payment entries to {baseCurrency}</div>
             </div>
           </div>
+          {fxError ? <p className="hint danger">FX error: {fxError}</p> : null}
         </div>
 
         <div className="doubleCol">
