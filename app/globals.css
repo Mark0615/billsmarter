@@ -1,26 +1,312 @@
-@import "tailwindcss";
+/* app/globals.css */
 
+/* ---- Base ---- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+  --shadow-sm: 0 6px 18px rgba(17, 24, 39, 0.06);
+  --radius: 16px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg) !important;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans TC", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---- Page layout ---- */
+.page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 24px 0;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.container {
+  width: min(1040px, calc(100% - 32px));
+  margin: 0 auto;
 }
+
+/* ---- Hero ---- */
+.hero {
+  text-align: center;
+  margin: 10px 0 18px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin-top: 14px;
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.badge {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fafafa;
+}
+
+/* ---- Controls ---- */
+.control {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  transition: border-color .15s ease, box-shadow .15s ease;
+  font-size: 16px; /* iOS 不會自動放大 */
+}
+
+.control:focus {
+  border-color: #cbd5e1;
+  box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.25);
+}
+
+.control.small { width: 100px; }
+
+.label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.labelInline {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- Grids ---- */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .grid2 { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+  .grid3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid4 { grid-template-columns: 1fr 1.3fr 0.7fr 1fr; }
+}
+
+/* ---- FX box ---- */
+.fxBox {
+  display: flex;
+  align-items: end;
+  min-height: 48px;
+}
+
+.fxText {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.fxSub {
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  border: 1px solid var(--border);
+  background: #111827;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform .06s ease, opacity .2s ease;
+  white-space: nowrap;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn.ghost {
+  background: #ffffff;
+  color: var(--text);
+}
+
+.btn.primary {
+  padding: 12px 18px;
+}
+
+/* ---- Add payment: amount row ---- */
+.amountRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ---- MultiSelect wrapper ---- */
+.multiWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miniActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---- Lists ---- */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.itemMain { min-width: 0; }
+.itemLine { font-size: 14px; }
+.itemSub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.itemRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemValue {
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.dot { margin: 0 6px; }
+
+.center { display: flex; justify-content: center; }
+
+/* ---- Balances ---- */
+.balanceGrid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.balanceRow {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.settleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.settleRow {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.muted { color: var(--muted); }
+.mono { font-variant-numeric: tabular-nums; }
+
+/* ---- Hints ---- */
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.hint.error { color: #b91c1c; }
