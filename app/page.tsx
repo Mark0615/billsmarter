@@ -1,30 +1,49 @@
 import Link from "next/link";
-export const runtime = 'edge';
+import CalculatorClient from "./calculator/CalculatorClient"; 
+// ↑ 這行依你的實際路徑調整：
+// 如果你的 CalculatorClient 在 app/calculator/CalculatorClient.tsx，這樣寫通常 OK
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="container"> {/* 使用 globals.css 裡的 .container */}
-      <section className="hero"> {/* 使用 globals.css 裡的 .hero */}
-        <h1 className="title">BillSmart — Split Travel Expenses Fairly</h1>
-        <p className="subtitle">
-          簡單、強大的旅遊分帳計算器，幫你快速結算團體開銷。
-        </p>
-        <Link
-          href="/calculator"
-          className="btn primary mt-6 inline-block" 
-        >
-          開始分帳
-        </Link>
+    <main>
+      {/* HERO：直接放計算器 */}
+      <section style={{ padding: "24px 0" }}>
+        <CalculatorClient />
       </section>
 
-      <section className="card"> {/* 使用 globals.css 裡的 .card */}
-        <h2 className="cardTitle">使用說明</h2>
-        <ol className="list-decimal ml-6 mt-4 space-y-2">
-          <li>新增所有參與者</li>
-          <li>輸入每一筆支出與受益人</li>
-          <li>一鍵計算最終結餘</li>
-        </ol>
+      {/* 往下滑：SEO 內容（Server Rendered） */}
+      <section id="faq" style={{ maxWidth: 960, margin: "0 auto", padding: "48px 16px" }}>
+        <h2>FAQ</h2>
+        <details>
+          <summary>BillSmart 是什麼？</summary>
+          <p>BillSmart 是一個支援多幣別、可快速分帳的工具，適合旅行、聚餐、合購。</p>
+        </details>
+        <details>
+          <summary>匯率怎麼計算？</summary>
+          <p>系統會在你輸入幣別與金額時自動換算成 Base currency（預設 USD）。</p>
+        </details>
       </section>
-    </div>
+
+      <section id="privacy" style={{ maxWidth: 960, margin: "0 auto", padding: "48px 16px" }}>
+        <h2>Privacy</h2>
+        <p>我們不需要你登入，不販售你的個資。你輸入的分帳內容預設只存在你的瀏覽器端。</p>
+        <p>
+          想看完整條款：<Link href="/privacy">Privacy Policy</Link>
+        </p>
+      </section>
+
+      <section id="blog" style={{ maxWidth: 960, margin: "0 auto", padding: "48px 16px" }}>
+        <h2>Blog</h2>
+        <p>分帳技巧、旅行理財、匯率與費用管理的小筆記。</p>
+        <p>
+          看文章：<Link href="/blog">Blog</Link>
+        </p>
+      </section>
+
+      <footer style={{ maxWidth: 960, margin: "0 auto", padding: "48px 16px" }}>
+        <Link href="/about">About</Link> ・ <Link href="/contact">Contact</Link> ・{" "}
+        <Link href="/privacy">Privacy</Link>
+      </footer>
+    </main>
   );
 }
