@@ -9,7 +9,9 @@
   --accent: #6e89ac;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
