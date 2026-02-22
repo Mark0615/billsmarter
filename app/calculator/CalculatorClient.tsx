@@ -15,9 +15,26 @@ type Payment = {
   note?: string;
 };
 
-const CURRENCIES = ["USD", "EUR", "JPY", "KRW", "TWD", "THB", "SGD", "HKD", "CNY", "GBP", "AUD", "CAD", "CHF"];
+const CURRENCIES = [
+  "USD",
+  "EUR",
+  "JPY",
+  "KRW",
+  "TWD",
+  "THB",
+  "SGD",
+  "HKD",
+  "CNY",
+  "GBP",
+  "AUD",
+  "CAD",
+  "CHF",
+];
 
-const nf2 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const nf2 = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
@@ -33,8 +50,14 @@ function resizeNames(prev: string[], nextCount: number) {
   return next;
 }
 
-function sum(nums: number[]) {
-  return nums.reduce((a, b) => a + b, 0);
+function getErrorMessage(err: unknown) {
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  try {
+    return JSON.stringify(err);
+  } catch {
+    return "Unknown error";
+  }
 }
 
 type FxResult = { rate: number; source: string; base: string; to: string };
@@ -45,14 +68,24 @@ async function fetchFxRate(from: string, to: string): Promise<FxResult> {
   url.searchParams.set("to", to);
 
   const resp = await fetch(url.toString(), { cache: "no-store" });
-  const data = await resp.json();
+  const data: unknown = await resp.json();
 
   if (!resp.ok) {
-    const msg = data?.error || `FX request failed (${resp.status})`;
+    const msg =
+      typeof data === "object" &&
+      data !== null &&
+      "error" in data &&
+      typeof (data as { error?: unknown }).error === "string"
+        ? (data as { error: string }).error
+        : `FX request failed (${resp.status})`;
+
     throw new Error(msg);
   }
-  if (!data?.rate || typeof data.rate !== "number") throw new Error("FX rate missing");
-  return data as FxResult;
+
+  const maybe = data as Partial<FxResult>;
+  if (!maybe || typeof maybe.rate !== "number") throw new Error("FX rate missing");
+
+  return maybe as FxResult;
 }
 
 export default function CalculatorClient() {
@@ -94,20 +127,26 @@ export default function CalculatorClient() {
     setBaseCurrency(nextBase);
     setFxError("");
 
-    // Recompute all existing payments baseAmount when base currency changes
     if (payments.length === 0) return;
 
     try {
       const updated: Payment[] = [];
       for (const p of payments) {
         if (p.currency === nextBase) {
-          updated.push({ ...p, baseCurrency: nextBase, baseAmount: p.amount, rateUsed: 1 });
+          updated.push({
+            ...p,
+            baseCurrency: nextBase,
+            baseAmount: p.amount,
+            rateUsed: 1,
+          });
           continue;
         }
 
         const key = `${p.currency}->${nextBase}`;
         const cached = latestFxRef.current[key];
-        const fx = cached ? { rate: cached, source: "cache", base: p.currency, to: nextBase } : await fetchFxRate(p.currency, nextBase);
+        const fx = cached
+          ? { rate: cached, source: "cache", base: p.currency, to: nextBase }
+          : await fetchFxRate(p.currency, nextBase);
 
         latestFxRef.current[key] = fx.rate;
 
@@ -119,8 +158,8 @@ export default function CalculatorClient() {
         });
       }
       setPayments(updated);
-    } catch (e: any) {
-      setFxError(e?.message || "FX conversion failed");
+    } catch (e: unknown) {
+      setFxError(getErrorMessage(e) || "FX conversion failed");
     }
   }
 
@@ -139,7 +178,9 @@ export default function CalculatorClient() {
       if (from !== to) {
         const key = `${from}->${to}`;
         const cached = latestFxRef.current[key];
-        const fx = cached ? { rate: cached, source: "cache", base: from, to } : await fetchFxRate(from, to);
+        const fx = cached
+          ? { rate: cached, source: "cache", base: from, to }
+          : await fetchFxRate(from, to);
         latestFxRef.current[key] = fx.rate;
 
         rateUsed = fx.rate;
@@ -160,8 +201,8 @@ export default function CalculatorClient() {
 
       setPayments((prev) => [p, ...prev]);
       setTemp((prev) => ({ ...prev, amount: "", note: "" }));
-    } catch (e: any) {
-      setFxError(e?.message || "Failed to add payment");
+    } catch (e: unknown) {
+      setFxError(getErrorMessage(e) || "Failed to add payment");
     }
   }
 
@@ -232,14 +273,19 @@ export default function CalculatorClient() {
       <div className="card currencyCard">
         <div className="cardHead">
           <h2>
-            <span aria-hidden="true">1️⃣</span> Choose your base currency
+            <span aria-hidden="true">🪙</span> 1 Choose your base currency
           </h2>
           <div className="pill">Base: {baseCurrency}</div>
         </div>
+
         <div className="row">
           <div className="field grow">
             <div className="label">Base currency (calculation & default)</div>
-            <select className="control" value={baseCurrency} onChange={(e) => void handleBaseCurrencyChange(e.target.value)}>
+            <select
+              className="control"
+              value={baseCurrency}
+              onChange={(e) => void handleBaseCurrencyChange(e.target.value)}
+            >
               {CURRENCIES.map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -251,6 +297,7 @@ export default function CalculatorClient() {
             <div className="fxText">Auto-convert payment entries to {baseCurrency}</div>
           </div>
         </div>
+
         {fxError ? <p className="hint danger">FX error: {fxError}</p> : null}
       </div>
 
@@ -258,11 +305,10 @@ export default function CalculatorClient() {
         <div className="card">
           <div className="cardHead">
             <h2>
-              <span aria-hidden="true">2️⃣</span> People
+              <span aria-hidden="true">👥</span> 2 People
             </h2>
           </div>
 
-          {/* ✅ 這裡加 marginBottom，讓 Count 跟第一個人名不要黏在一起 */}
           <div className="row" style={{ marginBottom: 12 }}>
             <div className="field countField">
               <div className="label">Count</div>
@@ -299,13 +345,16 @@ export default function CalculatorClient() {
               />
             ))}
           </div>
-          {filled.length !== count && <div className="hint danger">Please fill all names before adding payments.</div>}
+
+          {filled.length !== count && (
+            <div className="hint danger">Please fill all names before adding payments.</div>
+          )}
         </div>
 
         <div className="card">
           <div className="cardHead">
             <h2>
-              <span aria-hidden="true">3️⃣</span> Add payment
+              <span aria-hidden="true">💳</span> 3 Add payment
             </h2>
             <div className="muted">Default: {baseCurrency}</div>
           </div>
@@ -313,7 +362,12 @@ export default function CalculatorClient() {
           <div className="payGrid">
             <div className="field">
               <label className="label">Payer</label>
-              <select className="control" value={temp.payer} onChange={(e) => setTemp({ ...temp, payer: e.target.value })} disabled={filled.length === 0}>
+              <select
+                className="control"
+                value={temp.payer}
+                onChange={(e) => setTemp({ ...temp, payer: e.target.value })}
+                disabled={filled.length === 0}
+              >
                 <option value="">Select payer</option>
                 {filled.map((p) => (
                   <option key={p} value={p}>
@@ -335,7 +389,12 @@ export default function CalculatorClient() {
 
             <div className="field currencyField">
               <label className="label">Currency</label>
-              <select className="control" value={temp.currency} onChange={(e) => setTemp({ ...temp, currency: e.target.value })} disabled={filled.length === 0}>
+              <select
+                className="control"
+                value={temp.currency}
+                onChange={(e) => setTemp({ ...temp, currency: e.target.value })}
+                disabled={filled.length === 0}
+              >
                 {CURRENCIES.map((c) => (
                   <option key={c} value={c}>
                     {c}
@@ -346,7 +405,14 @@ export default function CalculatorClient() {
 
             <div className="field">
               <label className="label">Amount</label>
-              <input className="control" inputMode="decimal" placeholder="0.00" value={temp.amount} onChange={(e) => setTemp({ ...temp, amount: e.target.value })} disabled={filled.length === 0} />
+              <input
+                className="control"
+                inputMode="decimal"
+                placeholder="0.00"
+                value={temp.amount}
+                onChange={(e) => setTemp({ ...temp, amount: e.target.value })}
+                disabled={filled.length === 0}
+              />
             </div>
           </div>
 
@@ -354,7 +420,13 @@ export default function CalculatorClient() {
             <button className="btn primary" onClick={() => void addPayment()} disabled={!canAdd}>
               Add payment →
             </button>
-            <input className="control" placeholder="Note (optional) e.g., taxi / dinner" value={temp.note} onChange={(e) => setTemp({ ...temp, note: e.target.value })} disabled={filled.length === 0} />
+            <input
+              className="control"
+              placeholder="Note (optional) e.g., taxi / dinner"
+              value={temp.note}
+              onChange={(e) => setTemp({ ...temp, note: e.target.value })}
+              disabled={filled.length === 0}
+            />
           </div>
 
           <div className="muted" style={{ marginTop: 10 }}>
@@ -366,7 +438,7 @@ export default function CalculatorClient() {
       <div className="card">
         <div className="cardHead">
           <h2>
-            <span aria-hidden="true">4️⃣</span> Result
+            <span aria-hidden="true">✅</span> 4 Result
           </h2>
           <div className="muted">Settled in {baseCurrency}</div>
         </div>
@@ -392,6 +464,7 @@ export default function CalculatorClient() {
             <div className="muted" style={{ marginTop: 10 }}>
               Suggested transfers
             </div>
+
             <div className="transfers">
               {transfers.length === 0 ? (
                 <div className="transferRow">
@@ -413,6 +486,7 @@ export default function CalculatorClient() {
             <div className="muted" style={{ marginTop: 14 }}>
               Payment list
             </div>
+
             <div className="list">
               {payments.map((p) => (
                 <div key={p.id} className="item">
@@ -421,7 +495,8 @@ export default function CalculatorClient() {
                       {p.payer} paid {p.currency} {nf2.format(p.amount)}
                     </div>
                     <div className="itemSub">
-                      for {p.beneficiaries.join(", ")} • {baseCurrency} {nf2.format(p.baseAmount)} (rate {nf2.format(p.rateUsed)})
+                      for {p.beneficiaries.join(", ")} • {baseCurrency}{" "}
+                      {nf2.format(p.baseAmount)} (rate {nf2.format(p.rateUsed)})
                       {p.note ? ` • ${p.note}` : ""}
                     </div>
                   </div>

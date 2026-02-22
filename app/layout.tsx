@@ -3,7 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-export const runtime = "edge";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "https://cdn-icons-png.flaticon.com/128/7839/7839025.png",
+    icon: "/icon.png",
   },
 };
 
