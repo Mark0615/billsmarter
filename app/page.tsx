@@ -1,50 +1,97 @@
-import Link from "next/link";
-import AdSlot from "@/components/AdSlot";
+import Image from "next/image";
 import CalculatorClient from "./calculator/CalculatorClient";
+
+const featureItems = [
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/14875/14875254.png",
+    title: "No More Math",
+    text: "Enter payments and we handle the split logic automatically, including who paid and who owes.",
+  },
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/2164/2164712.png",
+    title: "Fair Splitting",
+    text: "Supports mixed currencies and converts into one base unit so everyone settles with confidence.",
+  },
+  {
+    icon: "https://cdn-icons-png.flaticon.com/128/456/456112.png",
+    title: "Data Control",
+    text: "No required login flow for this calculator, making quick split sessions private and easy.",
+  },
+];
+
+const faqItems = [
+  {
+    q: "Can I split one payment for multiple people?",
+    a: "Yes. Use the ‘Pay for’ multi-select dropdown and choose one, many, or select all.",
+  },
+  {
+    q: "Do I need to use the same currency for every expense?",
+    a: "No. Each payment can use a different currency and is converted to the base currency automatically.",
+  },
+  {
+    q: "What happens if exchange rates are temporarily unavailable?",
+    a: "BillSmart shows a clear FX error and prevents saving wrong converted amounts.",
+  },
+];
 
 export default function HomePage() {
   return (
     <div className="homeStack">
-      <CalculatorClient />
-
-      <AdSlot slot="1234567890" className="containerCard" label="Advertisement" />
-
-      <section className="containerCard" id="how-it-works">
-        <h2>How it works</h2>
-        <ol className="contentList">
-          <li>
-            Set your base currency (default USD), then add traveler names.
-          </li>
-          <li>
-            Add payments with original currency. BillSmart converts each item to base currency with live FX.
-          </li>
-          <li>
-            Read final balances and transfer instructions instantly.
-          </li>
-        </ol>
-      </section>
-
-      <section className="containerCard" id="faq">
-        <h2>FAQ</h2>
-        <details>
-          <summary>Can I split one payment for multiple people?</summary>
-          <p>Yes. Use the “Pay for” multi-select dropdown and choose one, many, or select all.</p>
-        </details>
-        <details>
-          <summary>Do I need to use the same currency for every expense?</summary>
-          <p>No. Each payment can use a different currency and is converted to the base currency automatically.</p>
-        </details>
-        <details>
-          <summary>Is data stored on your server?</summary>
-          <p>Currently this tool works client-side for quick calculations. For policy details, check our privacy page.</p>
-        </details>
-      </section>
-
-      <section className="containerCard">
-        <h2>Resources</h2>
+      <section className="heroBanner">
+        <h1>
+          <b>BillSmart</b> | The smartest split for any expense
+        </h1>
         <p>
-          Read our guides in <Link href="/blog">Blog</Link> or contact us via <Link href="/contact">Contact</Link>.
+          Choose a base currency, add mixed-currency payments, and settle fairly
+          with one final result.
         </p>
+      </section>
+
+      <section className="calculatorShell">
+        <CalculatorClient />
+      </section>
+
+      {/* WHY */}
+      <section className="featureSectionPlain" aria-labelledby="why-billsmart">
+        <h2 id="why-billsmart" className="sectionTitle">
+          Why Choose BillSmart
+        </h2>
+        <p className="sectionLead">Simple and fair splitting, made easy.</p>
+
+        <div className="featureGridPlain">
+          {featureItems.map((item) => (
+            <article key={item.title} className="featureItem">
+              <Image
+                src={item.icon}
+                alt={item.title}
+                width={44}
+                height={44}
+                className="featureIconImagePlain"
+                unoptimized
+              />
+              <h3 className="featureTitle">{item.title}</h3>
+              <p className="featureText">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Divider between WHY and FAQ */}
+      <hr className="sectionDivider" />
+
+      {/* FAQ */}
+      <section className="faqWrap" id="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title" className="sectionTitle">
+          FAQ
+        </h2>
+        <div className="faqGrid">
+          {faqItems.map((item) => (
+            <article key={item.q} className="faqCard">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );

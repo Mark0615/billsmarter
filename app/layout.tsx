@@ -3,12 +3,11 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
-export const runtime = "edge";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
   title: {
-    default: "BillSmart - Split Bills with Live FX Calculator",
+    default: "BillSmart - The smartest split for any expense",
     template: "%s | BillSmart",
   },
   description:
@@ -16,13 +15,21 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx" crossOrigin="anonymous" strategy="afterInteractive" />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <Navbar />
         <main className="siteMain">{children}</main>
       </body>

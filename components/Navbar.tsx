@@ -8,19 +8,20 @@ const links = [
 
 export default function Navbar() {
   return (
-    <header className="siteHeader">
-      <nav className="siteNav">
-        <Link href="/" className="brand">
-          BillSmart
+    <header className="nav">
+      <div className="navInner">
+        <Link href="/" className="brand" aria-label="BillSmart home">
+          <span className="brandText">BillSmart</span>
         </Link>
-        <div className="navLinks">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
+
+        <nav className="navLinks" aria-label="Primary">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
             </Link>
           ))}
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }
