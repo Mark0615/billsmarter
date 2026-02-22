@@ -273,7 +273,7 @@ export default function CalculatorClient() {
       <div className="card currencyCard">
         <div className="cardHead">
           <h2>
-            <span aria-hidden="true">🪙</span> 1 Choose your base currency
+            <span aria-hidden="true">1️⃣</span> Choose your base currency
           </h2>
           <div className="pill">Base: {baseCurrency}</div>
         </div>
@@ -305,7 +305,7 @@ export default function CalculatorClient() {
         <div className="card">
           <div className="cardHead">
             <h2>
-              <span aria-hidden="true">👥</span> 2 People
+              <span aria-hidden="true">2️⃣</span> People
             </h2>
           </div>
 
@@ -354,7 +354,7 @@ export default function CalculatorClient() {
         <div className="card">
           <div className="cardHead">
             <h2>
-              <span aria-hidden="true">💳</span> 3 Add payment
+              <span aria-hidden="true">3️⃣</span> Add payment
             </h2>
             <div className="muted">Default: {baseCurrency}</div>
           </div>
@@ -438,7 +438,7 @@ export default function CalculatorClient() {
       <div className="card">
         <div className="cardHead">
           <h2>
-            <span aria-hidden="true">✅</span> 4 Result
+            <span aria-hidden="true">4️⃣</span> Result
           </h2>
           <div className="muted">Settled in {baseCurrency}</div>
         </div>
