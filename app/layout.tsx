@@ -1,26 +1,30 @@
+import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-export const runtime = 'edge';
-export const metadata = {
+
+export const runtime = "edge";
+
+export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
   title: {
-    default: "BillSmart - Travel Expense Calculator",
+    default: "BillSmart - Split Bills with Live FX Calculator",
     template: "%s | BillSmart",
   },
   description:
-    "Split travel expenses fairly in seconds. Smart group expense settlement tool.",
+    "BillSmart helps groups split expenses with live exchange rates, clear settlement results, and travel budgeting guides.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx" crossOrigin="anonymous" strategy="afterInteractive" />
         <Navbar />
-        <main className="max-w-4xl mx-auto p-6">{children}</main>
+        <main className="siteMain">{children}</main>
       </body>
     </html>
   );
