@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pages:build": "next build && npx @cloudflare/next-on-pages"
   },
   "dependencies": {
     "next": "15.1.7",
@@ -23,11 +24,5 @@
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
-}
-{
-  "scripts": {
-    "build": "next build",
-    "pages:build": "next build && npx @cloudflare/next-on-pages"
   }
 }

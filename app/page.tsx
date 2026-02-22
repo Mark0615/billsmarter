@@ -4,17 +4,17 @@ import CalculatorClient from "./calculator/CalculatorClient";
 const featureItems = [
   {
     icon: "https://cdn-icons-png.flaticon.com/128/14875/14875254.png",
-    title: "No more math",
+    title: "No More Math",
     text: "Enter payments and we handle the split logic automatically, including who paid and who owes.",
   },
   {
     icon: "https://cdn-icons-png.flaticon.com/128/2164/2164712.png",
-    title: "Fair splitting",
+    title: "Fair Splitting",
     text: "Supports mixed currencies and converts into one base unit so everyone settles with confidence.",
   },
   {
     icon: "https://cdn-icons-png.flaticon.com/128/456/456112.png",
-    title: "Data control",
+    title: "Data Control",
     text: "No required login flow for this calculator, making quick split sessions private and easy.",
   },
 ];
@@ -30,7 +30,7 @@ const faqItems = [
   },
   {
     q: "What happens if exchange rates are temporarily unavailable?",
-    a: "BillSmart now shows a clear FX error and prevents saving wrong converted amounts.",
+    a: "BillSmart shows a clear FX error and prevents saving wrong converted amounts.",
   },
 ];
 
@@ -41,31 +41,49 @@ export default function HomePage() {
         <h1>
           <b>BillSmart</b> | The smartest split for any expense
         </h1>
-        <p>Choose a base currency, add mixed-currency payments, and settle fairly with one final result.</p>
+        <p>
+          Choose a base currency, add mixed-currency payments, and settle fairly
+          with one final result.
+        </p>
       </section>
 
       <section className="calculatorShell">
         <CalculatorClient />
       </section>
 
-      <hr className="sectionDivider" />
-
-      <section className="containerCard featureSection" aria-labelledby="why-billsmart">
-        <h2 id="why-billsmart">Why choose BillSmart?</h2>
+      {/* WHY */}
+      <section className="featureSectionPlain" aria-labelledby="why-billsmart">
+        <h2 id="why-billsmart" className="sectionTitle">
+          Why Choose BillSmart
+        </h2>
         <p className="sectionLead">Simple and fair splitting, made easy.</p>
-        <div className="featureGrid">
+
+        <div className="featureGridPlain">
           {featureItems.map((item) => (
-            <article key={item.title} className="featureCard">
-              <Image src={item.icon} alt={item.title} width={52} height={52} className="featureIconImage" unoptimized />
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+            <article key={item.title} className="featureItem">
+              <Image
+                src={item.icon}
+                alt={item.title}
+                width={44}
+                height={44}
+                className="featureIconImagePlain"
+                unoptimized
+              />
+              <h3 className="featureTitle">{item.title}</h3>
+              <p className="featureText">{item.text}</p>
             </article>
           ))}
         </div>
       </section>
 
+      {/* Divider between WHY and FAQ */}
+      <hr className="sectionDivider" />
+
+      {/* FAQ */}
       <section className="faqWrap" id="faq" aria-labelledby="faq-title">
-        <h2 id="faq-title">FAQ</h2>
+        <h2 id="faq-title" className="sectionTitle">
+          FAQ
+        </h2>
         <div className="faqGrid">
           {faqItems.map((item) => (
             <article key={item.q} className="faqCard">
