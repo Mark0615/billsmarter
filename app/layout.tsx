@@ -1,6 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-
+export const runtime = 'edge';
 export const metadata = {
   metadataBase: new URL("https://billsmarter.app"),
   title: {
