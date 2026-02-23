@@ -1,4 +1,10 @@
 import Link from "next/link";
+import { Rajdhani } from "next/font/google";
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["700"],
+});
 
 const links = [
   { href: "/calculator", label: "Calculator" },
@@ -11,7 +17,7 @@ export default function Navbar() {
     <header className="nav">
       <div className="navInner">
         <Link href="/" className="brand" aria-label="BillSmart home">
-          <span className="brandText">BillSmart</span>
+          <span className={`${rajdhani.className} brandText`}>BillSmart</span>
         </Link>
 
         <nav className="navLinks" aria-label="Primary">

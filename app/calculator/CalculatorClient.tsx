@@ -91,6 +91,7 @@ async function fetchFxRate(from: string, to: string): Promise<FxResult> {
 export default function CalculatorClient() {
   const [baseCurrency, setBaseCurrency] = useState<string>("USD");
   const [count, setCount] = useState<number>(3);
+  const [countInput, setCountInput] = useState<string>("3");
   const [names, setNames] = useState<string[]>(["Alice", "Bob", "Charlie"]);
 
   const [fxError, setFxError] = useState<string>("");
@@ -122,6 +123,13 @@ export default function CalculatorClient() {
     if (!Number.isFinite(amt) || amt <= 0) return false;
     return true;
   }, [count, filled.length, temp.amount, temp.beneficiaries.length, temp.payer]);
+
+  function applyCount(nextValue: number) {
+    const nextCount = Math.max(2, Math.min(20, nextValue || 2));
+    setCount(nextCount);
+    setCountInput(String(nextCount));
+    setNames((prev) => resizeNames(prev, nextCount));
+  }
 
   async function handleBaseCurrencyChange(nextBase: string) {
     setBaseCurrency(nextBase);
@@ -317,12 +325,25 @@ export default function CalculatorClient() {
                 type="number"
                 min={2}
                 max={20}
-                value={count}
+                inputMode="numeric"
+                value={countInput}
                 onChange={(e) => {
-                  const nextCount = Math.max(2, Math.min(20, Number(e.target.value) || 2));
-                  setCount(nextCount);
-                  setNames((prev) => resizeNames(prev, nextCount));
+                  const raw = e.target.value;
+                  if (raw === "") {
+                    setCountInput("");
+                    return;
+                  }
+                  if (!/^\d+$/.test(raw)) return;
+
+                  setCountInput(raw);
+
+                  const nextValue = Number(raw);
+                  if (nextValue >= 2 && nextValue <= 20) {
+                    setCount(nextValue);
+                    setNames((prev) => resizeNames(prev, nextValue));
+                  }
                 }}
+                onBlur={() => applyCount(Number(countInput))}
               />
             </div>
           </div>
