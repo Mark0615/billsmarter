@@ -16,8 +16,8 @@ export default function ContactPage() {
         <p className="font-semibold">Email</p>
         <p>
           {/* TODO: 換成你的信箱 */}
-          <a className="underline" href="mailto:hello@yourdomain.com">
-            hello@yourdomain.com
+          <a className="underline" href="mailto:hello@billsmarter.app">
+            hello@billsmarter.app
           </a>
         </p>
       </div>

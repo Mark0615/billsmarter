@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
   title: {
-    default: "BillSmart - The smartest split for any expense",
+    default: "BillSmart - The Smartest Split For Any Expense",
     template: "%s | BillSmart",
   },
   description:
@@ -16,7 +16,11 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 

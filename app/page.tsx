@@ -39,7 +39,7 @@ export default function HomePage() {
     <div className="homeStack">
       <section className="heroBanner">
         <h1>
-          <b>BillSmart</b> | The smartest split for any expense
+          <b>BillSmart</b> | The Smartest Split For Any Expense
         </h1>
         <p>
           Choose a base currency, add mixed-currency payments, and settle fairly

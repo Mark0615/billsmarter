@@ -20,6 +20,7 @@ body {
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
     Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  overflow-x: hidden;
 }
 
 a {
@@ -27,8 +28,11 @@ a {
 }
 
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 30;
   background: rgba(240, 246, 252, 0.72);
   backdrop-filter: blur(10px);
@@ -43,6 +47,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
+  position: relative;
 }
 
 .brand {
@@ -72,7 +77,7 @@ a {
 }
 
 .brandText {
-  font-size: 2.05rem;
+  font-size: 2.25rem;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -83,6 +88,40 @@ a {
   flex-wrap: wrap;
 }
 
+.mobileToggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 145, 171, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mobileToggleBars,
+.mobileToggleBars::before,
+.mobileToggleBars::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #2b3b52;
+  border-radius: 999px;
+  content: "";
+  position: relative;
+}
+
+.mobileToggleBars::before {
+  position: absolute;
+  top: -6px;
+}
+
+.mobileToggleBars::after {
+  position: absolute;
+  top: 6px;
+}
+
 .navLinks a {
   color: #344861;
   font-weight: 600;
@@ -90,31 +129,133 @@ a {
 
 @media (max-width: 640px) {
   .navInner {
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-start;
     gap: 10px;
-    padding: 12px 14px;
+    padding: 12px 56px 12px 14px;
   }
 
   .brandText {
-    font-size: 1.75rem; /* 手機稍微小一點避免撐開 */
+    font-size: 1.95rem; /* 手機稍微小一點避免撐開 */
   }
 
   .navLinks {
-    width: 100%;
-    justify-content: center; /* 連結置中 */
-    gap: 14px;               /* 間距縮小 */
+    display: none;
   }
 
   .navLinks a {
     font-size: 0.95rem;
   }
+
+  .mobileToggle {
+    display: inline-flex;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 45;
+  }
+}
+
+@media (min-width: 641px) {
+  .mobileToggle {
+    display: none !important;
+  }
+
+  .mobileBackdrop,
+  .mobilePanel {
+    display: none !important;
+  }
+
+  .navLinks {
+    display: flex !important;
+  }
+}
+
+.mobileBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 35, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  z-index: 100; /* 提高 z-index 確保蓋在畫面上方 */
+}
+
+.mobileBackdrop.isOpen {
+  opacity: 1;
+  pointer-events: auto; /* 展開時改為 auto，讓遮罩可以被點擊關閉 */
+}
+
+.mobilePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh; /* 關鍵修正 2：使用 100dvh 確保高度完美貼合手機螢幕 */
+  width: min(78vw, 320px);
+  background: #ffffff;
+  border-left: 1px solid rgba(124, 145, 171, 0.25);
+  box-shadow: -16px 0 36px rgba(20, 36, 60, 0.22);
+  transform: translateX(100%);
+  transition: transform 0.24s ease;
+  z-index: 101; /* 確保選單在遮罩之上 */
+  padding: 14px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 1;
+  overflow-y: auto; /* 關鍵修正 3：改為 overflow-y: auto，如果連結太多就可以滑動，不會被裁切 */
+  will-change: transform;
+}
+
+.mobilePanel.isOpen {
+  transform: translateX(0);
+}
+
+.mobilePanelHead {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.mobilePanelTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.mobileClose {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(124, 145, 171, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mobileNavLinks {
+  display: grid;
+  gap: 8px;
+  background: #ffffff;
+  padding-top: 4px;
+}
+
+.mobileNavLinks a {
+  color: #2f4158;
+  font-weight: 700;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(124, 145, 171, 0.22);
+  box-shadow: 0 2px 10px rgba(16, 28, 46, 0.06);
 }
 
 .siteMain {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 20px 16px 70px;
+  padding: 92px 16px 70px;
 }
 
 .homeStack,
@@ -122,6 +263,12 @@ a {
 .gridSection {
   display: grid;
   gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .siteMain {
+    padding-top: 82px;
+  }
 }
 
 .heroBanner {
@@ -493,4 +640,94 @@ a {
   box-shadow: 0 18px 44px rgba(22, 41, 64, 0.16);
   padding: 8px;
   z-index: 50;
+}
+
+/* ===== Responsive Navbar (mobile full-screen menu) ===== */
+
+.desktopOnly { display: none; }
+.mobileOnly { display: inline-flex; }
+
+@media (min-width: 641px) {
+  .desktopOnly { display: flex; }
+  .mobileOnly { display: none; }
+}
+
+/* hamburger button */
+.hamburgerBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 145, 171, 0.25);
+  background: rgba(255, 255, 255, 0.78);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hamburgerIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* overlay covers entire screen */
+.mobileMenuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.25); /* 灰黑遮罩 */
+}
+
+/* full white panel */
+.mobileMenuPanel {
+  position: fixed;
+  inset: 0;                 /* ✅ 全滿版到最底 */
+  background: #ffffff;      /* ✅ 全白底 */
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  overflow: auto;
+}
+
+/* top bar inside menu */
+.mobileMenuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(124, 145, 171, 0.18);
+  margin-bottom: 12px;
+}
+
+.mobileMenuTitle {
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.mobileMenuClose {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 145, 171, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* menu items */
+.mobileMenuNav {
+  display: grid;
+  gap: 12px;
+}
+
+.mobileMenuItem {
+  display: block;
+  padding: 16px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(124, 145, 171, 0.18);
+  background: #ffffff;
+  color: #162233;
+  font-weight: 800;
+  font-size: 1.1rem;
 }

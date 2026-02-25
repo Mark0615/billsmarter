@@ -95,6 +95,7 @@ export default function CalculatorClient() {
   const [names, setNames] = useState<string[]>(["Alice", "Bob", "Charlie"]);
 
   const [fxError, setFxError] = useState<string>("");
+  const [fxNotice, setFxNotice] = useState<string>("");
 
   const [payments, setPayments] = useState<Payment[]>([]);
   const [temp, setTemp] = useState<{
@@ -134,11 +135,13 @@ export default function CalculatorClient() {
   async function handleBaseCurrencyChange(nextBase: string) {
     setBaseCurrency(nextBase);
     setFxError("");
+    setFxNotice("");
 
     if (payments.length === 0) return;
 
     try {
       const updated: Payment[] = [];
+      let usedBackup = false;
       for (const p of payments) {
         if (p.currency === nextBase) {
           updated.push({
@@ -157,6 +160,7 @@ export default function CalculatorClient() {
           : await fetchFxRate(p.currency, nextBase);
 
         latestFxRef.current[key] = fx.rate;
+        if (fx.source === "backup-table") usedBackup = true;
 
         updated.push({
           ...p,
@@ -166,6 +170,11 @@ export default function CalculatorClient() {
         });
       }
       setPayments(updated);
+      setFxNotice(
+        usedBackup
+          ? "FX data was temporarily unavailable. Using backup USD rates."
+          : ""
+      );
     } catch (e: unknown) {
       setFxError(getErrorMessage(e) || "FX conversion failed");
     }
@@ -173,6 +182,7 @@ export default function CalculatorClient() {
 
   async function addPayment() {
     setFxError("");
+    setFxNotice("");
     if (!canAdd) return;
 
     const amt = Number(temp.amount);
@@ -193,6 +203,9 @@ export default function CalculatorClient() {
 
         rateUsed = fx.rate;
         baseAmount = amt * fx.rate;
+        if (fx.source === "backup-table") {
+          setFxNotice("FX data was temporarily unavailable. Using backup USD rates.");
+        }
       }
 
       const p: Payment = {
@@ -307,6 +320,7 @@ export default function CalculatorClient() {
         </div>
 
         {fxError ? <p className="hint danger">FX error: {fxError}</p> : null}
+        {!fxError && fxNotice ? <p className="hint warn">{fxNotice}</p> : null}
       </div>
 
       <div className="doubleCol">
