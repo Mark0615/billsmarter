@@ -4,6 +4,7 @@ export const metadata = {
 };
 
 const posts = [
+  // --- 原本的 3 篇文章 ---
   {
     slug: "how-to-split-group-expense-fairly",
     title: "How to Split Group Expenses Fairly?",
@@ -21,6 +22,24 @@ const posts = [
     title: "Cash vs. Card Payments When Traveling",
     summary:
       "When to use cash, when to swipe, and how to avoid hidden FX fees.",
+  },
+  {
+    slug: "roommate-shared-expenses-split-guide",
+    title: "Roommate Shared Expenses: 5 Hidden Costs",
+    summary:
+      "Learn how to fairly split shared living expenses and avoid roommate drama.",
+  },
+  {
+    slug: "how-to-split-restaurant-and-bar-bills",
+    title: "How to Split Restaurant and Bar Bills",
+    summary:
+      "Learn the most elegant ways to split the check fairly without ruining the night.",
+  },
+  {
+    slug: "how-to-split-event-tickets-with-friends", 
+    title: "How to Split Concert and Sports Event Tickets",
+    summary:
+      "Learn how to track and split these major event expenses easily.",
   },
 ];
 
