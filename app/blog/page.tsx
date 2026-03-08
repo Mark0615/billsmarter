@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Blog | BillSmart",
+  title: "Blog",
   description: "Tips, guides, and updates about splitting travel expenses fairly.",
 };
 

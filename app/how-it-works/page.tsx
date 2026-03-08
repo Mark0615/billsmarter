@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "How It Works | BillSmart",
+  title: "How It Works",
   description: "Learn how to use BillSmart to split expenses and calculate settlements.",
 };
 

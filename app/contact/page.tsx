@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact | BillSmart",
+  title: "Contact",
   description: "Contact BillSmart for feedback, issues, or partnership inquiries.",
 };
 

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "FAQ | BillSmart",
+  title: "FAQ",
   description: "Frequently asked questions about BillSmart and bill splitting.",
 };
 

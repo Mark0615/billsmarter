@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Privacy Policy | BillSmart",
+  title: "Privacy Policy",
   description: "Privacy Policy for BillSmart, including analytics and advertising cookies.",
 };
 
