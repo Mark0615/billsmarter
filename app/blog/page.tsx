@@ -4,7 +4,6 @@ export const metadata = {
 };
 
 const posts = [
-  // --- 原本的 3 篇文章 ---
   {
     slug: "how-to-split-group-expense-fairly",
     title: "How to Split Group Expenses Fairly?",
@@ -36,7 +35,7 @@ const posts = [
       "Learn the most elegant ways to split the check fairly without ruining the night.",
   },
   {
-    slug: "how-to-split-event-tickets-with-friends", 
+    slug: "how-to-split-event-tickets-with-friends",
     title: "How to Split Concert and Sports Event Tickets",
     summary:
       "Learn how to track and split these major event expenses easily.",

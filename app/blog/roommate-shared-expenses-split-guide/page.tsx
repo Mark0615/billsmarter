@@ -23,8 +23,8 @@ export default function RoommateExpensesPage() {
           These are the silent budget drainers. Who bought the last pack of toilet paper? Who is replacing the dish soap? If the same person always ends up paying for these essentials, resentment will build quickly.
         </p>
         <ul className="list-disc pl-6 mb-6">
-          <li><strong>The Mistake:</strong> The "whoever notices it's empty buys it" method. This is a trap that punishes the most responsible roommate.</li>
-          <li><strong>The Solution:</strong> Create a "House Kitty." Everyone contributes $20 at the start of the month to a shared envelope or digital fund exclusively for household supplies. Alternatively, track every purchase and settle up at the end of the month using a split bill calculator.</li>
+          <li><strong>The Mistake:</strong> The &quot;whoever notices it&apos;s empty buys it&quot; method. This is a trap that punishes the most responsible roommate.</li>
+          <li><strong>The Solution:</strong> Create a &quot;House Kitty.&quot; Everyone contributes $20 at the start of the month to a shared envelope or digital fund exclusively for household supplies. Alternatively, track every purchase and settle up at the end of the month using a split bill calculator.</li>
         </ul>
 
         <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">2. Shared Groceries and Spices</h2>
@@ -32,7 +32,7 @@ export default function RoommateExpensesPage() {
           Cooking together can be fun, but splitting the grocery bill gets complicated when Roommate A cooks every night and Roommate B only eats at home twice a week. 
         </p>
         <p>
-          <strong>The Solution:</strong> Basic pantry items (cooking oil, salt, pepper) should be split equally using the house fund. For fresh produce or expensive items (like olive oil or specialty sauces), the rule should be "buy your own." If you do a massive shared grocery run, keep the receipt and itemize who bought what immediately.
+          <strong>The Solution:</strong> Basic pantry items (cooking oil, salt, pepper) should be split equally using the house fund. For fresh produce or expensive items (like olive oil or specialty sauces), the rule should be &quot;buy your own.&quot; If you do a massive shared grocery run, keep the receipt and itemize who bought what immediately.
         </p>
 
         <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">3. Internet and Streaming Subscriptions (Netflix, Spotify)</h2>
@@ -68,7 +68,7 @@ export default function RoommateExpensesPage() {
           Roommate life is full of small, overlapping debts. You bought the trash bags yesterday, your roommate paid the electric bill today. Trying to figure out who owes who at the end of the month can take hours of math.
         </p>
         <p className="mb-8">
-          That’s where BillSmarter comes in. Just log your expenses as they happen. At the end of the month, our smart calculator will tell you exactly how to settle up with the fewest possible transactions. Keep your friendships strong and your math simple!
+          That&apos;s where BillSmarter comes in. Just log your expenses as they happen. At the end of the month, our smart calculator will tell you exactly how to settle up with the fewest possible transactions. Keep your friendships strong and your math simple!
         </p>
 
         <div className="bg-blue-50 p-8 rounded-xl text-center border border-blue-100">

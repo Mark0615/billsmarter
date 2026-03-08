@@ -15,7 +15,7 @@ export default function EventTicketsSplitPage() {
         </h1>
         
         <p className="mb-8 text-gray-600">
-          Traveling with friends to see your favorite artist live or attending a major international sports event is an unforgettable experience. However, these mega-events come with massive financial logistics: expensive grandstand tickets, aggressive ticketing queues, and hidden foreign transaction fees. If you don't track these costs properly from day one, settling the debts later will be a massive headache.
+          Traveling with friends to see your favorite artist live or attending a major international sports event is an unforgettable experience. However, these mega-events come with massive financial logistics: expensive grandstand tickets, aggressive ticketing queues, and hidden foreign transaction fees. If you don&apos;t track these costs properly from day one, settling the debts later will be a massive headache.
         </p>
 
         <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">The 3 Major Hurdles of Event Expenses</h2>
@@ -30,12 +30,12 @@ export default function EventTicketsSplitPage() {
         
         <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">1. Wait for the Final Credit Card Statement</h3>
         <p>
-          If you bought tickets in a foreign currency, never use Google's exchange rate on the day of purchase to calculate what your friends owe you. Wait a few days for the transaction to fully clear on your banking app. Use the final billed amount in your local currency (which includes all hidden bank fees) and divide that by the number of tickets. 
+          If you bought tickets in a foreign currency, never use Google&apos;s exchange rate on the day of purchase to calculate what your friends owe you. Wait a few days for the transaction to fully clear on your banking app. Use the final billed amount in your local currency (which includes all hidden bank fees) and divide that by the number of tickets. 
         </p>
 
         <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">2. Use Clear Transfer Notes</h3>
         <p>
-          When your friends transfer you hundreds of dollars for their share of the tickets, make sure they write a clear memo (e.g., "F1 Grandstand Ticket" or "Taylor Swift VIP"). If the event is canceled or postponed months later and you need to issue refunds, you will have a clear paper trail of who paid what.
+          When your friends transfer you hundreds of dollars for their share of the tickets, make sure they write a clear memo (e.g., &quot;F1 Grandstand Ticket&quot; or &quot;Taylor Swift VIP&quot;). If the event is canceled or postponed months later and you need to issue refunds, you will have a clear paper trail of who paid what.
         </p>
 
         <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">3. Create a Dedicated Expense Ledger</h3>
@@ -49,7 +49,7 @@ export default function EventTicketsSplitPage() {
           Make BillSmarter Your Event Financial Manager
         </h2>
         <p>
-          Whether it’s the massive upfront cost of the tickets or the smaller on-site expenses for drinks and merch, you can throw it all into BillSmarter. 
+          Whether it&apos;s the massive upfront cost of the tickets or the smaller on-site expenses for drinks and merch, you can throw it all into BillSmarter. 
         </p>
         <p className="mb-8">
           Once the concert is over and the race is won, hit calculate. Our algorithm will sort through the chaos and provide a clean, optimized list of who needs to pay whom. Focus on the event, and let us handle the accounting!

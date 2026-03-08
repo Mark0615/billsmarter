@@ -30,9 +30,9 @@ export default function RestaurantBarSplitPage() {
           This is the golden rule of group dining. Take the total cost of the shared food (like appetizers and pizzas) and divide it equally among the group. Then, calculate the alcohol separately. If you bought a bottle of wine to share among three people, only those three people split the cost of the bottle.
         </p>
 
-        <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">Rule 2: Declare "Going Dutch" Before You Order</h3>
+        <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">Rule 2: Declare &quot;Going Dutch&quot; Before You Order</h3>
         <p>
-          If you are dining at an expensive or fine-dining restaurant, set the expectation early. A simple "Hey guys, should we just ask for separate checks or pay for what we order today?" before looking at the menu relieves all pressure. Everyone can then order the lobster or the side salad without feeling guilty or resentful.
+          If you are dining at an expensive or fine-dining restaurant, set the expectation early. A simple &quot;Hey guys, should we just ask for separate checks or pay for what we order today?&quot; before looking at the menu relieves all pressure. Everyone can then order the lobster or the side salad without feeling guilty or resentful.
         </p>
 
         <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">Rule 3: Round Up to Cover Tax and Tip</h3>
