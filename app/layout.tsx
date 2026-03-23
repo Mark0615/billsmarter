@@ -37,6 +37,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://nap5k.com/tag.min.js"
+          data-zone="10767896"
+          strategy="lazyOnload" 
+        />
+        <Script
+          src="https://5gvci.com/act/files/tag.min.js?z=10767892"
+          data-cfasync="false"
+          strategy="lazyOnload" 
+        />
         <Navbar />
         <main className="siteMain">{children}</main>
       </body>
