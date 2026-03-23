@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
+  other: {
+    "monetag" : "2eb2d660667a4d2aece6dc3bf3083799",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
