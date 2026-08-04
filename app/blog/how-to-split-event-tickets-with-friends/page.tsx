@@ -1,9 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
 
-export const metadata = {
-  title: 'How to Split Concert and Sports Event Tickets with Friends | BillSmarter',
-  description: 'Buying group tickets for concerts or Formula 1 races often involves massive upfront costs and foreign transaction fees. Learn how to track and split these major event expenses easily.',
+export const metadata: Metadata = {
+  title: 'How to Split Concert and Sports Event Tickets with Friends',
+  description: 'Group tickets mean one person fronting thousands upfront, plus foreign transaction fees nobody budgeted for. How to track and split major event costs from day one.',
+  alternates: { canonical: '/blog/how-to-split-event-tickets-with-friends' },
 };
 
 export default function EventTicketsSplitPage() {
@@ -13,7 +16,9 @@ export default function EventTicketsSplitPage() {
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           How to Split Concert and Sports Event Tickets with Friends
         </h1>
-        
+
+        <PostMeta slug="how-to-split-event-tickets-with-friends" />
+
         <p className="mb-8 text-gray-600">
           Traveling with friends to see your favorite artist live or attending a major international sports event is an unforgettable experience. However, these mega-events come with massive financial logistics: expensive grandstand tickets, aggressive ticketing queues, and hidden foreign transaction fees. If you don&apos;t track these costs properly from day one, settling the debts later will be a massive headache.
         </p>

@@ -1,9 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
 
-export const metadata = {
-  title: 'How to Split Restaurant and Bar Bills: A Guide for Big Groups | BillSmarter',
-  description: 'Splitting the bill at a restaurant or bar is always awkward, especially when alcohol is involved. Learn the most elegant ways to split the check fairly without ruining the night.',
+export const metadata: Metadata = {
+  title: 'How to Split Restaurant and Bar Bills: A Guide for Big Groups',
+  description: 'The alcohol gap, the person who only had a salad, and the tip nobody accounts for. How to split a restaurant or bar check fairly without ruining the night.',
+  alternates: { canonical: '/blog/how-to-split-restaurant-and-bar-bills' },
 };
 
 export default function RestaurantBarSplitPage() {
@@ -13,7 +16,9 @@ export default function RestaurantBarSplitPage() {
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           How to Split Restaurant and Bar Bills: An Elegant Guide for Big Groups
         </h1>
-        
+
+        <PostMeta slug="how-to-split-restaurant-and-bar-bills" />
+
         <p className="mb-8 text-gray-600">
           Gathering with friends for a great dinner or a night out at a bar is supposed to be relaxing. But the moment the waiter drops the leather bill folder on the table, the mood often shifts to anxiety. If everyone ordered similar items, an even split is easy. But what if one person ordered an expensive steak and top-shelf whiskey, while another just had a salad and tap water? Here is how to handle the check elegantly.
         </p>

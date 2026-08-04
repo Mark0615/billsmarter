@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
@@ -22,14 +25,12 @@ export const metadata: Metadata = {
     shortcut: "/icon.png",
     apple: "/icon.png",
   },
-  other: {
-    "monetag" : "2eb2d660667a4d2aece6dc3bf3083799",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
       <body>
         <Script
           async
@@ -37,18 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        <Script
-          src="https://nap5k.com/tag.min.js"
-          data-zone="10767896"
-          strategy="lazyOnload" 
-        />
-        <Script
-          src="https://5gvci.com/act/files/tag.min.js?z=10767892"
-          data-cfasync="false"
-          strategy="lazyOnload" 
-        />
         <Navbar />
         <main className="siteMain">{children}</main>
+        <Footer />
       </body>
     </html>
   );

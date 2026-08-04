@@ -1,74 +1,50 @@
-export const metadata = {
-  title: "Blog",
-  description: "Tips, guides, and updates about splitting travel expenses fairly.",
-};
+import type { Metadata } from "next";
+import Link from "next/link";
+import { formatPostDate, posts } from "./posts";
 
-const posts = [
-  {
-    slug: "how-to-split-group-expense-fairly",
-    title: "How to Split Group Expenses Fairly?",
-    summary:
-      "A practical guide to even, proportional, and itemized splits without awkwardness.",
-  },
-  {
-    slug: "best-ways-to-split-expenses-when-traveling-with-friends",
-    title: "Best Ways to Split Expenses When Traveling with Friends",
-    summary:
-      "Travel-focused strategies for multi-currency trips and uneven budgets.",
-  },
-  {
-    slug: "cash-vs-card-payments-when-traveling",
-    title: "Cash vs. Card Payments When Traveling",
-    summary:
-      "When to use cash, when to swipe, and how to avoid hidden FX fees.",
-  },
-  {
-    slug: "roommate-shared-expenses-split-guide",
-    title: "Roommate Shared Expenses: 5 Hidden Costs",
-    summary:
-      "Learn how to fairly split shared living expenses and avoid roommate drama.",
-  },
-  {
-    slug: "how-to-split-restaurant-and-bar-bills",
-    title: "How to Split Restaurant and Bar Bills",
-    summary:
-      "Learn the most elegant ways to split the check fairly without ruining the night.",
-  },
-  {
-    slug: "how-to-split-event-tickets-with-friends",
-    title: "How to Split Concert and Sports Event Tickets",
-    summary:
-      "Learn how to track and split these major event expenses easily.",
-  },
-];
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Guides on splitting shared expenses: what counts as fair, how to handle mixed currencies on a trip, and how to raise money with friends without souring the evening.",
+  alternates: { canonical: "/blog" },
+};
 
 export default function BlogPage() {
   return (
-    <main className="max-w-3xl mx-auto p-6 space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-bold">Blog</h1>
-        <p className="text-slate-600">
-          Short guides on splitting bills, travel expenses, and best practices.
+    <div className="prosePage">
+      <header style={{ display: "grid", gap: "10px" }}>
+        <h1>Guides</h1>
+        <p className="lead">
+          The parts of shared spending a calculator can&rsquo;t solve — fairness when
+          incomes differ, currency fees nobody budgets for, and how to bring up money
+          with people you like. Written and edited by{" "}
+          <Link href="/about">Mark</Link>.
         </p>
       </header>
 
-      <section className="grid gap-4">
+      <section style={{ display: "grid", gap: "16px" }}>
         {posts.map((post) => (
-          <article
-            key={post.slug}
-            className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-          >
-            <h2 className="text-xl font-semibold text-slate-900">{post.title}</h2>
-            <p className="mt-2 text-slate-600">{post.summary}</p>
-            <a
-              className="mt-4 inline-flex text-slate-900 font-semibold underline"
+          <article key={post.slug} className="card">
+            <h2 style={{ fontSize: "1.2rem", fontWeight: 800, margin: "0 0 6px" }}>
+              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+            </h2>
+            <p className="proseMeta" style={{ margin: "0 0 10px" }}>
+              <time dateTime={post.publishedAt}>{formatPostDate(post.publishedAt)}</time>
+              <span aria-hidden="true"> · </span>
+              {post.readingTime}
+            </p>
+            <p style={{ margin: "0 0 12px", lineHeight: 1.7, color: "#35435a" }}>
+              {post.summary}
+            </p>
+            <Link
               href={`/blog/${post.slug}`}
+              style={{ fontWeight: 700, color: "var(--accent)" }}
             >
-              Read article
-            </a>
+              Read the guide &rarr;
+            </Link>
           </article>
         ))}
       </section>
-    </main>
+    </div>
   );
 }

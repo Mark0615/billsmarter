@@ -1,11 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
+
+export const metadata: Metadata = {
+  title: 'Best Ways to Split Expenses When Traveling with Friends',
+  description:
+    'How to handle a shared trip budget across currencies: settling as you go, who fronts the big bookings, and what to agree on before you fly.',
+  alternates: {
+    canonical: '/blog/best-ways-to-split-expenses-when-traveling-with-friends',
+  },
+};
 
 const TravelExpenseBlog: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 font-sans text-gray-800 bg-white">
-      {/* SEO TITLE: Best Ways to Split Expenses When Traveling with Friends (2026 Guide) */}
-      
       <article>
         <header className="mb-12">
           <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Travel & Finance</span>
@@ -15,6 +24,7 @@ const TravelExpenseBlog: React.FC = () => {
           <p className="text-xl text-gray-600 leading-relaxed">
             From Tokyo to Taipei, traveling in a group is a test of friendship. Don't let the math get in the way of the memories.
           </p>
+          <PostMeta slug="best-ways-to-split-expenses-when-traveling-with-friends" />
         </header>
 
         <section className="prose prose-lg max-w-none">
@@ -59,7 +69,7 @@ const TravelExpenseBlog: React.FC = () => {
 
           <h2 className="text-2xl font-bold text-slate-800 mt-10 mb-4">Conclusion: Settle Up Before You Land</h2>
           <p className="mb-6 text-lg">
-            The best way to split expenses is to do it **as you go**. Don't wait until the trip is over. By the time you land back home, everyone should already know exactly what they owe. 
+            The best way to split expenses is to do it <strong>as you go</strong>. Don't wait until the trip is over. By the time you land back home, everyone should already know exactly what they owe. 
           </p>
           <p className="mb-10 text-lg">
             Using a smart tool that handles the math and the exchange rates means you can spend your flight home looking through photos, not receipts.

@@ -1,19 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
+
+export const metadata: Metadata = {
+  title: 'Cash vs. Card Payments When Traveling: How to Choose',
+  description:
+    'Where a card beats cash abroad, where it quietly costs you 3-5%, and how to spot dynamic currency conversion before you tap.',
+  alternates: { canonical: '/blog/cash-vs-card-payments-when-traveling' },
+};
 
 const CashVsCardBlog: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 font-sans text-gray-800 bg-white">
-      {/* SEO TITLE: Cash vs Card Payments Traveling: How to Choose for Best Rates (2026) */}
-
       <article>
         <header className="mb-12 border-b pb-10">
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">
             Cash vs. Card Payments When Traveling: How Do I Choose?
           </h1>
-          <p className="text-lg text-gray-500 uppercase font-semibold">
-            Global Spending Guide • 8 Minute Read
-          </p>
+          <PostMeta slug="cash-vs-card-payments-when-traveling" />
         </header>
 
         <section className="prose prose-lg max-w-none leading-relaxed">
@@ -27,7 +32,7 @@ const CashVsCardBlog: React.FC = () => {
 
           <h2 className="text-2xl font-bold text-gray-800 mt-10 mb-4">When to Choose: The Credit Card</h2>
           <p className="mb-4">
-            For 90% of your travel, a **Travel Credit Card (with No Foreign Transaction Fees)** is your best friend.
+            For 90% of your travel, a <strong>travel credit card with no foreign transaction fees</strong> is your best friend.
           </p>
           <ul className="list-disc pl-6 space-y-3 mb-8 text-gray-700">
             <li><strong>The Exchange Rate:</strong> Credit card networks (Visa/Mastercard) offer the "Interbank Rate," which is much better than what you'll get at a physical booth.</li>

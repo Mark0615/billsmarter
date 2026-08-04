@@ -1,26 +1,25 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
+
+export const metadata: Metadata = {
+  title: 'How to Split Group Expenses Fairly: Even, Proportional and Itemized',
+  description:
+    'When an even split stops being fair, how income-based and itemized splitting work, and why tax and tip quietly cost the person holding the card.',
+  alternates: { canonical: '/blog/how-to-split-group-expense-fairly' },
+};
 
 const FairExpenseBlog: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 font-sans text-gray-900 bg-white">
-      {/* SEO Metadata (Commented for your reference) */}
-      {/* Title: How to Split Group Expenses Fairly: The Definitive Guide */}
-      {/* Description: Learn the best methods for splitting bills without losing friends. From even splits to proportional sharing. */}
-
       <article>
         <header className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-indigo-900">
             How to Split Group Expenses Fairly?
           </h1>
-          <div className="flex justify-center items-center text-gray-500 text-sm mb-4">
-            <span>By Finance Expert</span>
-            <span className="mx-2">•</span>
-            <span>12 Min Read</span>
-            <span className="mx-2">•</span>
-            <span>Updated Feb 2026</span>
-          </div>
-          <img 
+          <PostMeta slug="how-to-split-group-expense-fairly" />
+          <img
             src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" 
             alt="Group of friends looking at a bill" 
             className="w-full h-96 object-cover rounded-2xl shadow-lg"
@@ -102,10 +101,6 @@ const FairExpenseBlog: React.FC = () => {
         </section>
       </article>
 
-      {/* FOOTER / GEO SEO TAGS */}
-      <footer className="mt-20 text-center text-gray-400 text-xs border-t pt-8">
-        <p>Serving users globally from New York to Taipei. Best group expense app 2026.</p>
-      </footer>
     </div>
   );
 };

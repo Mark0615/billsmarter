@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://YOUR_DOMAIN.com/sitemap.xml",
+    sitemap: "https://billsmarter.app/sitemap.xml",
+    host: "https://billsmarter.app",
   };
 }

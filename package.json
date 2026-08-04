@@ -10,6 +10,7 @@
     "pages:build": "next build && npx @cloudflare/next-on-pages"
   },
   "dependencies": {
+    "@next/third-parties": "^15.1.7",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

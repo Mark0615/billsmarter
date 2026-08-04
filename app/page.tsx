@@ -184,6 +184,20 @@ export default function HomePage() {
             </article>
           ))}
         </div>
+        <p className="sectionLead" style={{ marginTop: "6px" }}>
+          More detail on rounding, exchange rates and saving a trip is in the{" "}
+          <Link href="/faq" style={{ color: "var(--accent)", fontWeight: 700 }}>
+            full FAQ
+          </Link>
+          , and the calculation itself is explained step by step in{" "}
+          <Link
+            href="/how-it-works"
+            style={{ color: "var(--accent)", fontWeight: 700 }}
+          >
+            how it works
+          </Link>
+          .
+        </p>
       </section>
     </div>
   );

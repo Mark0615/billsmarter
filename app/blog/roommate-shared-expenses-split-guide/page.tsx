@@ -1,9 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import PostMeta from '../PostMeta';
 
-export const metadata = {
-  title: 'Roommate Shared Expenses: 5 Hidden Costs That Cause Conflicts and How to Split Them | BillSmarter',
-  description: 'Living with roommates? Rent is easy to split, but what about toilet paper, groceries, and cleaning supplies? Learn how to fairly split shared living expenses and avoid roommate drama.',
+export const metadata: Metadata = {
+  title: 'Roommate Shared Expenses: 5 Hidden Costs That Cause Conflicts',
+  description: 'Rent is easy to split. Toilet paper, groceries and cleaning supplies are where resentment builds. Five shared costs that cause roommate conflict, and how to split each one.',
+  alternates: { canonical: '/blog/roommate-shared-expenses-split-guide' },
 };
 
 export default function RoommateExpensesPage() {
@@ -13,7 +16,9 @@ export default function RoommateExpensesPage() {
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           Roommate Shared Expenses: 5 Hidden Costs That Cause Conflicts and How to Split Them
         </h1>
-        
+
+        <PostMeta slug="roommate-shared-expenses-split-guide" />
+
         <p className="mb-8 text-gray-600">
           Moving in with friends or new roommates is an exciting milestone. However, financial disagreements are the number one killer of a peaceful household. Most people agree on how to split rent and utilities on day one, but what about the hidden everyday costs? In this guide, we break down the top 5 expenses that usually cause roommate drama and provide practical strategies to split them fairly.
         </p>
