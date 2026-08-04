@@ -5,7 +5,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+// Container ID is public (it ships in the page source), so it lives here as the
+// default. Set NEXT_PUBLIC_GTM_ID to point a preview deploy at another container.
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-PK4CMHRF";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
