@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import PostMeta from '../PostMeta';
 
@@ -19,11 +20,6 @@ const FairExpenseBlog: React.FC = () => {
             How to Split Group Expenses Fairly?
           </h1>
           <PostMeta slug="how-to-split-group-expense-fairly" />
-          <img
-            src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" 
-            alt="Group of friends looking at a bill" 
-            className="w-full h-96 object-cover rounded-2xl shadow-lg"
-          />
         </header>
 
         {/* INTRODUCTION */}
@@ -92,12 +88,12 @@ const FairExpenseBlog: React.FC = () => {
           <p className="text-lg font-bold text-indigo-300">
             Keep your friendships fun, and leave the math to us.
           </p>
-          <a
-            href="/calculator"
+          <Link
+            href="/"
             className="mt-8 inline-block bg-white text-indigo-900 px-8 py-3 rounded-full font-bold hover:bg-indigo-100 transition shadow-lg"
           >
-            Try Our Smart Splitter Today
-          </a>
+            Try the BillSmart calculator
+          </Link>
         </section>
       </article>
 

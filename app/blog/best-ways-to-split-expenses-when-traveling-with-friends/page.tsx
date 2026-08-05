@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import PostMeta from '../PostMeta';
 
@@ -78,13 +79,13 @@ const TravelExpenseBlog: React.FC = () => {
 
         <div className="bg-blue-600 rounded-2xl p-8 text-center text-white">
           <h3 className="text-2xl font-bold mb-4">Make Your Next Trip Stress-Free</h3>
-          <p className="mb-6 opacity-90">Our smart splitter handles 150+ currencies so you don't have to.</p>
-          <a
-            href="/calculator"
+          <p className="mb-6 opacity-90">BillSmart converts mixed-currency payments into one settlement, with no account needed.</p>
+          <Link
+            href="/"
             className="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition"
           >
             Start Splitting for Free
-          </a>
+          </Link>
         </div>
       </article>
     </div>

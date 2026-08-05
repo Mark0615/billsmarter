@@ -10,7 +10,7 @@ const rajdhani = Rajdhani({
 });
 
 const links = [
-  { href: "/calculator", label: "Calculator" },
+  { href: "/", label: "Calculator" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/blog", label: "Blog" },
   { href: "/faq", label: "FAQ" },

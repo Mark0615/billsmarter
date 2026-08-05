@@ -1,6 +1,43 @@
-import Image from "next/image";
 import Link from "next/link";
-import CalculatorClient from "./calculator/CalculatorClient";
+import CalculatorClient from "@/components/CalculatorClient";
+
+/**
+ * Inline so the homepage carries no third-party image requests and no
+ * icon-library attribution obligation.
+ */
+const iconProps = {
+  width: 44,
+  height: 44,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.6,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  "aria-hidden": true,
+};
+
+const CalculatorIcon = () => (
+  <svg {...iconProps}>
+    <rect x="4" y="2.5" width="16" height="19" rx="2.5" />
+    <path d="M8 7h8M8 12h2m3 0h3M8 16.5h2m3 0h3" />
+  </svg>
+);
+
+const ScalesIcon = () => (
+  <svg {...iconProps}>
+    <path d="M12 3.5v17M6 20.5h12M4 8.5l8-2.5 8 2.5" />
+    <path d="M4 8.5 1.8 14a3.2 3.2 0 0 0 4.4 0L4 8.5Z" />
+    <path d="M20 8.5 17.8 14a3.2 3.2 0 0 0 4.4 0L20 8.5Z" />
+  </svg>
+);
+
+const LockIcon = () => (
+  <svg {...iconProps}>
+    <rect x="4" y="10" width="16" height="11" rx="2.5" />
+    <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14.5v2.5" />
+  </svg>
+);
 
 const howItWorksItems = [
   {
@@ -19,17 +56,17 @@ const howItWorksItems = [
 
 const featureItems = [
   {
-    icon: "https://cdn-icons-png.flaticon.com/128/14875/14875254.png",
+    Icon: CalculatorIcon,
     title: "No More Math",
     text: "Enter payments and we handle the complex split logic automatically, including who paid and who owes.",
   },
   {
-    icon: "https://cdn-icons-png.flaticon.com/128/2164/2164712.png",
+    Icon: ScalesIcon,
     title: "Fair Splitting",
     text: "Supports mixed currencies and converts them into one base unit so everyone settles with confidence.",
   },
   {
-    icon: "https://cdn-icons-png.flaticon.com/128/456/456112.png",
+    Icon: LockIcon,
     title: "Data Control",
     text: "No login or registration required, making quick split sessions entirely private and easy.",
   },
@@ -123,18 +160,13 @@ export default function HomePage() {
         <p className="sectionLead">Simple and fair splitting, made easy.</p>
 
         <div className="featureGridPlain">
-          {featureItems.map((item) => (
-            <article key={item.title} className="featureItem">
-              <Image
-                src={item.icon}
-                alt={item.title}
-                width={44}
-                height={44}
-                className="featureIconImagePlain"
-                unoptimized
-              />
-              <h3 className="featureTitle">{item.title}</h3>
-              <p className="featureText">{item.text}</p>
+          {featureItems.map(({ Icon, title, text }) => (
+            <article key={title} className="featureItem">
+              <span className="featureIconImagePlain">
+                <Icon />
+              </span>
+              <h3 className="featureTitle">{title}</h3>
+              <p className="featureText">{text}</p>
             </article>
           ))}
         </div>

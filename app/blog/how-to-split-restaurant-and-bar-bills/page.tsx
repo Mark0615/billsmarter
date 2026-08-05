@@ -58,7 +58,7 @@ export default function RestaurantBarSplitPage() {
         </p>
 
         <div className="bg-blue-50 p-8 rounded-xl text-center border border-blue-100">
-          <Link href="/calculator" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+          <Link href="/" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
             Open the Bill Splitter Now
           </Link>
         </div>

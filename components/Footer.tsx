@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const productLinks = [
-  { href: "/calculator", label: "Calculator" },
+  { href: "/", label: "Calculator" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/faq", label: "FAQ" },
 ];
@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
 
       <div className="siteFooterBase">
-        <p>© {new Date().getFullYear()} BillSmart. Built and maintained by Mark in Taipei.</p>
+        <p>© {new Date().getFullYear()} BillSmart</p>
         <p>
           Results are suggestions, not financial advice. Always confirm amounts before
           transferring money.

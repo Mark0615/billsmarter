@@ -578,7 +578,14 @@ a {
 }
 
 .featureIconImagePlain {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
+  background: #ffffff;
+  color: var(--accent);
   box-shadow: 0 10px 22px rgba(40, 67, 101, 0.14);
 }
 
@@ -858,12 +865,36 @@ a {
   margin: 0;
 }
 
+/*
+ * Tailwind's preflight strips list markers, and `display: grid` on the list
+ * would drop them again by removing `list-item` from the children — so both
+ * the list style and the item display are set back explicitly.
+ */
 .prosePage ul,
 .prosePage ol {
-  display: grid;
-  gap: 8px;
-  padding-left: 22px;
+  padding-left: 26px;
   margin: 0;
+}
+
+.prosePage ul {
+  list-style: disc outside;
+}
+
+.prosePage ol {
+  list-style: decimal outside;
+}
+
+.prosePage li {
+  display: list-item;
+  margin: 0 0 8px;
+}
+
+.prosePage li:last-child {
+  margin-bottom: 0;
+}
+
+.prosePage li::marker {
+  color: var(--accent);
 }
 
 .prosePage .lead {

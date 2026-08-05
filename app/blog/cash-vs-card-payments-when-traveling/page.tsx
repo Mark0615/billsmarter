@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import PostMeta from '../PostMeta';
 
@@ -77,12 +78,12 @@ const CashVsCardBlog: React.FC = () => {
 
         <footer className="border-t pt-10 mt-10 text-center">
           <p className="text-gray-500 italic mb-4">Ready to simplify your global travel spending?</p>
-          <a
-            href="/calculator"
+          <Link
+            href="/"
             className="inline-block bg-black text-white px-10 py-4 rounded-lg font-bold hover:bg-gray-800 transition"
           >
-            Get the Smart Splitter App
-          </a>
+            Open the BillSmart calculator
+          </Link>
         </footer>
       </article>
     </div>
