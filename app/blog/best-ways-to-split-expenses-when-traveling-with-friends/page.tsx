@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const TravelExpenseBlog: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 font-sans text-gray-800 bg-white">
+    <div className="prosePage blogArticle">
       <article>
         <header className="mb-12">
           <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">Travel & Finance</span>
@@ -50,7 +50,7 @@ const TravelExpenseBlog: React.FC = () => {
           <p className="mb-6">
             If you’re traveling through Europe or Asia, you might go from using Euros to Swiss Francs, or Yen to New Taiwan Dollars in a single week. 
           </p>
-          <div className="bg-slate-50 border-l-4 border-blue-500 p-6 my-8">
+          <div className="proseNote">
             <h4 className="font-bold text-blue-900 mb-2">The Golden Rule of FX Splitting:</h4>
             <p className="italic text-slate-700">
               Never use "estimated" exchange rates. Use the rate at the time of the transaction.
@@ -77,12 +77,12 @@ const TravelExpenseBlog: React.FC = () => {
           </p>
         </section>
 
-        <div className="bg-blue-600 rounded-2xl p-8 text-center text-white">
+        <div className="articleCta">
           <h3 className="text-2xl font-bold mb-4">Make Your Next Trip Stress-Free</h3>
           <p className="mb-6 opacity-90">BillSmart converts mixed-currency payments into one settlement, with no account needed.</p>
           <Link
             href="/"
-            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition"
+            className="articleCtaButton"
           >
             Start Splitting for Free
           </Link>

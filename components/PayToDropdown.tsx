@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { CaretDown } from "@phosphor-icons/react";
 
 type Option = { value: string; label: string };
 
@@ -91,7 +92,7 @@ export default function PayToDropdown({
         aria-expanded={open}
       >
         <span className={!safeValue.length ? "placeholder" : ""}>{displayText}</span>
-        <span aria-hidden="true">▾</span>
+        <CaretDown size={14} weight="bold" aria-hidden="true" />
       </button>
 
       {open && !disabled ? (

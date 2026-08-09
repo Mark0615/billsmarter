@@ -27,7 +27,7 @@ export default function Footer() {
           <p className="siteFooterName">BillSmart</p>
           <p className="siteFooterBlurb">
             A free, no-signup calculator for splitting group expenses across multiple
-            currencies — and guides on doing it without awkwardness.
+            currencies.
           </p>
         </div>
 

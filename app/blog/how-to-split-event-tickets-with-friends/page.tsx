@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function EventTicketsSplitPage() {
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <article className="prose prose-lg md:prose-xl max-w-none text-gray-800">
+    <div className="prosePage blogArticle">
+      <article>
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           How to Split Concert and Sports Event Tickets with Friends
         </h1>
@@ -60,8 +60,8 @@ export default function EventTicketsSplitPage() {
           Once the concert is over and the race is won, hit calculate. Our algorithm will sort through the chaos and provide a clean, optimized list of who needs to pay whom. Focus on the event, and let us handle the accounting!
         </p>
 
-        <div className="bg-blue-50 p-8 rounded-xl text-center border border-blue-100">
-          <Link href="/" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+        <div className="articleCta">
+          <Link href="/" className="articleCtaButton">
             Create a Tab for Your Next Event
           </Link>
         </div>

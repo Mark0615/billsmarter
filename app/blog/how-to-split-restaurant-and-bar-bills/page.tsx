@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function RestaurantBarSplitPage() {
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <article className="prose prose-lg md:prose-xl max-w-none text-gray-800">
+    <div className="prosePage blogArticle">
+      <article>
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           How to Split Restaurant and Bar Bills: An Elegant Guide for Big Groups
         </h1>
@@ -57,8 +57,8 @@ export default function RestaurantBarSplitPage() {
           With BillSmarter, you can easily assign specific items (like that expensive whiskey) to specific people, while evenly splitting the shared appetizers. It calculates the exact totals, including tax and tip, in seconds!
         </p>
 
-        <div className="bg-blue-50 p-8 rounded-xl text-center border border-blue-100">
-          <Link href="/" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+        <div className="articleCta">
+          <Link href="/" className="articleCtaButton">
             Open the Bill Splitter Now
           </Link>
         </div>

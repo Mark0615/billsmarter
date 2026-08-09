@@ -1,43 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
+import {
+  Calculator,
+  LockKey,
+  Scales,
+} from "@phosphor-icons/react/dist/ssr";
 import CalculatorClient from "@/components/CalculatorClient";
-
-/**
- * Inline so the homepage carries no third-party image requests and no
- * icon-library attribution obligation.
- */
-const iconProps = {
-  width: 44,
-  height: 44,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
-};
-
-const CalculatorIcon = () => (
-  <svg {...iconProps}>
-    <rect x="4" y="2.5" width="16" height="19" rx="2.5" />
-    <path d="M8 7h8M8 12h2m3 0h3M8 16.5h2m3 0h3" />
-  </svg>
-);
-
-const ScalesIcon = () => (
-  <svg {...iconProps}>
-    <path d="M12 3.5v17M6 20.5h12M4 8.5l8-2.5 8 2.5" />
-    <path d="M4 8.5 1.8 14a3.2 3.2 0 0 0 4.4 0L4 8.5Z" />
-    <path d="M20 8.5 17.8 14a3.2 3.2 0 0 0 4.4 0L20 8.5Z" />
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg {...iconProps}>
-    <rect x="4" y="10" width="16" height="11" rx="2.5" />
-    <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14.5v2.5" />
-  </svg>
-);
 
 const howItWorksItems = [
   {
@@ -56,17 +24,17 @@ const howItWorksItems = [
 
 const featureItems = [
   {
-    Icon: CalculatorIcon,
+    Icon: Calculator,
     title: "No More Math",
     text: "Enter payments and we handle the complex split logic automatically, including who paid and who owes.",
   },
   {
-    Icon: ScalesIcon,
+    Icon: Scales,
     title: "Fair Splitting",
     text: "Supports mixed currencies and converts them into one base unit so everyone settles with confidence.",
   },
   {
-    Icon: LockIcon,
+    Icon: LockKey,
     title: "Data Control",
     text: "No login or registration required, making quick split sessions entirely private and easy.",
   },
@@ -112,39 +80,60 @@ const faqItems = [
 export default function HomePage() {
   return (
     <div className="homeStack">
-      {/* 英雄區塊 (Hero Banner) */}
-      <section className="heroBanner">
-        <h1>
-          <b>BillSmart</b> | The Smartest Split For Any Expense
-        </h1>
-        <p>
-          Choose a base currency, add mixed-currency payments, and settle fairly
-          with one final result.
-        </p>
-      </section>
+      <section className="heroWorkspace" aria-label="BillSmart calculator">
+        <article className="heroPanel glassPanel">
+          <div>
+            <p className="heroEyebrow">Free · Mixed-currency group expense splitting</p>
+            <h1>
+              <span className="heroBrandLine">BillSmart</span>
+              The
+              <br />
+              Smartest Split
+              <br />
+              For Any
+              <br />
+              Expense
+            </h1>
+            <p className="heroCopy">
+              Choose a base currency, add mixed-currency payments, and settle fairly
+              with one final result.
+            </p>
+            <p className="heroFlow" aria-label="Calculate, split, settle">
+              Calculate <span aria-hidden="true">→</span> Split{" "}
+              <span aria-hidden="true">→</span> Settle
+              <small>Fair. Clear. Automatic.</small>
+            </p>
+          </div>
 
-      {/* 計算機本體 */}
-      <section className="calculatorShell">
+          <Image
+            className="heroDoodle"
+            src="/assets/split-doodle-transparent.png"
+            alt="Hand-drawn receipt showing a Tokyo lunch split fairly between three people"
+            width={700}
+            height={525}
+            sizes="(max-width: 760px) 80vw, 300px"
+            priority
+          />
+
+          <p className="heroFootnote">© 2026 BillSmart</p>
+        </article>
+
         <CalculatorClient />
       </section>
 
-      <hr className="sectionDivider" />
+      <hr className="sectionDivider homeToContent" />
 
-      {/* 新增：How It Works (使用原本的 faqGrid 與 card 樣式) */}
-      <section aria-labelledby="how-it-works" style={{ display: "grid", gap: "14px" }}>
+      <section className="contentSection" aria-labelledby="how-it-works">
+        <p className="contentEyebrow">01 / Process</p>
         <h2 id="how-it-works" className="sectionTitle">
           How BillSmart Works
         </h2>
         <p className="sectionLead">Three simple steps to settle up.</p>
-        <div className="faqGrid">
+        <div className="processGrid">
           {howItWorksItems.map((step) => (
-            <article key={step.title} className="card">
-              <h3 style={{ fontWeight: 800, color: "var(--text)", margin: "0 0 8px" }}>
-                {step.title}
-              </h3>
-              <p style={{ color: "var(--muted)", margin: 0, lineHeight: 1.7 }}>
-                {step.desc}
-              </p>
+            <article key={step.title} className="processItem">
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
             </article>
           ))}
         </div>
@@ -152,8 +141,8 @@ export default function HomePage() {
 
       <hr className="sectionDivider" />
 
-      {/* WHY 區塊 (保持原本樣式) */}
-      <section className="featureSectionPlain" aria-labelledby="why-billsmart">
+      <section className="contentSection featureSectionPlain" aria-labelledby="why-billsmart">
+        <p className="contentEyebrow">02 / Advantages</p>
         <h2 id="why-billsmart" className="sectionTitle">
           Why Choose BillSmart
         </h2>
@@ -163,7 +152,7 @@ export default function HomePage() {
           {featureItems.map(({ Icon, title, text }) => (
             <article key={title} className="featureItem">
               <span className="featureIconImagePlain">
-                <Icon />
+                <Icon size={34} weight="light" aria-hidden="true" />
               </span>
               <h3 className="featureTitle">{title}</h3>
               <p className="featureText">{text}</p>
@@ -174,28 +163,23 @@ export default function HomePage() {
 
       <hr className="sectionDivider" />
 
-      {/* 新增：應用場景 (Use Cases)，引導至長篇部落格 */}
-      <section aria-labelledby="use-cases" style={{ display: "grid", gap: "14px" }}>
+      <section className="contentSection" aria-labelledby="use-cases">
+        <p className="contentEyebrow">03 / Guides</p>
         <h2 id="use-cases" className="sectionTitle">
           Perfect for Every Situation
         </h2>
         <p className="sectionLead">Read our guides on how to split expenses fairly.</p>
-        <div className="faqGrid">
+        <div className="guideGrid">
           {useCaseItems.map((useCase) => (
             <Link 
               key={useCase.title} 
               href={useCase.link} 
-              className="card flex flex-col transition-transform hover:-translate-y-1 hover:shadow-lg"
+              className="guideItem"
             >
-              <h3 style={{ fontWeight: 800, color: "var(--text)", margin: "0 0 8px" }}>
-                {useCase.title}
-              </h3>
-              <p style={{ color: "var(--muted)", margin: "0 0 16px", lineHeight: 1.7, flex: 1 }}>
-                {useCase.desc}
-              </p>
-              <span style={{ color: "var(--accent)", fontWeight: 700, fontSize: "0.95rem" }}>
-                Read the Guide &rarr;
-              </span>
+              <span className="guideIndex">0{useCaseItems.indexOf(useCase) + 1}</span>
+              <h3>{useCase.title}</h3>
+              <p>{useCase.desc}</p>
+              <span className="guideLink">Read the Guide &rarr;</span>
             </Link>
           ))}
         </div>
@@ -203,8 +187,8 @@ export default function HomePage() {
 
       <hr className="sectionDivider" />
 
-      {/* FAQ 區塊 (擴充版) */}
-      <section className="faqWrap" id="faq" aria-labelledby="faq-title">
+      <section className="contentSection faqWrap" id="faq" aria-labelledby="faq-title">
+        <p className="contentEyebrow">04 / Questions</p>
         <h2 id="faq-title" className="sectionTitle">
           FAQ
         </h2>
@@ -216,15 +200,14 @@ export default function HomePage() {
             </article>
           ))}
         </div>
-        <p className="sectionLead" style={{ marginTop: "6px" }}>
+        <p className="sectionLead faqFollowup">
           More detail on rounding, exchange rates and saving a trip is in the{" "}
-          <Link href="/faq" style={{ color: "var(--accent)", fontWeight: 700 }}>
+          <Link href="/faq">
             full FAQ
           </Link>
           , and the calculation itself is explained step by step in{" "}
           <Link
             href="/how-it-works"
-            style={{ color: "var(--accent)", fontWeight: 700 }}
           >
             how it works
           </Link>

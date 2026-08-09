@@ -1,13 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Rajdhani } from "next/font/google";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-
-const rajdhani = Rajdhani({
-  subsets: ["latin"],
-  weight: ["700"],
-});
+import { List, X } from "@phosphor-icons/react";
 
 const links = [
   { href: "/", label: "Calculator" },
@@ -20,18 +16,27 @@ const links = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
       <header className="nav">
         <div className="navInner">
           <Link href="/" className="brand" aria-label="BillSmart home">
-            <span className={`${rajdhani.className} brandText`}>BillSmart</span>
+            <span className="brandText">BillSmart</span>
           </Link>
 
           <nav className="navLinks" aria-label="Primary">
             {links.map((l) => (
-              <Link key={l.href} href={l.href}>
+              <Link
+                key={l.href}
+                href={l.href}
+                className={isActive(l.href) ? "isActive" : undefined}
+                aria-current={isActive(l.href) ? "page" : undefined}
+              >
                 {l.label}
               </Link>
             ))}
@@ -45,15 +50,14 @@ export default function Navbar() {
             aria-controls="mobile-nav-panel"
             onClick={() => setMobileOpen((open) => !open)}
           >
-            <span className="mobileToggleBars" aria-hidden="true" />
+            <List size={22} weight="light" aria-hidden="true" />
           </button>
         </div>
       </header>
 
-      {/* 關鍵修正 1：將遮罩與側邊欄移出 header 外，避免受 backdrop-filter 影響 */}
       <div 
         className={`mobileBackdrop${mobileOpen ? " isOpen" : ""}`} 
-        onClick={() => setMobileOpen(false)} // 點擊旁邊黑色遮罩也能關閉
+        onClick={() => setMobileOpen(false)}
       />
 
       <aside
@@ -68,7 +72,7 @@ export default function Navbar() {
             aria-label="Close navigation"
             onClick={() => setMobileOpen(false)}
           >
-            ×
+            <X size={22} weight="light" aria-hidden="true" />
           </button>
         </div>
         <nav className="mobileNavLinks" aria-label="Mobile">

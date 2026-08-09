@@ -46,7 +46,7 @@ const checklist = [
 
 export default function Page() {
   return (
-    <article className="prosePage">
+    <article className="prosePage blogArticleStandalone">
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>The Group Trip Money Checklist</h1>
         <PostMeta slug="group-trip-money-checklist" />

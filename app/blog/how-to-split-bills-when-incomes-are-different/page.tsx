@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <article className="prosePage">
+    <article className="prosePage blogArticleStandalone">
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>How to Split Bills When Everyone Earns Different Amounts</h1>
         <PostMeta slug="how-to-split-bills-when-incomes-are-different" />

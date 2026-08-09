@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const CashVsCardBlog: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 font-sans text-gray-800 bg-white">
+    <div className="prosePage blogArticle">
       <article>
         <header className="mb-12 border-b pb-10">
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">
@@ -51,7 +51,7 @@ const CashVsCardBlog: React.FC = () => {
             <li><strong>Emergency Backup:</strong> If a local network goes down or a small shop's card reader is broken, cash is your only lifeline.</li>
           </ul>
 
-          <div className="bg-amber-50 rounded-xl p-8 my-10 border border-amber-200">
+          <div className="proseNote">
             <h3 className="text-xl font-bold text-amber-900 mb-3">Pro Tip: Avoid the "Dynamic Currency Conversion" (DCC)</h3>
             <p className="text-amber-800">
               When a card machine abroad asks if you want to pay in "Your Home Currency" or "Local Currency," <strong>ALWAYS choose Local Currency.</strong> If you choose your home currency, the merchant chooses the exchange rate, and it is almost always a terrible deal for you.
@@ -76,11 +76,11 @@ const CashVsCardBlog: React.FC = () => {
           </p>
         </section>
 
-        <footer className="border-t pt-10 mt-10 text-center">
+        <footer className="articleCta">
           <p className="text-gray-500 italic mb-4">Ready to simplify your global travel spending?</p>
           <Link
             href="/"
-            className="inline-block bg-black text-white px-10 py-4 rounded-lg font-bold hover:bg-gray-800 transition"
+            className="articleCtaButton"
           >
             Open the BillSmart calculator
           </Link>

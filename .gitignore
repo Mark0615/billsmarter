@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design QA working files (screenshots, before/after captures)
+/audit-blog-before/
+/audit-blog-after/
+/design-assets/
+/design-qa*.png

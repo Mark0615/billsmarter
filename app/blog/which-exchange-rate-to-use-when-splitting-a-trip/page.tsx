@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <article className="prosePage">
+    <article className="prosePage blogArticleStandalone">
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>Which Exchange Rate Should You Use When Splitting a Trip?</h1>
         <PostMeta slug="which-exchange-rate-to-use-when-splitting-a-trip" />

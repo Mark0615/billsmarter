@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <article className="prosePage">
+    <article className="prosePage blogArticleStandalone">
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>Bill-Splitting Etiquette Around the World</h1>
         <PostMeta slug="bill-splitting-etiquette-around-the-world" />

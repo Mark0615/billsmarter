@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const FairExpenseBlog: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 font-sans text-gray-900 bg-white">
+    <div className="prosePage blogArticle">
       <article>
         <header className="mb-10 text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-indigo-900">
@@ -44,7 +44,7 @@ const FairExpenseBlog: React.FC = () => {
           <p className="mb-4 leading-8">
             The simplest way to split a bill is to divide the total by the number of people. It is fast, efficient, and requires zero brainpower. However, the even split is only "fair" when the consumption is roughly equal. 
           </p>
-          <div className="bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-500 mb-8">
+          <div className="proseNote">
             <h4 className="font-bold text-indigo-900 mb-2">When to use it:</h4>
             <ul className="list-disc ml-6 space-y-2">
               <li>Fixed costs like Netflix subscriptions or trash pick-up for roommates.</li>
@@ -77,7 +77,7 @@ const FairExpenseBlog: React.FC = () => {
         </section>
 
         {/* CONCLUSION */}
-        <section className="bg-indigo-900 text-white p-10 rounded-3xl mt-12">
+        <section className="articleCta">
           <h2 className="text-3xl font-bold mb-6">Conclusion: Transparency is Key</h2>
           <p className="mb-6 text-indigo-100 leading-8">
             At the end of the day, "fair" is whatever the group agrees upon <em>before</em> the money is spent. The most successful groups are those that talk about money openly. If you are on a budget, say it early. If you want to splurge, offer to cover the difference.
@@ -90,7 +90,7 @@ const FairExpenseBlog: React.FC = () => {
           </p>
           <Link
             href="/"
-            className="mt-8 inline-block bg-white text-indigo-900 px-8 py-3 rounded-full font-bold hover:bg-indigo-100 transition shadow-lg"
+            className="articleCtaButton"
           >
             Try the BillSmart calculator
           </Link>

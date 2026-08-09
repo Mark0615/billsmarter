@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Doto, Inter } from "next/font/google";
 import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
@@ -8,6 +9,17 @@ import Footer from "@/components/Footer";
 // Container ID is public (it ships in the page source), so it lives here as the
 // default. Set NEXT_PUBLIC_GTM_ID to point a preview deploy at another container.
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-PK4CMHRF";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const doto = Doto({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-doto",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://billsmarter.app"),
@@ -31,9 +43,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
-      <body>
+      <body className={`${inter.variable} ${doto.variable}`}>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9974301999021865"

@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function RoommateExpensesPage() {
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <article className="prose prose-lg md:prose-xl max-w-none text-gray-800">
+    <div className="prosePage blogArticle">
+      <article>
         <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
           Roommate Shared Expenses: 5 Hidden Costs That Cause Conflicts and How to Split Them
         </h1>
@@ -76,8 +76,8 @@ export default function RoommateExpensesPage() {
           That&apos;s where BillSmarter comes in. Just log your expenses as they happen. At the end of the month, our smart calculator will tell you exactly how to settle up with the fewest possible transactions. Keep your friendships strong and your math simple!
         </p>
 
-        <div className="bg-blue-50 p-8 rounded-xl text-center border border-blue-100">
-          <Link href="/" className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+        <div className="articleCta">
+          <Link href="/" className="articleCtaButton">
             Start Splitting Rent & Expenses Now
           </Link>
         </div>
