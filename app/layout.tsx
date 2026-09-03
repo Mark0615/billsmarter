@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Doto, Inter } from "next/font/google";
-import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -44,14 +43,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
-      <body className={`${inter.variable} ${doto.variable}`}>
-        <Script
+      <head>
+        {/*
+          Plain <script>, not next/script: React hoists this into the static
+          <head> so it is present in the server-rendered HTML immediately —
+          required for AdSense's "AdSense code snippet" site-ownership check
+          and for crawlers that don't wait on hydration. next/script's
+          afterInteractive strategy only injects it client-side post-hydrate.
+        */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9974301999021865"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
+      </head>
+      {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
+      <body className={`${inter.variable} ${doto.variable}`}>
         <Navbar />
         <main className="siteMain">{children}</main>
         <Footer />
