@@ -1959,3 +1959,35 @@ select {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Worked example: a real screenshot of the calculator solving the case the
+   article just described. Sits between the argument and the CTA. */
+.articleWorked {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.articleFigure {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+}
+
+.articleFigure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 0 1px rgba(49, 61, 62, 0.1),
+    0 16px 38px rgba(48, 63, 64, 0.09);
+}
+
+.articleFigure figcaption {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--muted, #5c6a6b);
+}

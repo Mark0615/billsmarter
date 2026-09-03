@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -147,6 +148,24 @@ export default function Page() {
           </li>
         </ul>
       </section>
-    </article>
+            <section className="articleWorked">
+          <h2>Worked example</h2>
+          <p>
+            Point 6 in practice &mdash; shared costs shared, optional activities charged to whoever took part. Five people, one ryokan for everybody, a cable car three of them rode, and a coffee the other two had.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/group-trip-money-checklist.webp"
+              alt="BillSmart result panel for five people, showing one shared accommodation cost and two subset activities."
+              width={1350}
+              height={1398}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Dan and Eve pay Ana $44.23 each, Chloe pays Ana $42.31, Ben pays Ana $7.69. Four transfers instead of five people reconciling three separate bills.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
   );
 }

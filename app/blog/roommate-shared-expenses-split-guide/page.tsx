@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -67,14 +68,33 @@ export default function RoommateExpensesPage() {
         <hr className="my-10 border-gray-300" />
 
         <h2 className="text-3xl font-bold mt-8 mb-4 text-blue-600">
-          Stop Arguing Over Receipts. Use BillSmarter.
+          Stop Arguing Over Receipts. Use BillSmart.
         </h2>
         <p>
           Roommate life is full of small, overlapping debts. You bought the trash bags yesterday, your roommate paid the electric bill today. Trying to figure out who owes who at the end of the month can take hours of math.
         </p>
         <p className="mb-8">
-          That&apos;s where BillSmarter comes in. Just log your expenses as they happen. At the end of the month, our smart calculator will tell you exactly how to settle up with the fewest possible transactions. Keep your friendships strong and your math simple!
+          That&apos;s where BillSmart comes in. Keep a running note of who paid for what as the month goes &mdash; the flat&rsquo;s group chat is enough &mdash; then enter the list in one sitting when you settle up. The calculator nets everything off and returns the fewest transfers that clear the month. Nothing is stored between visits, so do it in a single pass and share the result in the chat.
         </p>
+
+                <section className="articleWorked">
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">Worked example</h2>
+          <p>
+            A month of ordinary flat costs, entered in one sitting: Ana paid the electricity, Ben the household supplies, Chloe the internet. All three split evenly.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/roommate-shared-expenses-split-guide.webp"
+              alt="BillSmart result panel showing three household bills paid by three different flatmates."
+              width={1350}
+              height={1128}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Ben pays Ana $36.33, Chloe pays Ana $10.33. Three bills across three people collapse into two transfers.
+            </figcaption>
+          </figure>
+        </section>
 
         <div className="articleCta">
           <Link href="/" className="articleCtaButton">

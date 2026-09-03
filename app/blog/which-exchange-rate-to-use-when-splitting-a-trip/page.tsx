@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -187,6 +188,24 @@ export default function Page() {
           </li>
         </ul>
       </section>
-    </article>
+            <section className="articleWorked">
+          <h2>Worked example</h2>
+          <p>
+            The convention above, applied: one settlement currency for the whole group, every entry converted into it. Three people, three currencies, settling in New Taiwan dollars.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/which-exchange-rate-to-use-when-splitting-a-trip.webp"
+              alt="BillSmart result panel settling yen, US dollar and New Taiwan dollar payments into New Taiwan dollars."
+              width={1350}
+              height={1128}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in TWD: Chloe pays Ana NT$947.44 and Ben NT$290.52. Each payment is entered in the currency it was actually paid in; the calculator converts, not the group.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
   );
 }
