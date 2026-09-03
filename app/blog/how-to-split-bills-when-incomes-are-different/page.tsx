@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -215,6 +216,24 @@ export default function Page() {
           </li>
         </ul>
       </section>
-    </article>
+            <section className="articleWorked">
+          <h2>Worked example</h2>
+          <p>
+            The structure this article argues for, entered as two lines: the house split evenly across everyone, and the expensive dinner charged only to the two who went.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/how-to-split-bills-when-incomes-are-different.webp"
+              alt="BillSmart result panel showing an evenly split accommodation cost alongside an opt-in dinner charged to two people."
+              width={1350}
+              height={980}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe pays Ana $405.00, Ben pays Ana $195.00. Nobody had to state a salary &mdash; the opt-in did the work.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
   );
 }

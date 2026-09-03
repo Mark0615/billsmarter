@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -51,18 +52,37 @@ export default function EventTicketsSplitPage() {
         <hr className="my-10 border-gray-300" />
 
         <h2 className="text-3xl font-bold mt-8 mb-4 text-blue-600">
-          Make BillSmarter Your Event Financial Manager
+          Make BillSmart Your Event Accountant
         </h2>
         <p>
-          Whether it&apos;s the massive upfront cost of the tickets or the smaller on-site expenses for drinks and merch, you can throw it all into BillSmarter. 
+          Whether it&apos;s the upfront cost of the tickets or the smaller on-site spending on drinks and merch, enter each payment against the people it actually covers &mdash; the friend who bought four tickets paid for four people; the round at the bar covers only whoever was standing there.
         </p>
         <p className="mb-8">
-          Once the concert is over and the race is won, hit calculate. Our algorithm will sort through the chaos and provide a clean, optimized list of who needs to pay whom. Focus on the event, and let us handle the accounting!
+          Once the night is over, the calculator nets the whole evening down to an optimized list of who needs to pay whom. Enter it in one sitting &mdash; nothing is saved between visits &mdash; and paste the transfer list into the group chat.
         </p>
+
+                <section className="articleWorked">
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">Worked example</h2>
+          <p>
+            One person fronts the tickets, someone else buys a round. Ana bought four concert tickets for the group; Ben&rsquo;s round at the bar covered only himself and Chloe.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/how-to-split-event-tickets-with-friends.webp"
+              alt="BillSmart result panel showing four event tickets bought by one person and a bar round covering two people."
+              width={1350}
+              height={1116}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe pays Ana $152.00, Dan pays Ana $120.00, Ben pays Ana $88.00. Ben&rsquo;s round is netted off what he owes for his ticket rather than moving as a separate payment.
+            </figcaption>
+          </figure>
+        </section>
 
         <div className="articleCta">
           <Link href="/" className="articleCtaButton">
-            Create a Tab for Your Next Event
+            Split Your Next Event
           </Link>
         </div>
       </article>

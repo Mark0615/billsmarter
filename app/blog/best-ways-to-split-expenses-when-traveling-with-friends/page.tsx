@@ -1,3 +1,4 @@
+import Image from 'next/image';
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
@@ -53,11 +54,11 @@ const TravelExpenseBlog: React.FC = () => {
           <div className="proseNote">
             <h4 className="font-bold text-blue-900 mb-2">The Golden Rule of FX Splitting:</h4>
             <p className="italic text-slate-700">
-              Never use "estimated" exchange rates. Use the rate at the time of the transaction.
+              Never settle from &ldquo;estimated&rdquo; exchange rates. Agree on one rate convention for the whole group and apply it to every entry.
             </p>
           </div>
           <p className="mb-6">
-            The best way to handle this is using an app that supports <strong>multi-currency entry</strong>. You enter the amount in the local currency (e.g., ¥5,000), and the app should automatically fetch the live exchange rate and show everyone what they owe in their home currency. This eliminates the "I think the rate was 1:150" arguments later.
+            The practical way to handle this is a tool that supports <strong>multi-currency entry</strong>. You enter the amount in the local currency (e.g., ¥5,000), and it converts every entry into one settlement currency at a live mid-market rate, so the whole group is reading from the same number. That eliminates the &ldquo;I think the rate was 1:150&rdquo; arguments later. Which rate to standardise on is worth settling up front &mdash; <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">here is the convention we suggest</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-slate-800 mt-10 mb-4">3. Respecting Different Budgets</h2>
@@ -75,6 +76,25 @@ const TravelExpenseBlog: React.FC = () => {
           <p className="mb-10 text-lg">
             Using a smart tool that handles the math and the exchange rates means you can spend your flight home looking through photos, not receipts.
           </p>
+        </section>
+
+                <section className="articleWorked">
+          <h2 className="text-2xl font-bold text-slate-800 mb-4">Worked example</h2>
+          <p>
+            Four friends, three currencies, one settlement currency. Ana put two nights of hotel on her card in yen, Ben covered a group dinner, and Chloe paid the airport transfer in baht. All three bills are split evenly across the four of them.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/best-ways-to-split-expenses-when-traveling-with-friends.webp"
+              alt="BillSmart result panel: Ana is owed 185 US dollars after paying a hotel in yen, with the other three in deficit."
+              width={1350}
+              height={1264}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Dan pays Ana $122.68, Ben pays Ana $45.76, Chloe pays Ana $16.56 — three transfers to clear three currencies. Rates are fetched live, so the exact figures move day to day.
+            </figcaption>
+          </figure>
         </section>
 
         <div className="articleCta">

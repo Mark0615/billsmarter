@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -48,14 +49,33 @@ export default function RestaurantBarSplitPage() {
         <hr className="my-10 border-gray-300" />
 
         <h2 className="text-3xl font-bold mt-8 mb-4 text-blue-600">
-          Let BillSmarter Do the Math While You Enjoy Your Drink
+          Let BillSmart Do the Math While You Enjoy Your Drink
         </h2>
         <p>
           Trying to do complex math after a few cocktails is a recipe for disaster. Stop passing the receipt around the table with your smartphone calculators out.
         </p>
         <p className="mb-8">
-          With BillSmarter, you can easily assign specific items (like that expensive whiskey) to specific people, while evenly splitting the shared appetizers. It calculates the exact totals, including tax and tip, in seconds!
+          That is what the calculator is for. Enter the shared food as one payment covering everyone, then the bottle of wine as a second payment covering only the three people who drank it &mdash; the same bill, two entries. Enter each amount as it was actually paid, tax and service included, so the extras are shared in the same proportion as the meal instead of quietly landing on whoever held the card. What comes back is a list of who pays whom, using the fewest transfers.
         </p>
+
+                <section className="articleWorked">
+          <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">Worked example</h2>
+          <p>
+            Rule 1 in practice. The shared food is one payment covering all four; the bottle of wine is a second payment covering only the three who drank it. Both amounts are the receipt totals, tax and service included.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/how-to-split-restaurant-and-bar-bills.webp"
+              alt="BillSmart result panel showing shared food split four ways and a bottle of wine split between three of the four."
+              width={1350}
+              height={1116}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe pays Ana $70.00; Dan pays Ana $28.00 and Ben $14.00. Dan, who did not drink, pays $42.00 in total &mdash; his share of the food and nothing else.
+            </figcaption>
+          </figure>
+        </section>
 
         <div className="articleCta">
           <Link href="/" className="articleCtaButton">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -193,6 +194,24 @@ export default function Page() {
           </li>
         </ul>
       </section>
-    </article>
+            <section className="articleWorked">
+          <h2>Worked example</h2>
+          <p>
+            One person fronting a large booking &mdash; exactly the exposure this article is about. Ana put the villa deposit on her card; Ben picked up groceries. Both split evenly across the four.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/who-should-pay-the-deposit-group-travel.webp"
+              alt="BillSmart result panel showing a large villa deposit paid by one person and a small grocery bill paid by another."
+              width={1350}
+              height={1116}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe and Dan pay Ana $324.00 each, Ben pays Ana $228.00. Ana is carrying $1,200 until those three transfers land, which is the case for settling big bookings before the trip rather than after.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
   );
 }

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
@@ -85,6 +86,24 @@ const CashVsCardBlog: React.FC = () => {
             Open the BillSmart calculator
           </Link>
         </footer>
+              <section className="articleWorked">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Worked example</h2>
+          <p>
+            The hybrid strategy, entered as it actually happened: Ana&rsquo;s card at a restaurant in Japan, Ben&rsquo;s cash at a night market in Taiwan. The calculator does not need to know which was cash and which was card &mdash; only the currency and the amount.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/cash-vs-card-payments-when-traveling.webp"
+              alt="BillSmart result panel showing a card payment in yen and a cash payment in New Taiwan dollars settled together."
+              width={1350}
+              height={980}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe pays Ben $22.76 and Ana $17.47. The cash payment carries exactly the same weight as the card one.
+            </figcaption>
+          </figure>
+        </section>
       </article>
     </div>
   );

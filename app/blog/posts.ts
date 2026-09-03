@@ -16,7 +16,7 @@ export const posts: Post[] = [
     summary:
       "Eight decisions that take five minutes in the group chat and prevent every common money argument on a trip — plus a message you can copy and send.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-08-05",
+    updatedAt: "2026-09-04",
     readingTime: "4 min read",
   },
   {
@@ -25,7 +25,7 @@ export const posts: Post[] = [
     summary:
       "Three people paid in three currencies on three different days. How to pick one rate for the whole group without anyone quietly losing money.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-08-05",
+    updatedAt: "2026-09-04",
     readingTime: "5 min read",
   },
   {
@@ -34,7 +34,7 @@ export const posts: Post[] = [
     summary:
       "One person putting a whole trip on their card carries real risk: cancellations, partial refunds, currency moves and months of exposure.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-08-05",
+    updatedAt: "2026-09-04",
     readingTime: "5 min read",
   },
   {
@@ -43,7 +43,7 @@ export const posts: Post[] = [
     summary:
       "Proportional splitting with the arithmetic worked through, where an even split starts to hurt, and how to raise it without it being awkward.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-08-05",
+    updatedAt: "2026-09-04",
     readingTime: "5 min read",
   },
   {
@@ -52,7 +52,7 @@ export const posts: Post[] = [
     summary:
       "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and Europe.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-08-05",
+    updatedAt: "2026-09-04",
     readingTime: "5 min read",
   },
   {
@@ -61,7 +61,7 @@ export const posts: Post[] = [
     summary:
       "A practical guide to even, proportional, and itemized splits without awkwardness.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-02-26",
+    updatedAt: "2026-09-04",
     readingTime: "4 min read",
   },
   {
@@ -70,7 +70,7 @@ export const posts: Post[] = [
     summary:
       "Travel-focused strategies for multi-currency trips and uneven budgets.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-02-26",
+    updatedAt: "2026-09-04",
     readingTime: "3 min read",
   },
   {
@@ -78,7 +78,7 @@ export const posts: Post[] = [
     title: "Cash vs. Card Payments When Traveling",
     summary: "When to use cash, when to swipe, and how to avoid hidden FX fees.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-02-26",
+    updatedAt: "2026-09-04",
     readingTime: "3 min read",
   },
   {
@@ -87,7 +87,7 @@ export const posts: Post[] = [
     summary:
       "Learn how to fairly split shared living expenses and avoid roommate drama.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-03-08",
+    updatedAt: "2026-09-04",
     readingTime: "3 min read",
   },
   {
@@ -96,7 +96,7 @@ export const posts: Post[] = [
     summary:
       "Learn the most elegant ways to split the check fairly without ruining the night.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-03-08",
+    updatedAt: "2026-09-04",
     readingTime: "3 min read",
   },
   {
@@ -104,7 +104,7 @@ export const posts: Post[] = [
     title: "How to Split Concert and Sports Event Tickets",
     summary: "Learn how to track and split these major event expenses easily.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-03-08",
+    updatedAt: "2026-09-04",
     readingTime: "3 min read",
   },
 ];

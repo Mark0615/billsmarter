@@ -1,3 +1,4 @@
+import Image from 'next/image';
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'next/link';
@@ -94,6 +95,24 @@ const FairExpenseBlog: React.FC = () => {
           >
             Try the BillSmart calculator
           </Link>
+        </section>
+              <section className="articleWorked">
+          <h2 className="text-3xl font-bold text-indigo-800 mb-4">Worked example</h2>
+          <p>
+            Both rules from above in one calculation: the boat rental everyone used, split evenly; the excursion only two people joined, charged to those two.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/how-to-split-group-expense-fairly.webp"
+              alt="BillSmart result panel showing an evenly split boat rental and a two-person excursion."
+              width={1350}
+              height={1116}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe and Dan pay Ana $60.00 each, Ben pays Ana $12.00. Ben owes $60 for the boat and is owed $48 for the excursion, so only the $12 difference actually moves.
+            </figcaption>
+          </figure>
         </section>
       </article>
 

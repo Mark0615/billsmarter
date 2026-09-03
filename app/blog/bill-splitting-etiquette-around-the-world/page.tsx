@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -184,6 +185,24 @@ export default function Page() {
           </li>
         </ul>
       </section>
-    </article>
+            <section className="articleWorked">
+          <h2>Worked example</h2>
+          <p>
+            The pattern underneath the whole article, run through the calculator. Ana&rsquo;s card covered the table in Tokyo; Ben picked up lunch in Seoul the next day. One card pays, the group settles privately afterwards.
+          </p>
+          <figure className="articleFigure">
+            <Image
+              src="/blog/bill-splitting-etiquette-around-the-world.webp"
+              alt="BillSmart result panel showing a yen bill and a won bill settled together in US dollars."
+              width={1350}
+              height={1116}
+              sizes="(max-width: 900px) 92vw, 820px"
+            />
+            <figcaption>
+              Settled in USD: Chloe pays Ana $40.32; Dan pays Ana $34.75 and Ben $5.56. Two bills in two currencies, cleared in three transfers.
+            </figcaption>
+          </figure>
+        </section>
+      </article>
   );
 }
