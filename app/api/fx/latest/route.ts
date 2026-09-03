@@ -2,6 +2,48 @@ import { NextResponse } from "next/server";
 
 export const runtime = "edge";
 
+// Frankfurter is ECB-backed and only quotes the reference rates the ECB
+// publishes. Confirmed against https://api.frankfurter.app/currencies
+// (2026-09-04). Of the currencies this app offers, TWD is the one it does
+// not cover, so every TWD pair used to pay for a guaranteed-miss round-trip
+// before falling through to open.er-api.
+const FRANKFURTER_CURRENCIES = new Set([
+  "AUD",
+  "BRL",
+  "CAD",
+  "CHF",
+  "CNY",
+  "CZK",
+  "DKK",
+  "EUR",
+  "GBP",
+  "HKD",
+  "HUF",
+  "IDR",
+  "ILS",
+  "INR",
+  "ISK",
+  "JPY",
+  "KRW",
+  "MXN",
+  "MYR",
+  "NOK",
+  "NZD",
+  "PHP",
+  "PLN",
+  "RON",
+  "SEK",
+  "SGD",
+  "THB",
+  "TRY",
+  "USD",
+  "ZAR",
+]);
+
+function frankfurterCovers(from: string, to: string) {
+  return FRANKFURTER_CURRENCIES.has(from) && FRANKFURTER_CURRENCIES.has(to);
+}
+
 const USD_RATES: Record<string, number> = {
   USD: 1,
   EUR: 0.92,
@@ -64,9 +106,11 @@ export async function GET(req: Request) {
       return NextResponse.json({ base: from, to, rate: 1, source: "identity" });
     }
 
-    const frankfurterRate = await tryFrankfurter(from, to);
-    if (frankfurterRate) {
-      return NextResponse.json({ base: from, to, rate: frankfurterRate, source: "frankfurter" });
+    if (frankfurterCovers(from, to)) {
+      const frankfurterRate = await tryFrankfurter(from, to);
+      if (frankfurterRate) {
+        return NextResponse.json({ base: from, to, rate: frankfurterRate, source: "frankfurter" });
+      }
     }
 
     const openRate = await tryOpenErApi(from, to);

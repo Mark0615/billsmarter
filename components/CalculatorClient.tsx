@@ -103,6 +103,9 @@ export default function CalculatorClient() {
 
   const [fxError, setFxError] = useState<string>("");
   const [fxNotice, setFxNotice] = useState<string>("");
+  // Number of FX lookups in flight. Adding a payment while one is running used
+  // to lose the entry, so the Add button waits for the rate instead.
+  const [fxPending, setFxPending] = useState<number>(0);
 
   const [payments, setPayments] = useState<Payment[]>([]);
   const [temp, setTemp] = useState<{
@@ -124,13 +127,14 @@ export default function CalculatorClient() {
   const filled = useMemo(() => names.map(sanitizeName).filter(Boolean), [names]);
 
   const canAdd = useMemo(() => {
+    if (fxPending > 0) return false;
     if (filled.length !== count) return false;
     if (!temp.payer) return false;
     if (!temp.beneficiaries.length) return false;
     const amt = Number(temp.amount);
     if (!Number.isFinite(amt) || amt <= 0) return false;
     return true;
-  }, [count, filled.length, temp.amount, temp.beneficiaries.length, temp.payer]);
+  }, [count, filled.length, fxPending, temp.amount, temp.beneficiaries.length, temp.payer]);
 
   function applyCount(nextValue: number) {
     const nextCount = Math.max(2, Math.min(20, nextValue || 2));
@@ -146,12 +150,13 @@ export default function CalculatorClient() {
 
     if (payments.length === 0) return;
 
+    setFxPending((n) => n + 1);
     try {
-      const updated: Payment[] = [];
+      const converted = new Map<string, Payment>();
       let usedBackup = false;
       for (const p of payments) {
         if (p.currency === nextBase) {
-          updated.push({
+          converted.set(p.id, {
             ...p,
             baseCurrency: nextBase,
             baseAmount: p.amount,
@@ -169,14 +174,16 @@ export default function CalculatorClient() {
         latestFxRef.current[key] = fx.rate;
         if (fx.source === "backup-table") usedBackup = true;
 
-        updated.push({
+        converted.set(p.id, {
           ...p,
           baseCurrency: nextBase,
           baseAmount: p.amount * fx.rate,
           rateUsed: fx.rate,
         });
       }
-      setPayments(updated);
+      // `payments` is the snapshot taken before the awaits above. Merge by id
+      // so anything added meanwhile survives instead of being overwritten.
+      setPayments((prev) => prev.map((p) => converted.get(p.id) ?? p));
       setFxNotice(
         usedBackup
           ? "FX data was temporarily unavailable. Using backup USD rates."
@@ -184,6 +191,8 @@ export default function CalculatorClient() {
       );
     } catch (e: unknown) {
       setFxError(getErrorMessage(e) || "FX conversion failed");
+    } finally {
+      setFxPending((n) => n - 1);
     }
   }
 
@@ -196,6 +205,7 @@ export default function CalculatorClient() {
     const from = temp.currency;
     const to = baseCurrency;
 
+    setFxPending((n) => n + 1);
     try {
       let rateUsed = 1;
       let baseAmount = amt;
@@ -231,6 +241,8 @@ export default function CalculatorClient() {
       setTemp((prev) => ({ ...prev, amount: "", note: "" }));
     } catch (e: unknown) {
       setFxError(getErrorMessage(e) || "Failed to add payment");
+    } finally {
+      setFxPending((n) => n - 1);
     }
   }
 
@@ -465,8 +477,9 @@ export default function CalculatorClient() {
               className="btn primary addPaymentButton"
               onClick={() => void addPayment()}
               disabled={!canAdd}
+              aria-busy={fxPending > 0}
             >
-              <span>Add payment</span>
+              <span>{fxPending > 0 ? "Getting exchange rate…" : "Add payment"}</span>
               <Plus size={20} weight="light" aria-hidden="true" />
             </button>
 
