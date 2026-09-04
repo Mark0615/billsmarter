@@ -47,7 +47,10 @@ export default function Page() {
         <p>
           The midpoint between what banks buy and sell a currency at. It is the number
           you get from a search engine or a currency site, and it is the rate BillSmart
-          uses, sourced from European Central Bank reference data.
+          uses &mdash; European Central Bank reference data where the ECB publishes it,
+          and a second public source for the currencies it does not. New Taiwan dollars
+          are in the second group, so the trip above settles on the fallback rather than
+          on ECB data.
         </p>
         <p>
           It is neutral — nobody in the group can accuse it of favouring the person who
