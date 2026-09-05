@@ -74,7 +74,7 @@ export default function RoommateExpensesPage() {
           Roommate life is full of small, overlapping debts. You bought the trash bags yesterday, your roommate paid the electric bill today. Trying to figure out who owes who at the end of the month can take hours of math.
         </p>
         <p className="mb-8">
-          That&apos;s where BillSmart comes in. Keep a running note of who paid for what as the month goes &mdash; the flat&rsquo;s group chat is enough &mdash; then enter the list in one sitting when you settle up. The calculator nets everything off and returns the fewest transfers that clear the month. Nothing is stored between visits, so do it in a single pass and share the result in the chat.
+          That&apos;s where BillSmart comes in. Keep a running note of who paid for what as the month goes &mdash; the flat&rsquo;s group chat is enough &mdash; then enter the list in one sitting when you settle up. The calculator nets everything off and returns a short list of transfers that clears the month. Nothing is stored between visits, so do it in a single pass and share the result in the chat.
         </p>
 
                 <section className="articleWorked">

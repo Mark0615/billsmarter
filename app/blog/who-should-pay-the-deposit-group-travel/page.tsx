@@ -126,18 +126,22 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Rule four: fix the exchange rate at the moment of booking</h2>
         <p>
-          If the booking was in a foreign currency, use the rate from the day it was paid,
-          not the day people reimburse. The booker paid a specific amount in their home
-          currency; that number is on their statement and it is the number to divide.
+          If the booking was in a foreign currency, fix the rate on the day it was paid
+          rather than the day people reimburse. Reimbursing at a later rate means the
+          group is unintentionally speculating on currency, with the booker taking the
+          whole position &mdash; and on a deposit paid six months out, that position is
+          large and lasts a long time.
         </p>
         <p>
-          Reimbursing at a later rate means the group is unintentionally speculating on
-          currency, with the booker taking the whole position. There is more on choosing a
-          convention in{" "}
+          This is a deliberate exception to the convention we recommend everywhere else.
+          For ordinary trip spending the answer is the mid-market rate applied uniformly,
+          with card fees staying on the card that charged them; see{" "}
           <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">
             which exchange rate to use when splitting a trip
           </Link>
-          .
+          . A single large upfront booking is the case where pinning the rate to the
+          booking date is worth the inconsistency, because the exposure is concentrated on
+          one person for months rather than spread across everyone for a week.
         </p>
       </section>
 
@@ -167,7 +171,7 @@ export default function Page() {
         <div className="proseNote">
           <p>
             &ldquo;Flights: I&rsquo;ll book, everyone sends their share within a week.
-            House: Ana books, same deal. Rate is whatever we actually paid on the day. If
+            House: Ana books, same deal. Big bookings settle at the rate on the booking date. If
             someone drops out after we&rsquo;ve booked, that person covers their own
             share.&rdquo;
           </p>

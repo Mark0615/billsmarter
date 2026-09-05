@@ -34,7 +34,7 @@ export const posts: Post[] = [
     summary:
       "One person putting a whole trip on their card carries real risk: cancellations, partial refunds, currency moves and months of exposure.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-05",
     readingTime: "5 min read",
   },
   {
@@ -87,7 +87,7 @@ export const posts: Post[] = [
     summary:
       "Learn how to fairly split shared living expenses and avoid roommate drama.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-05",
     readingTime: "3 min read",
   },
   {
@@ -96,7 +96,7 @@ export const posts: Post[] = [
     summary:
       "Learn the most elegant ways to split the check fairly without ruining the night.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-05",
     readingTime: "3 min read",
   },
   {
@@ -104,7 +104,7 @@ export const posts: Post[] = [
     title: "How to Split Concert and Sports Event Tickets",
     summary: "Learn how to track and split these major event expenses easily.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-05",
     readingTime: "3 min read",
   },
 ];
