@@ -14,8 +14,8 @@ export default function HowItWorksPage() {
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>How BillSmart Works</h1>
         <p className="lead">
-          BillSmart turns a messy pile of &ldquo;who paid for what&rdquo; into the
-          shortest possible list of transfers. This page explains exactly what happens
+          BillSmart turns a messy pile of &ldquo;who paid for what&rdquo; into a short
+          list of transfers. This page explains exactly what happens
           between the numbers you type and the settlement you get, including how
           exchange rates are handled and where rounding can bite.
         </p>

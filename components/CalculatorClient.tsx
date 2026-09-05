@@ -10,15 +10,25 @@ import {
 } from "@phosphor-icons/react";
 import PayToDropdown from "./PayToDropdown";
 
+type Person = { id: string; name: string };
+
 type Payment = {
   id: string;
-  payer: string;
-  beneficiaries: string[];
+  /**
+   * People are referenced by id, never by name. Names are labels the user can
+   * edit at any time; using them as identity meant a rename dropped the
+   * person's paid/owed totals out of the settlement and the books stopped
+   * balancing, and two people sharing a name collapsed into one.
+   */
+  payerId: string;
+  beneficiaryIds: string[];
   currency: string;
   amount: number;
   baseCurrency: string;
   baseAmount: number;
   rateUsed: number;
+  /** Which tier of the FX chain produced rateUsed, so backup rates stay flagged. */
+  rateSource: string;
   note?: string;
 };
 
@@ -38,10 +48,30 @@ const CURRENCIES = [
   "CHF",
 ];
 
-const nf2 = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
+// Currencies this app offers that are not subdivided in practice. JPY and KRW
+// have no minor unit at all; TWD formally has one (ISO 4217 lists two digits)
+// but Taiwan does not transact in it, and "NT$3,333.33" is not a transfer
+// anybody can actually make.
+const ZERO_DECIMAL_CURRENCIES = new Set(["JPY", "KRW", "TWD"]);
+
+const formatterCache = new Map<number, Intl.NumberFormat>();
+
+function decimalsFor(currency: string) {
+  return ZERO_DECIMAL_CURRENCIES.has(currency) ? 0 : 2;
+}
+
+function formatMoney(value: number, currency: string) {
+  const digits = decimalsFor(currency);
+  let nf = formatterCache.get(digits);
+  if (!nf) {
+    nf = new Intl.NumberFormat("en-US", {
+      minimumFractionDigits: digits,
+      maximumFractionDigits: digits,
+    });
+    formatterCache.set(digits, nf);
+  }
+  return nf.format(value);
+}
 
 function uid() {
   return Math.random().toString(16).slice(2) + Date.now().toString(16);
@@ -51,10 +81,39 @@ function sanitizeName(s: string) {
   return (s || "").trim();
 }
 
-function resizeNames(prev: string[], nextCount: number) {
+/**
+ * Fixed ids, not uid(). This page is prerendered, so a useState initializer
+ * runs once on the server and again on the client; random ids would differ
+ * between the two, and React does not repair attribute mismatches during
+ * hydration — the <option value> in the served HTML would keep pointing at
+ * ids that client state no longer had, so every payment referenced a person
+ * who did not exist. Ids minted by resizePeople are safe: it only runs from
+ * event handlers, which are client-only.
+ */
+const INITIAL_PEOPLE: Person[] = [
+  { id: "person-1", name: "Alice" },
+  { id: "person-2", name: "Bob" },
+  { id: "person-3", name: "Charlie" },
+];
+
+function resizePeople(prev: Person[], nextCount: number) {
+  if (prev.length === nextCount) return prev;
   const next = prev.slice(0, nextCount);
-  while (next.length < nextCount) next.push("");
+  while (next.length < nextCount) next.push({ id: uid(), name: "" });
   return next;
+}
+
+/**
+ * Drop people who no longer exist from a payment. The payer going away voids
+ * the whole entry; a beneficiary going away re-splits the same amount across
+ * whoever is left. Returns null when the payment can no longer mean anything.
+ */
+function reconcilePayment(p: Payment, liveIds: Set<string>): Payment | null {
+  if (!liveIds.has(p.payerId)) return null;
+  const beneficiaryIds = p.beneficiaryIds.filter((id) => liveIds.has(id));
+  if (beneficiaryIds.length === 0) return null;
+  if (beneficiaryIds.length === p.beneficiaryIds.length) return p;
+  return { ...p, beneficiaryIds };
 }
 
 function getErrorMessage(err: unknown) {
@@ -99,7 +158,8 @@ export default function CalculatorClient() {
   const [baseCurrency, setBaseCurrency] = useState<string>("USD");
   const [count, setCount] = useState<number>(3);
   const [countInput, setCountInput] = useState<string>("3");
-  const [names, setNames] = useState<string[]>(["Alice", "Bob", "Charlie"]);
+  const [people, setPeople] = useState<Person[]>(INITIAL_PEOPLE);
+  const [rosterNotice, setRosterNotice] = useState<string>("");
 
   const [fxError, setFxError] = useState<string>("");
   const [fxNotice, setFxNotice] = useState<string>("");
@@ -109,41 +169,98 @@ export default function CalculatorClient() {
 
   const [payments, setPayments] = useState<Payment[]>([]);
   const [temp, setTemp] = useState<{
-    payer: string;
-    beneficiaries: string[];
+    payerId: string;
+    beneficiaryIds: string[];
     currency: string;
     amount: string;
     note: string;
   }>({
-    payer: "",
-    beneficiaries: [],
+    payerId: "",
+    beneficiaryIds: [],
     currency: "USD",
     amount: "",
     note: "",
   });
 
-  const latestFxRef = useRef<Record<string, number>>({});
+  const latestFxRef = useRef<Record<string, { rate: number; source: string }>>({});
 
-  const filled = useMemo(() => names.map(sanitizeName).filter(Boolean), [names]);
+  /** Everyone who has been given a name — the roster payments can refer to. */
+  const roster = useMemo(
+    () => people.filter((p) => sanitizeName(p.name)),
+    [people]
+  );
+  const nameById = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const p of people) m.set(p.id, sanitizeName(p.name));
+    return m;
+  }, [people]);
 
   const canAdd = useMemo(() => {
     if (fxPending > 0) return false;
-    if (filled.length !== count) return false;
-    if (!temp.payer) return false;
-    if (!temp.beneficiaries.length) return false;
+    if (roster.length !== count) return false;
+    if (!temp.payerId) return false;
+    if (!temp.beneficiaryIds.length) return false;
     const amt = Number(temp.amount);
     if (!Number.isFinite(amt) || amt <= 0) return false;
     return true;
-  }, [count, filled.length, fxPending, temp.amount, temp.beneficiaries.length, temp.payer]);
+  }, [count, roster.length, fxPending, temp.amount, temp.beneficiaryIds.length, temp.payerId]);
+
+  /**
+   * Shrinking the roster used to leave payments pointing at people who no
+   * longer existed, which silently unbalanced the settlement. Reconcile them
+   * and say out loud what was changed instead.
+   *
+   * Computed from the current `people` value rather than inside a setState
+   * updater: updaters must be pure, and `resizePeople` calls `uid()`, so
+   * letting React re-run it minted fresh ids and orphaned every payment.
+   */
+  function applyPeopleCount(nextCount: number) {
+    const nextPeople = resizePeople(people, nextCount);
+    // Nothing changed — leave any existing notice alone. The count input fires
+    // this on blur as well as on change, which used to wipe the message the
+    // moment focus moved.
+    if (nextPeople === people) return;
+
+    setRosterNotice("");
+    setPeople(nextPeople);
+
+    const liveIds = new Set(nextPeople.map((q) => q.id));
+
+    let dropped = 0;
+    let adjusted = 0;
+    const kept: Payment[] = [];
+    for (const p of payments) {
+      const r = reconcilePayment(p, liveIds);
+      if (!r) dropped++;
+      else {
+        if (r !== p) adjusted++;
+        kept.push(r);
+      }
+    }
+    if (dropped || adjusted) {
+      setPayments(kept);
+      const parts: string[] = [];
+      if (dropped) parts.push(`${dropped} payment${dropped > 1 ? "s" : ""} removed`);
+      if (adjusted) parts.push(`${adjusted} re-split across the remaining people`);
+      setRosterNotice(`Someone was removed from the group: ${parts.join(", ")}.`);
+    }
+
+    setTemp((t) => ({
+      ...t,
+      payerId: liveIds.has(t.payerId) ? t.payerId : "",
+      beneficiaryIds: t.beneficiaryIds.filter((id) => liveIds.has(id)),
+    }));
+  }
 
   function applyCount(nextValue: number) {
     const nextCount = Math.max(2, Math.min(20, nextValue || 2));
     setCount(nextCount);
     setCountInput(String(nextCount));
-    setNames((prev) => resizeNames(prev, nextCount));
+    applyPeopleCount(nextCount);
   }
 
   async function handleBaseCurrencyChange(nextBase: string) {
+    const previousBase = baseCurrency;
     setBaseCurrency(nextBase);
     setFxError("");
     setFxNotice("");
@@ -161,17 +278,20 @@ export default function CalculatorClient() {
             baseCurrency: nextBase,
             baseAmount: p.amount,
             rateUsed: 1,
+            rateSource: "identity",
           });
           continue;
         }
 
         const key = `${p.currency}->${nextBase}`;
         const cached = latestFxRef.current[key];
+        // Reuse the cached rate *and* the tier it came from, so a backup rate
+        // stays labelled as one on every later payment instead of only the first.
         const fx = cached
-          ? { rate: cached, source: "cache", base: p.currency, to: nextBase }
+          ? { rate: cached.rate, source: cached.source, base: p.currency, to: nextBase }
           : await fetchFxRate(p.currency, nextBase);
 
-        latestFxRef.current[key] = fx.rate;
+        latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
         if (fx.source === "backup-table") usedBackup = true;
 
         converted.set(p.id, {
@@ -179,6 +299,7 @@ export default function CalculatorClient() {
           baseCurrency: nextBase,
           baseAmount: p.amount * fx.rate,
           rateUsed: fx.rate,
+          rateSource: fx.source,
         });
       }
       // `payments` is the snapshot taken before the awaits above. Merge by id
@@ -190,7 +311,13 @@ export default function CalculatorClient() {
           : ""
       );
     } catch (e: unknown) {
-      setFxError(getErrorMessage(e) || "FX conversion failed");
+      // Every stored baseAmount is still expressed in the old currency, so
+      // leaving the label on the new one would show a settlement that is wrong
+      // by an entire exchange rate. Put the base back where it was.
+      setBaseCurrency(previousBase);
+      setFxError(
+        `${getErrorMessage(e) || "FX conversion failed"} — still settling in ${previousBase}.`
+      );
     } finally {
       setFxPending((n) => n - 1);
     }
@@ -209,31 +336,31 @@ export default function CalculatorClient() {
     try {
       let rateUsed = 1;
       let baseAmount = amt;
+      let rateSource = "identity";
 
       if (from !== to) {
         const key = `${from}->${to}`;
         const cached = latestFxRef.current[key];
         const fx = cached
-          ? { rate: cached, source: "cache", base: from, to }
+          ? { rate: cached.rate, source: cached.source, base: from, to }
           : await fetchFxRate(from, to);
-        latestFxRef.current[key] = fx.rate;
+        latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
 
         rateUsed = fx.rate;
         baseAmount = amt * fx.rate;
-        if (fx.source === "backup-table") {
-          setFxNotice("FX data was temporarily unavailable. Using backup USD rates.");
-        }
+        rateSource = fx.source;
       }
 
       const p: Payment = {
         id: uid(),
-        payer: temp.payer,
-        beneficiaries: temp.beneficiaries,
+        payerId: temp.payerId,
+        beneficiaryIds: temp.beneficiaryIds,
         currency: from,
         amount: amt,
         baseCurrency: to,
         baseAmount,
         rateUsed,
+        rateSource,
         note: temp.note?.trim() || undefined,
       };
 
@@ -254,41 +381,45 @@ export default function CalculatorClient() {
     const paid: Record<string, number> = {};
     const owed: Record<string, number> = {};
 
-    for (const n of filled) {
-      paid[n] = 0;
-      owed[n] = 0;
+    for (const person of roster) {
+      paid[person.id] = 0;
+      owed[person.id] = 0;
     }
 
     for (const p of payments) {
-      if (!paid[p.payer]) paid[p.payer] = 0;
-      paid[p.payer] += p.baseAmount;
+      paid[p.payerId] = (paid[p.payerId] ?? 0) + p.baseAmount;
 
-      const each = p.baseAmount / p.beneficiaries.length;
-      for (const b of p.beneficiaries) {
-        if (!owed[b]) owed[b] = 0;
-        owed[b] += each;
-      }
+      const each = p.baseAmount / p.beneficiaryIds.length;
+      for (const b of p.beneficiaryIds) owed[b] = (owed[b] ?? 0) + each;
     }
 
+    // Net over every id that appears anywhere, not just the current roster, so
+    // a stale reference can never quietly remove money from the settlement.
+    const ids = new Set<string>([...Object.keys(paid), ...Object.keys(owed)]);
     const net: Record<string, number> = {};
-    for (const n of filled) net[n] = (paid[n] || 0) - (owed[n] || 0);
+    for (const id of ids) net[id] = (paid[id] || 0) - (owed[id] || 0);
 
     return { paid, owed, net };
-  }, [filled, payments]);
+  }, [roster, payments]);
+
+  const usesBackupRate = useMemo(
+    () => payments.some((p) => p.rateSource === "backup-table"),
+    [payments]
+  );
 
   const transfers = useMemo(() => {
-    const creditors: { name: string; amt: number }[] = [];
-    const debtors: { name: string; amt: number }[] = [];
+    const creditors: { id: string; amt: number }[] = [];
+    const debtors: { id: string; amt: number }[] = [];
 
-    for (const [name, amt] of Object.entries(totals.net)) {
-      if (amt > 0.00001) creditors.push({ name, amt });
-      else if (amt < -0.00001) debtors.push({ name, amt: -amt });
+    for (const [id, amt] of Object.entries(totals.net)) {
+      if (amt > 0.00001) creditors.push({ id, amt });
+      else if (amt < -0.00001) debtors.push({ id, amt: -amt });
     }
 
     creditors.sort((a, b) => b.amt - a.amt);
     debtors.sort((a, b) => b.amt - a.amt);
 
-    const out: { from: string; to: string; amt: number }[] = [];
+    const out: { fromId: string; toId: string; amt: number }[] = [];
     let i = 0,
       j = 0;
 
@@ -297,7 +428,7 @@ export default function CalculatorClient() {
       const c = creditors[j];
       const pay = Math.min(d.amt, c.amt);
 
-      out.push({ from: d.name, to: c.name, amt: pay });
+      out.push({ fromId: d.id, toId: c.id, amt: pay });
 
       d.amt -= pay;
       c.amt -= pay;
@@ -343,6 +474,12 @@ export default function CalculatorClient() {
 
           {fxError ? <p className="hint danger">FX error: {fxError}</p> : null}
           {!fxError && fxNotice ? <p className="hint warn">{fxNotice}</p> : null}
+          {usesBackupRate ? (
+            <p className="hint warn">
+              Some entries use backup rates, not live ones. Treat those amounts as
+              approximate.
+            </p>
+          ) : null}
         </div>
 
         <div className="inputSplit">
@@ -375,29 +512,34 @@ export default function CalculatorClient() {
                   const nextValue = Number(raw);
                   if (nextValue >= 2 && nextValue <= 20) {
                     setCount(nextValue);
-                    setNames((prev) => resizeNames(prev, nextValue));
+                    applyPeopleCount(nextValue);
                   }
                 }}
-                onBlur={() => applyCount(Number(countInput))}
+                onBlur={() => {
+                  // An empty box on blur means "unchanged", not "two people".
+                  if (countInput.trim() === "") {
+                    setCountInput(String(count));
+                    return;
+                  }
+                  applyCount(Number(countInput));
+                }}
               />
             </div>
 
             <div className="peopleGrid">
-              {names.map((n, idx) => (
-                <label className="personField" key={idx}>
+              {people.map((person, idx) => (
+                <label className="personField" key={person.id}>
                   <UserCircle size={18} weight="light" aria-hidden="true" />
                   <span className="srOnly">Person {idx + 1}</span>
                   <input
                     className="personInput"
                     placeholder={`Person ${idx + 1}`}
-                    value={n}
+                    value={person.name}
                     onChange={(e) => {
                       const v = e.target.value;
-                      setNames((prev) => {
-                        const next = [...prev];
-                        next[idx] = v;
-                        return next;
-                      });
+                      setPeople((prev) =>
+                        prev.map((q) => (q.id === person.id ? { ...q, name: v } : q))
+                      );
                     }}
                   />
                   <DotsSixVertical className="dragDots" size={16} weight="bold" aria-hidden="true" />
@@ -405,9 +547,10 @@ export default function CalculatorClient() {
               ))}
             </div>
 
-            {filled.length !== count ? (
+            {roster.length !== count ? (
               <div className="hint danger">Please fill all names before adding payments.</div>
             ) : null}
+            {rosterNotice ? <div className="hint warn">{rosterNotice}</div> : null}
           </div>
 
           <div className="stepSection paymentSection">
@@ -425,24 +568,29 @@ export default function CalculatorClient() {
                 <select
                   id="payer"
                   className="control"
-                  value={temp.payer}
-                  onChange={(e) => setTemp({ ...temp, payer: e.target.value })}
-                  disabled={filled.length === 0}
+                  value={temp.payerId}
+                  onChange={(e) => setTemp({ ...temp, payerId: e.target.value })}
+                  disabled={roster.length === 0}
                 >
                   <option value="">Select payer</option>
-                  {filled.map((p) => <option key={p} value={p}>{p}</option>)}
+                  {roster.map((person) => (
+                    <option key={person.id} value={person.id}>{person.name}</option>
+                  ))}
                 </select>
               </div>
 
               <div className="field">
                 <label className="label">Pay for</label>
                 <PayToDropdown
-                  options={filled}
-                  selected={temp.beneficiaries}
-                  onChange={(beneficiaries) =>
-                    setTemp((prev) => ({ ...prev, beneficiaries }))
+                  options={roster.map((person) => ({
+                    value: person.id,
+                    label: person.name,
+                  }))}
+                  selected={temp.beneficiaryIds}
+                  onChange={(beneficiaryIds) =>
+                    setTemp((prev) => ({ ...prev, beneficiaryIds }))
                   }
-                  disabled={filled.length === 0}
+                  disabled={roster.length === 0}
                 />
               </div>
 
@@ -453,7 +601,7 @@ export default function CalculatorClient() {
                   className="control"
                   value={temp.currency}
                   onChange={(e) => setTemp({ ...temp, currency: e.target.value })}
-                  disabled={filled.length === 0}
+                  disabled={roster.length === 0}
                 >
                   {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -468,7 +616,7 @@ export default function CalculatorClient() {
                   placeholder="0.00"
                   value={temp.amount}
                   onChange={(e) => setTemp({ ...temp, amount: e.target.value })}
-                  disabled={filled.length === 0}
+                  disabled={roster.length === 0}
                 />
               </div>
             </div>
@@ -488,7 +636,7 @@ export default function CalculatorClient() {
               placeholder="Note (optional) e.g., taxi / dinner"
               value={temp.note}
               onChange={(e) => setTemp({ ...temp, note: e.target.value })}
-              disabled={filled.length === 0}
+              disabled={roster.length === 0}
               aria-label="Payment note"
             />
 
@@ -508,20 +656,22 @@ export default function CalculatorClient() {
           </div>
 
           <div className="balances">
-            {filled.map((n) => {
-              const net = totals.net[n] || 0;
+            {roster.map((person) => {
+              const net = totals.net[person.id] || 0;
               const cls = net >= 0 ? "amt pos" : "amt neg";
               const sign = net >= 0 ? "+" : "−";
               return (
-                <div key={n} className="balanceRow">
+                <div key={person.id} className="balanceRow">
                   <div className="balancePerson">
                     <UserCircle size={18} weight="light" aria-hidden="true" />
                     <div>
-                      <div className="big">{n}</div>
-                      <div className={cls}>{sign} {baseCurrency} {nf2.format(Math.abs(net))}</div>
+                      <div className="big">{person.name}</div>
+                      <div className={cls}>
+                        {sign} {baseCurrency} {formatMoney(Math.abs(net), baseCurrency)}
+                      </div>
                     </div>
                   </div>
-                  <div className="pixelAmount">{nf2.format(Math.abs(net))}</div>
+                  <div className="pixelAmount">{formatMoney(Math.abs(net), baseCurrency)}</div>
                 </div>
               );
             })}
@@ -534,9 +684,17 @@ export default function CalculatorClient() {
                 {payments.map((p) => (
                   <div key={p.id} className="item">
                     <div>
-                      <div className="big">{p.payer} paid {p.currency} {nf2.format(p.amount)}</div>
+                      <div className="big">
+                        {nameById.get(p.payerId) ?? "—"} paid {p.currency}{" "}
+                        {formatMoney(p.amount, p.currency)}
+                      </div>
                       <div className="itemSub">
-                        for {p.beneficiaries.join(", ")} · {baseCurrency} {nf2.format(p.baseAmount)}
+                        for{" "}
+                        {p.beneficiaryIds
+                          .map((id) => nameById.get(id))
+                          .filter(Boolean)
+                          .join(", ")}{" "}
+                        · {baseCurrency} {formatMoney(p.baseAmount, baseCurrency)}
                         {p.note ? ` · ${p.note}` : ""}
                       </div>
                     </div>
@@ -567,34 +725,34 @@ export default function CalculatorClient() {
         <div className="ledgerEntries">
           {payments.length > 0 && transfers.length > 0 ? (
             transfers.map((t, idx) => (
-              <article className="ledgerEntry" key={`${t.from}-${t.to}-${idx}`}>
+              <article className="ledgerEntry" key={`${t.fromId}-${t.toId}-${idx}`}>
                 <Plus className="ledgerEntryMark" size={28} weight="thin" aria-hidden="true" />
                 <div className="ledgerPerson">
                   <UserCircle size={21} weight="light" aria-hidden="true" />
                   <div>
-                    <strong>{t.from}</strong>
-                    <span>Pay to {t.to}</span>
+                    <strong>{nameById.get(t.fromId) ?? "—"}</strong>
+                    <span>Pay to {nameById.get(t.toId) ?? "—"}</span>
                     <small>{baseCurrency}</small>
                   </div>
                 </div>
-                <div className="ledgerAmount">{nf2.format(t.amt)}</div>
+                <div className="ledgerAmount">{formatMoney(t.amt, baseCurrency)}</div>
               </article>
             ))
           ) : (
-            filled.map((n) => {
-              const net = totals.net[n] || 0;
+            roster.map((person) => {
+              const net = totals.net[person.id] || 0;
               return (
-                <article className="ledgerEntry" key={n}>
+                <article className="ledgerEntry" key={person.id}>
                   <Plus className="ledgerEntryMark" size={28} weight="thin" aria-hidden="true" />
                   <div className="ledgerPerson">
                     <UserCircle size={21} weight="light" aria-hidden="true" />
                     <div>
-                      <strong>{n}</strong>
+                      <strong>{person.name}</strong>
                       <span>{net < 0 ? "Owes" : "Balance"}</span>
                       <small>{baseCurrency}</small>
                     </div>
                   </div>
-                  <div className="ledgerAmount">{nf2.format(Math.abs(net))}</div>
+                  <div className="ledgerAmount">{formatMoney(Math.abs(net), baseCurrency)}</div>
                 </article>
               );
             })
@@ -607,7 +765,14 @@ export default function CalculatorClient() {
 
         <div className="ledgerFooter">
           <span>Algorithm<br /><b>Fair split engine</b></span>
-          <span>Precision<br /><b>2 decimal places</b></span>
+          <span>
+            Precision<br />
+            <b>
+              {decimalsFor(baseCurrency) === 0
+                ? "whole units"
+                : "2 decimal places"}
+            </b>
+          </span>
         </div>
         <ArrowRight className="ledgerArrow" size={22} weight="thin" aria-hidden="true" />
       </aside>

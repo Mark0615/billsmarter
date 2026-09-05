@@ -34,9 +34,22 @@ export default function EventTicketsSplitPage() {
 
         <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-800">How to Manage Massive Shared Expenses</h2>
         
-        <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">1. Wait for the Final Credit Card Statement</h3>
+        <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">1. Agree the rate before you ask for money</h3>
         <p>
-          If you bought tickets in a foreign currency, never use Google&apos;s exchange rate on the day of purchase to calculate what your friends owe you. Wait a few days for the transaction to fully clear on your banking app. Use the final billed amount in your local currency (which includes all hidden bank fees) and divide that by the number of tickets. 
+          If you bought tickets in a foreign currency, say which rate you are dividing by
+          before anyone transfers anything. The default worth using is the mid-market rate
+          on the day of purchase &mdash; the number a search engine gives you, which
+          everybody in the group can check for themselves.
+        </p>
+        <p>
+          Dividing your card statement instead looks more accurate and is not: it charges
+          the group for your card&apos;s foreign transaction fee, so whoever brought the
+          worst card quietly gets subsidised. Fees belong to the card that charged them.
+          There is a fuller comparison of the options in{" "}
+          <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">
+            which exchange rate to use when splitting a trip
+          </Link>
+          .
         </p>
 
         <h3 className="text-xl font-bold mt-6 mb-2 text-gray-800">2. Use Clear Transfer Notes</h3>

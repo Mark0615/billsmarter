@@ -143,14 +143,21 @@ const faqs: Faq[] = [
   {
     q: "Why do balances sometimes differ by a cent?",
     plain:
-      "Splitting an amount that does not divide evenly creates rounding. Full precision is kept in the calculation and only the display is rounded to two decimals, so the transfer list still balances.",
+      "Splitting an amount that does not divide evenly creates rounding. The calculation keeps full precision, but each figure on screen is rounded on its own, so the printed numbers can be a cent apart from each other.",
     a: (
-      <p>
-        Because $10 does not divide evenly by three. Full precision is kept in the
-        calculation and only the display is rounded to two decimals, so the transfers
-        still balance to zero even when three shares of $3.33 do not visibly add up to
-        $10.
-      </p>
+      <>
+        <p>
+          Because $10 does not divide evenly by three. The calculation itself keeps full
+          precision and balances exactly, but every figure on screen is rounded on its
+          own, so what you read can be a cent out: three shares of $3.33 add up to
+          $9.99, not $10.
+        </p>
+        <p>
+          It is a display artefact, not lost money. If your group cares about the last
+          cent, let whoever is owed the most absorb the difference &mdash; or round each
+          transfer up in their favour.
+        </p>
+      </>
     ),
   },
   {

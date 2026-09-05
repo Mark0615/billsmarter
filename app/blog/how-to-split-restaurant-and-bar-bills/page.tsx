@@ -55,7 +55,7 @@ export default function RestaurantBarSplitPage() {
           Trying to do complex math after a few cocktails is a recipe for disaster. Stop passing the receipt around the table with your smartphone calculators out.
         </p>
         <p className="mb-8">
-          That is what the calculator is for. Enter the shared food as one payment covering everyone, then the bottle of wine as a second payment covering only the three people who drank it &mdash; the same bill, two entries. Enter each amount as it was actually paid, tax and service included, so the extras are shared in the same proportion as the meal instead of quietly landing on whoever held the card. What comes back is a list of who pays whom, using the fewest transfers.
+          That is what the calculator is for. Enter the shared food as one payment covering everyone, then the bottle of wine as a second payment covering only the three people who drank it &mdash; the same bill, two entries. Enter each amount as it was actually paid, tax and service included, so the extras are shared in the same proportion as the meal instead of quietly landing on whoever held the card. What comes back is a short list of who pays whom, netted off rather than paid bill by bill.
         </p>
 
                 <section className="articleWorked">
