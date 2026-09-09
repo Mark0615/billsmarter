@@ -8,9 +8,41 @@ export const metadata: Metadata = {
   alternates: { canonical: "/how-it-works" },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      headline: "How BillSmart Works",
+      description:
+        "What happens between the numbers you type and the settlement you get, including how exchange rates are handled and where rounding can bite.",
+      url: "https://billsmarter.app/how-it-works",
+      author: { "@type": "Person", name: "Mark", url: "https://billsmarter.app/about" },
+      publisher: { "@type": "Organization", name: "BillSmart", url: "https://billsmarter.app" },
+      about: { "@type": "WebApplication", name: "BillSmart", url: "https://billsmarter.app" },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://billsmarter.app" },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "How it works",
+          item: "https://billsmarter.app/how-it-works",
+        },
+      ],
+    },
+  ],
+};
+
 export default function HowItWorksPage() {
   return (
     <article className="prosePage">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>How BillSmart Works</h1>
         <p className="lead">
