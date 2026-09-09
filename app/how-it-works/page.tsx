@@ -22,7 +22,7 @@ export default function HowItWorksPage() {
       </header>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Step 1 — Pick a base currency</h2>
+        <h2>Step 1: Pick a base currency</h2>
         <p>
           Everything is settled in one currency. Pick the one your group will actually
           transfer money in, not the one you spent the most in. If four friends live in
@@ -36,7 +36,7 @@ export default function HowItWorksPage() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Step 2 — Add everyone in the group</h2>
+        <h2>Step 2: Add everyone in the group</h2>
         <p>
           Enter the number of people and fill in their names. Names are only labels used
           to attach payments to a person and to print the final transfer list. Everyone
@@ -46,19 +46,19 @@ export default function HowItWorksPage() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Step 3 — Log each payment</h2>
+        <h2>Step 3: Log each payment</h2>
         <p>Every payment needs three things:</p>
         <ul>
           <li>
-            <strong>Who paid</strong> — the one person whose card or cash covered the
+            <strong>Who paid</strong>, the one person whose card or cash covered the
             bill.
           </li>
           <li>
-            <strong>How much, and in which currency</strong> — the amount exactly as it
+            <strong>How much, and in which currency</strong>: the amount exactly as it
             appeared on the receipt, in the currency it was charged in.
           </li>
           <li>
-            <strong>Who it was for</strong> — the &ldquo;Pay for&rdquo; multi-select. Pick
+            <strong>Who it was for</strong>: the &ldquo;Pay for&rdquo; multi-select. Pick
             one person, several, or everyone. This is what makes an uneven split
             possible.
           </li>
@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
           <p>
             <strong>The most common mistake:</strong> logging a €120 dinner as
             &ldquo;paid for everyone&rdquo; when one person skipped dessert and drinks.
-            Split it into two entries instead — one for the shared food, one for the
+            Split it into two entries instead, one for the shared food, one for the
             items only some people had. Two entries take ten seconds and remove the
             argument entirely.
           </p>
@@ -79,7 +79,7 @@ export default function HowItWorksPage() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Step 4 — What happens to the exchange rate</h2>
+        <h2>Step 4: What happens to the exchange rate</h2>
         <p>
           When a payment&rsquo;s currency differs from the base currency, BillSmart
           requests a rate for that specific currency pair and multiplies the amount by
@@ -127,7 +127,7 @@ export default function HowItWorksPage() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Step 5 — How the settlement is calculated</h2>
+        <h2>Step 5: How the settlement is calculated</h2>
         <p>
           This is where most people expect something complicated, and it is genuinely
           simple. BillSmart never tracks &ldquo;A owes B&rdquo; per transaction. It only
@@ -136,15 +136,15 @@ export default function HowItWorksPage() {
         <p>For each person it computes:</p>
         <ul>
           <li>
-            <strong>Paid</strong> — the total of every payment where they were the payer,
+            <strong>Paid</strong>: the total of every payment where they were the payer,
             converted to the base currency.
           </li>
           <li>
-            <strong>Owed</strong> — their share of every payment they benefited from. A
+            <strong>Owed</strong>: their share of every payment they benefited from. A
             payment is divided evenly among the people it was for.
           </li>
           <li>
-            <strong>Net balance</strong> — paid minus owed. Positive means the group owes
+            <strong>Net balance</strong>: paid minus owed. Positive means the group owes
             them; negative means they owe the group.
           </li>
         </ul>
@@ -152,12 +152,12 @@ export default function HowItWorksPage() {
           The net balances always sum to zero. BillSmart then repeatedly matches the
           largest debtor with the largest creditor and moves the smaller of the two
           amounts, until every balance is cleared. That pairing is what keeps the
-          transfer count low — you end up with at most one fewer transfer than there are
+          transfer count low. You end up with at most one fewer transfer than there are
           people, and usually fewer than that.
         </p>
 
         <h3>A worked example</h3>
-        <p>Four friends — Ana, Ben, Chen, Dara — on a trip settling in USD:</p>
+        <p>Four friends (Ana, Ben, Chen, Dara) on a trip settling in USD:</p>
         <div style={{ overflowX: "auto" }}>
           <table>
             <thead>
@@ -206,7 +206,7 @@ export default function HowItWorksPage() {
         <h2>Rounding, and why a cent sometimes goes missing</h2>
         <p>
           Amounts are displayed to two decimal places. When a bill does not divide
-          evenly — $10 split three ways — the underlying maths keeps the full precision
+          evenly, say $10 split three ways, the underlying maths keeps the full precision
           and only the display is rounded, so the transfer list still balances to zero.
           What you may notice is a share showing as $3.33 three times against a $10
           total. That is a display artefact, not an error in the settlement.
@@ -226,7 +226,7 @@ export default function HowItWorksPage() {
         </p>
         <p>
           The one request that does leave your browser is the exchange-rate lookup, which
-          contains only a currency pair such as <code>JPY</code> to <code>TWD</code> — no
+          contains only a currency pair such as <code>JPY</code> to <code>TWD</code>, no
           amounts, no names. Full detail is in the{" "}
           <Link href="/privacy">privacy policy</Link>.
         </p>
@@ -261,8 +261,7 @@ export default function HowItWorksPage() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Next steps</h2>
         <p>
-          Open the <Link href="/">calculator</Link> and log your first three payments —
-          it takes about a minute. If something behaves unexpectedly, the{" "}
+          Open the <Link href="/">calculator</Link> and log your first three payments. It takes about a minute. If something behaves unexpectedly, the{" "}
           <Link href="/faq">FAQ</Link> covers the questions we get most, and the{" "}
           <Link href="/blog">guides</Link> go deeper into the etiquette side of splitting
           money with people you like.

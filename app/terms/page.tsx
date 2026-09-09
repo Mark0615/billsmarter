@@ -84,8 +84,7 @@ export default function TermsPage() {
         <h2>Limitation of liability</h2>
         <p>
           To the fullest extent permitted by law, the operator of BillSmart is not liable
-          for any loss or damage arising from use of, or inability to use, this site —
-          including any amount transferred on the basis of a calculation shown here.
+          for any loss or damage arising from use of, or inability to use, this site, including any amount transferred on the basis of a calculation shown here.
         </p>
       </section>
 

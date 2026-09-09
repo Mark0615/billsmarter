@@ -33,7 +33,7 @@ const faqs: Faq[] = [
     a: (
       <p>
         No. There is no sign-up, no email and no login. Open the page and start typing.
-        The trade-off is that nothing is saved between visits — see the question about
+        The trade-off is that nothing is saved between visits, see the question about
         saving a trip below.
       </p>
     ),
@@ -64,7 +64,7 @@ const faqs: Faq[] = [
       "Yes. Each payment has a 'Pay for' multi-select, so you choose exactly who that expense applies to. This is how uneven splits work.",
     a: (
       <p>
-        Yes — this is the main reason the tool exists. Each payment has a &ldquo;Pay
+        Yes. This is the main reason the tool exists. Each payment has a &ldquo;Pay
         for&rdquo; multi-select, so a taxi shared by three of five people is charged only
         to those three. Everyone else&rsquo;s balance is untouched.
       </p>
@@ -76,7 +76,7 @@ const faqs: Faq[] = [
       "Yes. Enter each payment in the currency it was charged in and BillSmart converts everything into the base currency you chose.",
     a: (
       <p>
-        Yes. Enter each payment in the currency it was actually charged in — that is the
+        Yes. Enter each payment in the currency it was actually charged in. That is the
         number on the receipt, and the one you can check later. BillSmart converts
         everything into your base currency and shows the rate it used for each entry.
       </p>
@@ -97,7 +97,7 @@ const faqs: Faq[] = [
           Your card issuer does not give you the mid-market rate. It applies its own
           spread, and many cards add a foreign-transaction fee of 1&ndash;3% on top. A
           statement landing a couple of percent away from the number here is normal, not
-          a bug. If you need the exact figure — for a company expense claim, say — use
+          a bug. If you need the exact figure for a company expense claim, use
           the amount printed on your statement.
         </p>
         <p>
@@ -133,8 +133,7 @@ const faqs: Faq[] = [
     a: (
       <p>
         Because it settles on net balances, not transaction by transaction. If you paid
-        for my lunch and I paid for your taxi, there is no reason for two transfers —
-        only the difference needs to move. BillSmart then pairs the largest debtor with
+        for my lunch and I paid for your taxi, there is no reason for two transfers, only the difference needs to move. BillSmart then pairs the largest debtor with
         the largest creditor repeatedly, which is what collapses a tangle of debts into a
         short list.
       </p>
@@ -154,7 +153,7 @@ const faqs: Faq[] = [
         </p>
         <p>
           It is a display artefact, not lost money. If your group cares about the last
-          cent, let whoever is owed the most absorb the difference &mdash; or round each
+          cent, let whoever is owed the most absorb the difference, or round each
           transfer up in their favour.
         </p>
       </>
@@ -217,7 +216,7 @@ const faqs: Faq[] = [
     a: (
       <p>
         Email me through the <Link href="/contact">contact page</Link>. For a wrong
-        conversion, include the two currencies and the rate you expected — that is enough
+        conversion, include the two currencies and the rate you expected. That is enough
         to trace it. For a missing currency, just name it; adding one is a small change.
       </p>
     ),
@@ -245,7 +244,7 @@ export default function FaqPage() {
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>Frequently Asked Questions</h1>
         <p className="lead">
-          Everything people actually ask about BillSmart — how the money maths works,
+          Everything people actually ask about BillSmart, how the money maths works,
           what happens to your data, and where the tool falls short.
         </p>
       </header>

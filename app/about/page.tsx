@@ -47,7 +47,7 @@ export default function AboutPage() {
         <h2>Who builds this</h2>
         <p>
           My name is Mark. I&rsquo;m a digital marketing consultant based in Taipei, and I
-          build small web tools in my own time — usually because I hit a problem often
+          build small web tools in my own time, usually because I hit a problem often
           enough to get annoyed by it.
         </p>
         <p>
@@ -60,7 +60,7 @@ export default function AboutPage() {
         </p>
         <p>
           I maintain the site myself and answer the email personally. If something is
-          wrong or missing, telling me is genuinely the fastest way to get it fixed —{" "}
+          wrong or missing, telling me is genuinely the fastest way to get it fixed, {" "}
           <Link href="/contact">contact page</Link>.
         </p>
       </section>
@@ -126,8 +126,8 @@ export default function AboutPage() {
         <div className="proseNote">
           <p>
             <strong>Not financial advice.</strong> Nothing here is personalised advice
-            about your money. For decisions with real consequences — taxes, debt, an
-            expense claim your employer will audit — talk to someone licensed in your
+            about your money. For decisions with real consequences (taxes, debt, an
+            expense claim your employer will audit), talk to someone licensed in your
             country.
           </p>
         </div>

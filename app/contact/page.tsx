@@ -15,7 +15,7 @@ export default function ContactPage() {
         <h1>Contact</h1>
         <p className="lead">
           BillSmart is run by one person. Email reaches me directly, and I reply to
-          everything that is not spam — usually within a few days.
+          everything that is not spam, usually within a few days.
         </p>
       </header>
 
@@ -35,20 +35,20 @@ export default function ContactPage() {
         <p>A few details turn a report into something I can actually act on:</p>
         <ul>
           <li>
-            <strong>A wrong conversion</strong> — the two currencies, the rate shown, and
+            <strong>A wrong conversion</strong>: the two currencies, the rate shown, and
             the rate you expected.
           </li>
           <li>
-            <strong>A missing currency</strong> — just the three-letter code. Adding one
+            <strong>A missing currency</strong>: just the three-letter code. Adding one
             is a small change.
           </li>
           <li>
-            <strong>A bug in the calculator</strong> — what you entered and what you
+            <strong>A bug in the calculator</strong>: what you entered and what you
             expected to see. A screenshot is ideal, and browser and phone model help if
             it is a layout problem.
           </li>
           <li>
-            <strong>A correction to an article</strong> — the page and the sentence.
+            <strong>A correction to an article</strong>: the page and the sentence.
             Corrections get made and the update date on the article changes.
           </li>
         </ul>
@@ -59,7 +59,7 @@ export default function ContactPage() {
         <p>
           Enquiries about advertising on the site are welcome at the same address.
           Sponsored articles and paid links in the <Link href="/blog">guides</Link> are
-          not available — the reasoning is on the <Link href="/about">about page</Link>.
+          not available, the reasoning is on the <Link href="/about">about page</Link>.
         </p>
       </section>
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
           Anything sensitive. BillSmart never needs your bank details, card numbers,
           passwords, or a copy of a statement, and there is no situation in which I would
           ask for them. To report a conversion problem, the currency pair alone is
-          enough — no amounts required.
+          enough, no amounts required.
         </p>
         <p className="proseMeta">
           How your message is handled is covered in the{" "}
