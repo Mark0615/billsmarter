@@ -10,9 +10,33 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://billsmarter.app/blog#blog",
+  name: "BillSmart Guides",
+  url: "https://billsmarter.app/blog",
+  description:
+    "Guides on splitting shared expenses across currencies, households and group trips.",
+  publisher: { "@type": "Organization", name: "BillSmart", url: "https://billsmarter.app" },
+  blogPost: posts.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.summary,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    url: `https://billsmarter.app/blog/${post.slug}`,
+    author: { "@type": "Person", name: "Mark", url: "https://billsmarter.app/about" },
+  })),
+};
+
 export default function BlogPage() {
   return (
     <div className="prosePage blogIndex">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="blogIndexHeader">
         <p className="contentEyebrow">Field notes / shared money</p>
         <h1>Guides</h1>

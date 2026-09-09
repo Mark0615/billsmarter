@@ -18,7 +18,7 @@ const howItWorksItems = [
   },
   {
     title: "3. Get the Split",
-    desc: "Hit calculate and instantly see the optimized list of who needs to pay whom to settle up.",
+    desc: "The settlement updates as you type. Read off the short list of who pays whom and share it.",
   },
 ];
 
@@ -26,7 +26,7 @@ const featureItems = [
   {
     Icon: Calculator,
     title: "No More Math",
-    text: "Enter payments and we handle the complex split logic automatically, including who paid and who owes.",
+    text: "Enter who paid and who each payment was for. The net balances and the transfer list follow automatically.",
   },
   {
     Icon: Scales,
@@ -54,7 +54,7 @@ const useCaseItems = [
   {
     title: "Dining Out & Bar Tabs",
     desc: "Someone ordered steak, another just had water? Easily split complex restaurant bills elegantly.",
-    link: "/blog/how-to-split-restaurant-and-bar-bills", // 確保這個 slug 跟你的資料夾名稱相符
+    link: "/blog/how-to-split-restaurant-and-bar-bills",
   },
 ];
 
@@ -69,17 +69,55 @@ const faqItems = [
   },
   {
     q: "How does the split algorithm work?",
-    a: "Our algorithm calculates the net balance for each person and then optimizes the transactions, minimizing the total number of bank transfers needed.",
+    a: "Each person's net balance is paid minus owed. BillSmart then repeatedly matches the largest debtor with the largest creditor, which keeps the transfer count low: at most one fewer transfer than there are people.",
   },
   {
     q: "What happens if exchange rates are temporarily unavailable?",
-    a: "BillSmart shows a clear FX error and prevents saving wrong converted amounts.",
+    a: "BillSmart shows the error rather than guessing. Rates come from European Central Bank data where the ECB publishes the currency, and a second public source for the rest, with a fixed backup table only if both are unreachable. Anything settled on the backup table is labelled as such.",
   },
 ];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://billsmarter.app/#app",
+      name: "BillSmart",
+      url: "https://billsmarter.app",
+      applicationCategory: "FinanceApplication",
+      operatingSystem: "Any browser",
+      browserRequirements: "Requires JavaScript",
+      description:
+        "A free calculator that splits group expenses across 13 currencies, convertseach payment into one settlement currency at live mid-market rates, and returns a short list of who pays whom. No account required.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      featureList: [
+        "Split one payment between any subset of the group",
+        "Mixed-currency entry converted to one settlement currency",
+        "Live mid-market exchange rates with a documented fallback",
+        "Net balances reduced to a short transfer list",
+        "No account, no installation, nothing stored between visits",
+      ],
+      isAccessibleForFree: true,
+      publisher: { "@id": "https://billsmarter.app/#org" },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://billsmarter.app/#org",
+      name: "BillSmart",
+      url: "https://billsmarter.app",
+      logo: "https://billsmarter.app/icon.png",
+    },
+  ],
+};
 
 export default function HomePage() {
   return (
     <div className="homeStack">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="heroWorkspace" aria-label="BillSmart calculator">
         <article className="heroPanel glassPanel">
           <div>

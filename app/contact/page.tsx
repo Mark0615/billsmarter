@@ -8,9 +8,26 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact BillSmart",
+  url: "https://billsmarter.app/contact",
+  mainEntity: {
+    "@type": "Organization",
+    name: "BillSmart",
+    url: "https://billsmarter.app",
+    email: "mailto:yang10824m@gmail.com",
+  },
+};
+
 export default function ContactPage() {
   return (
     <article className="prosePage">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header style={{ display: "grid", gap: "12px" }}>
         <h1>Contact</h1>
         <p className="lead">
