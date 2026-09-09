@@ -46,8 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/*
           Plain <script>, not next/script: React hoists this into the static
-          <head> so it is present in the server-rendered HTML immediately —
-          required for AdSense's "AdSense code snippet" site-ownership check
+          <head> so it is present in the server-rendered HTML immediately, required for AdSense's "AdSense code snippet" site-ownership check
           and for crawlers that don't wait on hydration. next/script's
           afterInteractive strategy only injects it client-side post-hydrate.
         */}

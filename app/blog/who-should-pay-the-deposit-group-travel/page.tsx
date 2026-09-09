@@ -60,7 +60,7 @@ export default function Page() {
         <p>
           The single highest-value habit in group travel. When someone books a
           NT$60,000 flight for four people, the other three transfer their NT$15,000
-          within a couple of days — not after the trip, not when the final spreadsheet is
+          within a couple of days, not after the trip, not when the final spreadsheet is
           ready.
         </p>
         <p>
@@ -88,8 +88,8 @@ export default function Page() {
           the trip collapses.
         </p>
         <p>
-          When it genuinely has to be one person — one card has the right travel insurance,
-          one person has the loyalty account — the group should acknowledge that as a
+          When it genuinely has to be one person (one card has the right travel insurance,
+          or one person has the loyalty account), the group should acknowledge that as a
           favour and reimburse fastest of all.
         </p>
       </section>
@@ -129,7 +129,7 @@ export default function Page() {
           If the booking was in a foreign currency, fix the rate on the day it was paid
           rather than the day people reimburse. Reimbursing at a later rate means the
           group is unintentionally speculating on currency, with the booker taking the
-          whole position &mdash; and on a deposit paid six months out, that position is
+          whole position, and on a deposit paid six months out, that position is
           large and lasts a long time.
         </p>
         <p>
@@ -154,14 +154,13 @@ export default function Page() {
         </p>
         <p>
           Treat the refund as its own event. Whoever received it distributes it in the
-          same proportion the original was split, and it is done — no recalculation of
+          same proportion the original was split, and it is done, no recalculation of
           anything else. In the <Link href="/">calculator</Link>, that is one negative
           entry against the same set of people, or simply a separate transfer if the
           rest is already settled.
         </p>
         <p>
-          Refunds below a threshold the group agrees on — the price of a coffee each —
-          are not worth moving. Say so once and let the booker keep them.
+          Refunds below a threshold the group agrees on (the price of a coffee each) are not worth moving. Say so once and let the booker keep them.
         </p>
       </section>
 
@@ -188,8 +187,7 @@ export default function Page() {
           <li>
             <Link href="/blog/how-to-split-event-tickets-with-friends">
               How to split concert and sports event tickets
-            </Link>{" "}
-            — the same problem, compressed into a sixty-second ticket queue.
+            </Link>{" "}: the same problem, compressed into a sixty-second ticket queue.
           </li>
           <li>
             <Link href="/blog/best-ways-to-split-expenses-when-traveling-with-friends">
@@ -201,7 +199,7 @@ export default function Page() {
             <section className="articleWorked">
           <h2>Worked example</h2>
           <p>
-            One person fronting a large booking &mdash; exactly the exposure this article is about. Ana put the villa deposit on her card; Ben picked up groceries. Both split evenly across the four.
+            One person fronting a large booking, exactly the exposure this article is about. Ana put the villa deposit on her card; Ben picked up groceries. Both split evenly across the four.
           </p>
           <figure className="articleFigure">
             <Image

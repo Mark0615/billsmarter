@@ -35,8 +35,7 @@ export default function Page() {
         <p>
           Every one of those transactions has a different exchange rate attached to it,
           and none of them is &ldquo;the&rdquo; rate. To settle up you have to choose one
-          convention and apply it to everyone. The choice matters less than you think —
-          but only if you make it deliberately and tell the group.
+          convention and apply it to everyone. The choice matters less than you think, but only if you make it deliberately and tell the group.
         </p>
       </section>
 
@@ -47,13 +46,13 @@ export default function Page() {
         <p>
           The midpoint between what banks buy and sell a currency at. It is the number
           you get from a search engine or a currency site, and it is the rate BillSmart
-          uses &mdash; European Central Bank reference data where the ECB publishes it,
+          uses, European Central Bank reference data where the ECB publishes it,
           and a second public source for the currencies it does not. New Taiwan dollars
           are in the second group, so the trip above settles on the fallback rather than
           on ECB data.
         </p>
         <p>
-          It is neutral — nobody in the group can accuse it of favouring the person who
+          It is neutral. Nobody in the group can accuse it of favouring the person who
           happened to use a particular card. It is also the only one of the four that is
           easy for everyone to verify independently.
         </p>
@@ -82,7 +81,7 @@ export default function Page() {
         <h3>4. One fixed rate for the whole trip, agreed in advance</h3>
         <p>
           Underrated. Before you leave, look up the rate and round it to something
-          memorable — 1 TWD to 4.7 JPY, say. Everyone uses that number for everything.
+          memorable, 1 TWD to 4.7 JPY, say. Everyone uses that number for everything.
         </p>
         <p>
           It is not the most accurate method, and it does not need to be. Currency moves
@@ -109,7 +108,7 @@ export default function Page() {
           <li>
             <strong>One person fronted a very large booking.</strong> If someone put
             NT$120,000 of flights on a card and ate a 1.5% fee doing it, that fee is
-            NT$1,800 — no longer noise. Add it as its own line item shared by the group.
+            NT$1,800, no longer noise. Add it as its own line item shared by the group.
             Enter it as a separate expense rather than fudging the rate.
           </li>
           <li>
@@ -129,7 +128,7 @@ export default function Page() {
           The card terminal asks whether you would like to be charged in your home
           currency instead of the local one. Say no. Every time. That option lets the
           merchant&rsquo;s payment processor set the exchange rate, and it is reliably
-          worse than the one your card network would have used — often by several
+          worse than the one your card network would have used, often by several
           percent, which dwarfs any of the choices above.
         </p>
         <p>
@@ -147,7 +146,7 @@ export default function Page() {
         <h3>Cash withdrawal fees hiding inside a good rate</h3>
         <p>
           An ATM can give a perfectly reasonable exchange rate and still cost you, because
-          the withdrawal fee is charged separately — sometimes by both your bank and the
+          the withdrawal fee is charged separately, sometimes by both your bank and the
           machine&rsquo;s operator. If one person is the group&rsquo;s designated cash
           machine, those fees should be a shared expense, not a private tax on being
           helpful.
@@ -164,7 +163,7 @@ export default function Page() {
         </p>
         <p>
           The <Link href="/">BillSmart calculator</Link> applies this convention
-          automatically — enter each payment in the currency it was charged in, and it
+          automatically, enter each payment in the currency it was charged in, and it
           converts to your chosen base currency and shows the rate it used for every
           entry, so the group can check the working rather than trust it.
         </p>
@@ -176,17 +175,15 @@ export default function Page() {
           <li>
             <Link href="/blog/cash-vs-card-payments-when-traveling">
               Cash vs. card payments when traveling
-            </Link>{" "}
-            — when each one wins, and what the fees really are.
+            </Link>{" "}: when each one wins, and what the fees really are.
           </li>
           <li>
             <Link href="/blog/best-ways-to-split-expenses-when-traveling-with-friends">
               Best ways to split expenses when traveling with friends
-            </Link>{" "}
-            — settling as you go rather than at the airport.
+            </Link>{" "}: settling as you go rather than at the airport.
           </li>
           <li>
-            <Link href="/how-it-works">How BillSmart works</Link> — the conversion and
+            <Link href="/how-it-works">How BillSmart works</Link>, the conversion and
             settlement logic, step by step.
           </li>
         </ul>

@@ -6,14 +6,14 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "The Group Trip Money Checklist: What to Agree Before You Book",
   description:
-    "Eight decisions that take five minutes in the group chat and prevent every common money argument on a group trip — with a message you can copy and send.",
+    "Eight decisions that take five minutes in the group chat and prevent every common money argument on a group trip, with a message you can copy and send.",
   alternates: { canonical: "/blog/group-trip-money-checklist" },
 };
 
 const checklist = [
   {
     title: "1. A nightly budget band, not a number",
-    body: "Agree a range for accommodation and dinners — 'somewhere between NT$1,500 and NT$2,500 a night each'. A band lets people opt into the top or bottom without announcing why, which a single number does not.",
+    body: "Agree a range for accommodation and dinners, 'somewhere between NT$1,500 and NT$2,500 a night each'. A band lets people opt into the top or bottom without announcing why, which a single number does not.",
   },
   {
     title: "2. Who books what",
@@ -29,7 +29,7 @@ const checklist = [
   },
   {
     title: "5. Settlement currency and rate convention",
-    body: "Pick the currency the group will actually transfer in — usually where you all live, not where you are going — and agree to use mid-market rates on the day of each expense. Card fees stay with whoever's card charged them.",
+    body: "Pick the currency the group will actually transfer in, usually where you all live, not where you are going, and agree to use mid-market rates on the day of each expense. Card fees stay with whoever's card charged them.",
   },
   {
     title: "6. What counts as shared",
@@ -70,13 +70,13 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>The message to send</h2>
         <p>
-          Adapt and paste into the group chat as soon as a trip becomes real — while
+          Adapt and paste into the group chat as soon as a trip becomes real, while
           agreeing is free, and before anyone has money at stake:
         </p>
         <div className="proseNote">
           <p>
             &ldquo;Money admin so we never have to talk about it again: aiming for roughly
-            NT$2,000 a night each. I&rsquo;ll book flights, Ana books the house — whoever
+            NT$2,000 a night each. I&rsquo;ll book flights, Ana books the house, whoever
             books, everyone sends their share within a week. Everything settles in TWD at
             whatever the rate was on the day. Shared = transport, house, anything we all
             do. Food and extras are on whoever had them. I&rsquo;ll keep the running list.
@@ -105,7 +105,7 @@ export default function Page() {
           </li>
           <li>
             <strong>Split the entry when the group splits.</strong> Three people took the
-            cable car and two went for coffee — that is two entries, not one bill divided
+            cable car and two went for coffee. That is two entries, not one bill divided
             five ways.
           </li>
         </ul>
@@ -122,7 +122,7 @@ export default function Page() {
         </p>
         <p>
           Send the list, let people pay, and do not reopen it for small refunds that arrive
-          afterwards — handle those separately. The value of a settlement is that it is
+          afterwards, handle those separately. The value of a settlement is that it is
           final.
         </p>
       </section>
@@ -133,8 +133,7 @@ export default function Page() {
           <li>
             <Link href="/blog/who-should-pay-the-deposit-group-travel">
               Who should pay the deposit?
-            </Link>{" "}
-            — the risks of one person fronting a whole trip.
+            </Link>{" "}: the risks of one person fronting a whole trip.
           </li>
           <li>
             <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">
@@ -151,7 +150,7 @@ export default function Page() {
             <section className="articleWorked">
           <h2>Worked example</h2>
           <p>
-            Point 6 in practice &mdash; shared costs shared, optional activities charged to whoever took part. Five people, one ryokan for everybody, a cable car three of them rode, and a coffee the other two had.
+            Point 6 in practice: shared costs shared, optional activities charged to whoever took part. Five people, one ryokan for everybody, a cable car three of them rode, and a coffee the other two had.
           </p>
           <figure className="articleFigure">
             <Image

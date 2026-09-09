@@ -6,7 +6,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "Bill-Splitting Etiquette Around the World",
   description:
-    "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and continental Europe — and how to handle it when you get it wrong.",
+    "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and continental Europe, and how to handle it when you get it wrong.",
   alternates: { canonical: "/blog/bill-splitting-etiquette-around-the-world" },
 };
 
@@ -35,7 +35,7 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Taiwan</h2>
         <p>
-          Among friends and colleagues of similar age, splitting evenly — AA制 — is
+          Among friends and colleagues of similar age, splitting evenly (AA制) is
           unremarkable, and mobile transfers make settling up afterwards effortless. Many
           groups will have one person pay the whole bill at the register and everyone
           transfer their share before they have left the restaurant.
@@ -52,7 +52,7 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Japan</h2>
         <p>
-          Splitting evenly — 割り勘, <em>warikan</em> — is the default among peers, and it
+          Splitting evenly (割り勘, <em>warikan</em>) is the default among peers, and it
           really does mean evenly. Itemising who ate what is unusual outside close friends,
           and many group dinners are booked as a fixed per-person course precisely so the
           question never arises.
@@ -76,7 +76,7 @@ export default function Page() {
         <p>
           A long-standing pattern is that the eldest or the most senior person pays,
           particularly at a first venue. Where a group is more equal, rounds get shared
-          across the evening instead — one person covers dinner, another covers the second
+          across the evening instead, one person covers dinner, another covers the second
           venue, another the third. Over a few outings it balances.
         </p>
         <p>
@@ -96,7 +96,7 @@ export default function Page() {
         <p>
           The complication is tipping. Fifteen to twenty percent is added on top by the
           customer, on top of tax, so the number on the menu is not the number you pay. If
-          your group splits evenly but tips separately, the total will not reconcile — and
+          your group splits evenly but tips separately, the total will not reconcile, and
           the person whose card ran the bill will absorb the gap. Decide up front whether
           the tip is shared proportionally or per person.
         </p>
@@ -106,7 +106,7 @@ export default function Page() {
         <h2>United Kingdom and Ireland</h2>
         <p>
           In restaurants, splitting is unremarkable and service is often already added to
-          the bill for larger tables — check before adding more.
+          the bill for larger tables, check before adding more.
         </p>
         <p>
           In pubs, the operative custom is rounds: one person buys drinks for the whole
@@ -122,7 +122,7 @@ export default function Page() {
         <p>
           Highly variable, but a few things travel well. Service is frequently included in
           the price, so the tipping arithmetic that complicates American bills mostly
-          disappears — rounding up is common, a percentage calculation is not.
+          disappears, rounding up is common, a percentage calculation is not.
         </p>
         <p>
           Splitting evenly is usually easy; splitting by item across many cards is more
@@ -145,14 +145,14 @@ export default function Page() {
           </li>
           <li>
             <strong>Is paying a social act or an accounting one?</strong> Where treating
-            carries meaning — Taiwan, Korea, Japan at certain tables — an insistent
+            carries meaning (Taiwan, Korea, Japan at certain tables), an insistent
             attempt to pay exactly your share can misfire. Where it does not, precision is
             simply efficient.
           </li>
         </ul>
         <p>
           When one person ends up covering the table, that is not a problem to solve at
-          the restaurant. Log it and settle later — which is what the{" "}
+          the restaurant. Log it and settle later, which is what the{" "}
           <Link href="/">calculator</Link> is for, particularly when the meals are in one
           currency and your group settles in another.
         </p>
@@ -174,14 +174,12 @@ export default function Page() {
           <li>
             <Link href="/blog/how-to-split-restaurant-and-bar-bills">
               How to split restaurant and bar bills
-            </Link>{" "}
-            — the mechanics once you have decided to split.
+            </Link>{" "}: the mechanics once you have decided to split.
           </li>
           <li>
             <Link href="/blog/cash-vs-card-payments-when-traveling">
               Cash vs. card payments when traveling
-            </Link>{" "}
-            — which to carry where.
+            </Link>{" "}: which to carry where.
           </li>
         </ul>
       </section>

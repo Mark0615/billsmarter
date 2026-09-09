@@ -57,55 +57,63 @@ export const posts: Post[] = [
   },
   {
     slug: "how-to-split-group-expense-fairly",
-    title: "How to Split Group Expenses Fairly?",
+    title:
+      "How to Split Group Expenses Fairly",
     summary:
-      "A practical guide to even, proportional, and itemized splits without awkwardness.",
+      "A group expense is rarely an expense for the whole group. Why every payment needs a payer and a set of people it covers, and what to agree before the money moves.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-04",
-    readingTime: "4 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
   {
     slug: "best-ways-to-split-expenses-when-traveling-with-friends",
-    title: "Best Ways to Split Expenses When Traveling with Friends",
+    title:
+      "The Best Way to Split Expenses When Traveling with Friends",
     summary:
-      "Travel-focused strategies for multi-currency trips and uneven budgets.",
+      "Three currencies in ten days and one person fronting the bookings. Picking a settlement currency, spreading the exposure, and charging each expense to the people it was actually for.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-04",
-    readingTime: "3 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
   {
     slug: "cash-vs-card-payments-when-traveling",
-    title: "Cash vs. Card Payments When Traveling",
-    summary: "When to use cash, when to swipe, and how to avoid hidden FX fees.",
+    title:
+      "Cash vs Card When You Travel: How to Choose",
+    summary:
+      "The four places a payment abroad quietly costs more, why whoever withdraws the cash pays fees nobody else sees, and how to log both so the split stays fair.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-04",
-    readingTime: "3 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
   {
     slug: "roommate-shared-expenses-split-guide",
-    title: "Roommate Shared Expenses: 5 Hidden Costs",
+    title:
+      "Roommate Shared Expenses: The Costs That Actually Cause Arguments",
     summary:
-      "Learn how to fairly split shared living expenses and avoid roommate drama.",
+      "Rent is never the problem. Bi-monthly utility bills that do not line up with monthly rent, the person who always buys the loo roll, guests, and moving out mid-cycle.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-05",
-    readingTime: "3 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
   {
     slug: "how-to-split-restaurant-and-bar-bills",
-    title: "How to Split Restaurant and Bar Bills",
+    title:
+      "How to Split Restaurant and Bar Bills for Big Groups",
     summary:
-      "Learn the most elegant ways to split the check fairly without ruining the night.",
+      "The drinks bill worked through in numbers, how service charges differ between Taiwan, Japan and the US, and why saying how you will split it before ordering changes what people order.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-05",
-    readingTime: "3 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
   {
     slug: "how-to-split-event-tickets-with-friends",
-    title: "How to Split Concert and Sports Event Tickets",
-    summary: "Learn how to track and split these major event expenses easily.",
+    title:
+      "How to Split Concert and Sports Event Tickets with Friends",
+    summary:
+      "One account, one card, ninety seconds, and one person carrying the cost for months. Getting reimbursed before the show, and what to agree in case it is postponed.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-05",
-    readingTime: "3 min read",
+    updatedAt: "2026-09-10",
+    readingTime: "6 min read",
   },
 ];
 

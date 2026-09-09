@@ -17,7 +17,7 @@ export default function BlogPage() {
         <p className="contentEyebrow">Field notes / shared money</p>
         <h1>Guides</h1>
         <p className="lead">
-          The parts of shared spending a calculator can&rsquo;t solve — fairness when
+          The parts of shared spending a calculator can&rsquo;t solve, fairness when
           incomes differ, currency fees nobody budgets for, and how to bring up money
           with people you like. Written and edited by{" "}
           <Link href="/about">Mark</Link>.

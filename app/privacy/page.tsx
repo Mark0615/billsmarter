@@ -42,7 +42,7 @@ export default function PrivacyPage() {
         </p>
         <p>
           When a payment needs converting, your browser requests an exchange rate through
-          this site. That request contains a currency pair only — for example{" "}
+          this site. That request contains a currency pair only, for example{" "}
           <code>JPY</code> to <code>TWD</code>. It contains no amounts, no names and
           nothing that identifies you or your group. Rates are sourced from{" "}
           <a href="https://www.frankfurter.app/" rel="nofollow noopener" target="_blank">
@@ -143,8 +143,8 @@ export default function PrivacyPage() {
           settings; the calculator will continue to work normally if you do.
         </p>
         <p>
-          Where consent is required by law — including the European Economic Area, the
-          UK and Switzerland — advertising and analytics cookies that require consent are
+          Where consent is required by law (the European Economic Area, the
+          UK and Switzerland), advertising and analytics cookies that require consent are
           set only after you have given it, through Google&rsquo;s consent management
           message. You can reopen that message to change your choice at any time. If you
           are in one of those regions and did not see a consent request, please tell us
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
           If you email the address on the <Link href="/contact">contact page</Link>, that
           message and your email address sit in a Gmail inbox and are used only to reply
           to you. They are not added to a mailing list and not shared. Please do not send
-          bank details, card numbers or statements — they are never needed.
+          bank details, card numbers or statements. They are never needed.
         </p>
       </section>
 

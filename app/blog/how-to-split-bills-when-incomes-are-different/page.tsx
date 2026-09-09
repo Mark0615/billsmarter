@@ -6,7 +6,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "How to Split Bills When Everyone Earns Different Amounts",
   description:
-    "Proportional splitting with the actual arithmetic worked through — including the disposable-income method, where an even split starts to hurt, and how to raise it without it being awkward.",
+    "Proportional splitting with the actual arithmetic worked through, including the disposable-income method, where an even split starts to hurt, and how to raise it without it being awkward.",
   alternates: {
     canonical: "/blog/how-to-split-bills-when-incomes-are-different",
   },
@@ -21,7 +21,7 @@ export default function Page() {
         <p className="lead">
           An even split is fair when everyone is roughly in the same financial position.
           When they are not, it quietly forces the lowest earner to either overspend or
-          opt out — and opting out is the part that damages the friendship.
+          opt out, and opting out is the part that damages the friendship.
         </p>
       </header>
 
@@ -48,7 +48,7 @@ export default function Page() {
         </p>
         <p>
           Three flatmates share NT$36,000 of rent and bills. They earn NT$45,000,
-          NT$60,000 and NT$75,000 — NT$180,000 combined. Their shares are 25%, 33.3% and
+          NT$60,000 and NT$75,000, NT$180,000 combined. Their shares are 25%, 33.3% and
           41.7%, so they pay NT$9,000, NT$12,000 and NT$15,000.
         </p>
         <div style={{ overflowX: "auto" }}>
@@ -93,8 +93,7 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Method 2: Split by disposable income</h2>
         <p>
-          Same maths, but each person first subtracts their genuinely fixed obligations —
-          loan repayments, family support, medical costs. What remains is what they can
+          Same maths, but each person first subtracts their genuinely fixed obligations, loan repayments, family support, medical costs. What remains is what they can
           actually choose how to spend, and the split runs on that.
         </p>
         <p>
@@ -120,8 +119,7 @@ export default function Page() {
         </p>
         <p>
           Shared costs everyone benefits from equally get split evenly: the taxi, the
-          Airbnb, the rental car. Anything discretionary is charged to whoever chose it —
-          the wine, the upgraded room, the tasting menu, the tour nobody else wanted.
+          Airbnb, the rental car. Anything discretionary is charged to whoever chose it, the wine, the upgraded room, the tasting menu, the tour nobody else wanted.
         </p>
         <p>
           This sidesteps income entirely and lands in roughly the right place anyway,
@@ -131,7 +129,7 @@ export default function Page() {
         </p>
         <p>
           Practically, it means logging one dinner as two or three entries rather than
-          one. The <Link href="/">calculator</Link> is built for exactly this — each
+          one. The <Link href="/">calculator</Link> is built for exactly this. Each
           payment has a &ldquo;pay for&rdquo; selector, so the NT$1,200 of wine is charged
           to the three people who drank it while the food stays shared.
         </p>
@@ -169,8 +167,7 @@ export default function Page() {
             places in the same range.&rdquo;
           </li>
           <li>
-            &ldquo;I&rsquo;m watching money this trip, so count me out of the fancy dinner
-            — I&rsquo;ll find something nearby and meet you after.&rdquo;
+            &ldquo;I&rsquo;m watching money this trip, so count me out of the fancy dinner, I&rsquo;ll find something nearby and meet you after.&rdquo;
           </li>
         </ul>
         <p>
@@ -186,7 +183,7 @@ export default function Page() {
           Everything above is about groups. Two people sharing a life have a different
           problem, because the money is not just being divided, it is being pooled over
           years. Proportional splitting is common there and works well, but the harder
-          question is usually not the ratio — it is whether one person&rsquo;s unpaid
+          question is usually not the ratio. It is whether one person&rsquo;s unpaid
           work, like childcare, is being counted at all. That is outside what a
           calculator can help with.
         </p>
@@ -205,14 +202,12 @@ export default function Page() {
           <li>
             <Link href="/blog/how-to-split-group-expense-fairly">
               How to split group expenses fairly
-            </Link>{" "}
-            — even, proportional and itemized splits compared.
+            </Link>{" "}: even, proportional and itemized splits compared.
           </li>
           <li>
             <Link href="/blog/roommate-shared-expenses-split-guide">
               Roommate shared expenses: 5 hidden costs
-            </Link>{" "}
-            — the household costs that cause the most friction.
+            </Link>{" "}: the household costs that cause the most friction.
           </li>
         </ul>
       </section>
@@ -230,7 +225,7 @@ export default function Page() {
               sizes="(max-width: 900px) 92vw, 820px"
             />
             <figcaption>
-              Settled in USD: Chloe pays Ana $405.00, Ben pays Ana $195.00. Nobody had to state a salary &mdash; the opt-in did the work.
+              Settled in USD: Chloe pays Ana $405.00, Ben pays Ana $195.00. Nobody had to state a salary, the opt-in did the work.
             </figcaption>
           </figure>
         </section>
