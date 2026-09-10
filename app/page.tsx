@@ -10,15 +10,15 @@ import CalculatorClient from "@/components/CalculatorClient";
 const howItWorksItems = [
   {
     title: "1. Set Base Currency",
-    desc: "Select the currency you want your final balances to be calculated in.",
+    desc: "Pick the currency the group will actually transfer money in, not the one you are spending in. Four friends from Taipei settling a trip to Japan should choose TWD, because that is what moves between their bank accounts afterwards. Everything else converts into it.",
   },
   {
     title: "2. Log the Expenses",
-    desc: "Enter who paid, how much, and who the expense was for. Mixed currencies are fully supported.",
+    desc: "Each payment needs three things: who paid, how much and in which currency, and who it was actually for. That last one is a multi-select, because a payment rarely covers the whole group. The hotel covers everyone, the round at the bar covers three people.",
   },
   {
     title: "3. Get the Split",
-    desc: "The settlement updates as you type. Read off the short list of who pays whom and share it.",
+    desc: "The settlement updates as you type. Each person's net balance is what they paid minus what they owe, and the transfer list turns those balances into a short set of payments. A week of tangled spending usually collapses into two or three transfers.",
   },
 ];
 
@@ -26,34 +26,34 @@ const featureItems = [
   {
     Icon: Calculator,
     title: "No More Math",
-    text: "Enter who paid and who each payment was for. The net balances and the transfer list follow automatically.",
+    text: "Enter who paid and who each payment was for. Balances and transfers follow automatically, including the cases people get wrong by hand: somebody who paid for a group they were not part of, or two people who both fronted money on the same day.",
   },
   {
     Icon: Scales,
     title: "Fair Splitting",
-    text: "Supports mixed currencies and converts them into one base unit so everyone settles with confidence.",
+    text: "Thirteen currencies, each payment entered in the one it was actually paid in. Conversion happens once, at a live mid-market rate, into the currency you chose to settle in. Nobody argues from a half-remembered number, and anybody can check the rate themselves.",
   },
   {
     Icon: LockKey,
     title: "Data Control",
-    text: "No login or registration required, making quick split sessions entirely private and easy.",
+    text: "No account, no installation, nothing stored between visits. What you type stays in your browser and is gone when you close the tab. The only thing that leaves your device is a currency pair such as JPY to TWD, with no amounts and no names attached.",
   },
 ];
 
 const useCaseItems = [
   {
     title: "Living with Roommates",
-    desc: "Rent is easy, but shared groceries and cleaning supplies are tricky. Learn how to track household expenses fairly.",
+    desc: "Rent is never the argument. The friction is in the small overlapping spending: the household supplies one person keeps replacing, bills that arrive every two months against rent that arrives monthly, groceries only half the flat eats.",
     link: "/blog/roommate-shared-expenses-split-guide",
   },
   {
     title: "Group Travel & Vacations",
-    desc: "From shared Airbnb bookings to foreign currency restaurant bills, keep your trip finances organized.",
+    desc: "Three currencies in ten days, and whoever books first ends up fronting the most. Enter each payment in the currency it was actually paid in, then settle once in the currency you will really transfer.",
     link: "/blog/best-ways-to-split-expenses-when-traveling-with-friends",
   },
   {
     title: "Dining Out & Bar Tabs",
-    desc: "Someone ordered steak, another just had water? Easily split complex restaurant bills elegantly.",
+    desc: "One person had a salad, four shared two bottles of wine, and the driver drank water. Entering the food and the drinks as separate payments takes ten seconds and stops the person who did not drink paying for it.",
     link: "/blog/how-to-split-restaurant-and-bar-bills",
   },
 ];
@@ -166,7 +166,10 @@ export default function HomePage() {
         <h2 id="how-it-works" className="sectionTitle">
           How BillSmart Works
         </h2>
-        <p className="sectionLead">Three simple steps to settle up.</p>
+        <p className="sectionLead">
+          Three steps, and only the first one needs a decision. Everything after it is
+          entering what already happened.
+        </p>
         <div className="processGrid">
           {howItWorksItems.map((step) => (
             <article key={step.title} className="processItem">
@@ -184,7 +187,10 @@ export default function HomePage() {
         <h2 id="why-billsmart" className="sectionTitle">
           Why Choose BillSmart
         </h2>
-        <p className="sectionLead">Simple and fair splitting, made easy.</p>
+        <p className="sectionLead">
+          The arithmetic is the easy part. What groups actually get wrong is who a
+          payment was for, and which exchange rate everybody agreed to use.
+        </p>
 
         <div className="featureGridPlain">
           {featureItems.map(({ Icon, title, text }) => (
@@ -206,7 +212,11 @@ export default function HomePage() {
         <h2 id="use-cases" className="sectionTitle">
           Perfect for Every Situation
         </h2>
-        <p className="sectionLead">Read our guides on how to split expenses fairly.</p>
+        <p className="sectionLead">
+          Eleven guides on the parts a calculator cannot settle for you: what counts as
+          shared, who fronts the big bookings, and how to raise any of it without
+          souring the evening.
+        </p>
         <div className="guideGrid">
           {useCaseItems.map((useCase) => (
             <Link 
