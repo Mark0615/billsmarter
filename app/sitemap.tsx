@@ -4,24 +4,31 @@ import { posts } from "./blog/posts";
 const SITE = "https://billsmarter.app";
 
 /**
- * Static pages carry a fixed date instead of `new Date()` so a redeploy
- * doesn't tell Google every page changed.
+ * Each static page carries the date it actually last changed, not `new Date()`
+ * and not one shared constant. `new Date()` would tell Google every page
+ * changed on every redeploy; a shared constant is what happened here instead,
+ * and it went stale, so the sitemap claimed the homepage had not moved since
+ * August while it was being rewritten. Update the date on the line you touch.
+ *
+ * Blog posts do not appear here: their dates come from `updatedAt` in
+ * posts.ts, which is already maintained per article.
  */
-const PAGES_UPDATED = new Date("2026-08-04");
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = (
     [
-      { url: SITE, priority: 1, changeFrequency: "weekly" },
-      { url: `${SITE}/how-it-works`, priority: 0.8, changeFrequency: "monthly" },
-      { url: `${SITE}/faq`, priority: 0.8, changeFrequency: "monthly" },
-      { url: `${SITE}/blog`, priority: 0.7, changeFrequency: "weekly" },
-      { url: `${SITE}/about`, priority: 0.5, changeFrequency: "yearly" },
-      { url: `${SITE}/contact`, priority: 0.4, changeFrequency: "yearly" },
-      { url: `${SITE}/privacy`, priority: 0.3, changeFrequency: "yearly" },
-      { url: `${SITE}/terms`, priority: 0.3, changeFrequency: "yearly" },
-    ] as const satisfies MetadataRoute.Sitemap
-  ).map((page) => ({ ...page, lastModified: PAGES_UPDATED }));
+      { url: SITE, priority: 1, changeFrequency: "weekly", updated: "2026-09-10" },
+      { url: `${SITE}/how-it-works`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-10" },
+      { url: `${SITE}/faq`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-10" },
+      { url: `${SITE}/blog`, priority: 0.7, changeFrequency: "weekly", updated: "2026-09-10" },
+      { url: `${SITE}/about`, priority: 0.5, changeFrequency: "yearly", updated: "2026-09-10" },
+      { url: `${SITE}/contact`, priority: 0.4, changeFrequency: "yearly", updated: "2026-09-10" },
+      { url: `${SITE}/privacy`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-10" },
+      { url: `${SITE}/terms`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-10" },
+    ] as const
+  ).map(({ updated, ...page }) => ({
+    ...page,
+    lastModified: new Date(`${updated}T00:00:00Z`),
+  }));
 
   const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${SITE}/blog/${post.slug}`,

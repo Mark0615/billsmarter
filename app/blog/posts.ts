@@ -16,7 +16,7 @@ export const posts: Post[] = [
     summary:
       "Eight decisions that take five minutes in the group chat and prevent every common money argument on a trip — plus a message you can copy and send.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-10",
     readingTime: "4 min read",
   },
   {
@@ -25,7 +25,7 @@ export const posts: Post[] = [
     summary:
       "Three people paid in three currencies on three different days. How to pick one rate for the whole group without anyone quietly losing money.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-10",
     readingTime: "5 min read",
   },
   {
@@ -34,7 +34,7 @@ export const posts: Post[] = [
     summary:
       "One person putting a whole trip on their card carries real risk: cancellations, partial refunds, currency moves and months of exposure.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-05",
+    updatedAt: "2026-09-10",
     readingTime: "5 min read",
   },
   {
@@ -43,7 +43,7 @@ export const posts: Post[] = [
     summary:
       "Proportional splitting with the arithmetic worked through, where an even split starts to hurt, and how to raise it without it being awkward.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-10",
     readingTime: "5 min read",
   },
   {
@@ -52,7 +52,7 @@ export const posts: Post[] = [
     summary:
       "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and Europe.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-04",
+    updatedAt: "2026-09-10",
     readingTime: "5 min read",
   },
   {
