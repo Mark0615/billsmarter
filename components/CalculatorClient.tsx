@@ -4,73 +4,17 @@ import React, { useMemo, useRef, useState } from "react";
 import {
   Asterisk,
   ArrowRight,
-  DotsSixVertical,
   Plus,
   UserCircle,
 } from "@phosphor-icons/react";
 import PayToDropdown from "./PayToDropdown";
 
-type Person = { id: string; name: string };
+import { CURRENCIES, MAX_AMOUNT, calculate, decimalsFor, formatMoney, validAmount, type Person, type Payment } from "@/lib/bills";
 
-type Payment = {
-  id: string;
-  /**
-   * People are referenced by id, never by name. Names are labels the user can
-   * edit at any time; using them as identity meant a rename dropped the
-   * person's paid/owed totals out of the settlement and the books stopped
-   * balancing, and two people sharing a name collapsed into one.
-   */
-  payerId: string;
-  beneficiaryIds: string[];
-  currency: string;
-  amount: number;
-  baseCurrency: string;
-  baseAmount: number;
-  rateUsed: number;
-  /** Which tier of the FX chain produced rateUsed, so backup rates stay flagged. */
-  rateSource: string;
-  note?: string;
-};
-
-const CURRENCIES = [
-  "USD",
-  "EUR",
-  "JPY",
-  "KRW",
-  "TWD",
-  "THB",
-  "SGD",
-  "HKD",
-  "CNY",
-  "GBP",
-  "AUD",
-  "CAD",
-  "CHF",
-];
-
-// Currencies this app offers that are not subdivided in practice. JPY and KRW
-// have no minor unit at all; TWD formally has one (ISO 4217 lists two digits)
-// but Taiwan does not transact in it, and "NT$3,333.33" is not a transfer
-// anybody can actually make.
-const ZERO_DECIMAL_CURRENCIES = new Set(["JPY", "KRW", "TWD"]);
-
-const formatterCache = new Map<number, Intl.NumberFormat>();
-
-function decimalsFor(currency: string) {
-  return ZERO_DECIMAL_CURRENCIES.has(currency) ? 0 : 2;
-}
-
-function formatMoney(value: number, currency: string) {
-  const digits = decimalsFor(currency);
-  let nf = formatterCache.get(digits);
-  if (!nf) {
-    nf = new Intl.NumberFormat("en-US", {
-      minimumFractionDigits: digits,
-      maximumFractionDigits: digits,
-    });
-    formatterCache.set(digits, nf);
-  }
-  return nf.format(value);
+function checkedConversion(amount: number, rate: number) {
+  const value = amount * rate;
+  if (!Number.isFinite(value) || value <= 0 || value > MAX_AMOUNT) throw new Error("Converted amount is too large. Split this into smaller entries.");
+  return value;
 }
 
 function uid() {
@@ -133,7 +77,7 @@ async function fetchFxRate(from: string, to: string): Promise<FxResult> {
   url.searchParams.set("from", from);
   url.searchParams.set("to", to);
 
-  const resp = await fetch(url.toString(), { cache: "no-store" });
+  const resp = await fetch(url.toString(), { cache: "no-store", signal: AbortSignal.timeout(15000) });
   const data: unknown = await resp.json();
 
   if (!resp.ok) {
@@ -149,7 +93,7 @@ async function fetchFxRate(from: string, to: string): Promise<FxResult> {
   }
 
   const maybe = data as Partial<FxResult>;
-  if (!maybe || typeof maybe.rate !== "number") throw new Error("FX rate missing");
+  if (!maybe || typeof maybe.rate !== "number" || !Number.isFinite(maybe.rate) || maybe.rate <= 0) throw new Error("FX rate missing");
 
   return maybe as FxResult;
 }
@@ -162,7 +106,6 @@ export default function CalculatorClient() {
   const [rosterNotice, setRosterNotice] = useState<string>("");
 
   const [fxError, setFxError] = useState<string>("");
-  const [fxNotice, setFxNotice] = useState<string>("");
   // Number of FX lookups in flight. Adding a payment while one is running used
   // to lose the entry, so the Add button waits for the rate instead.
   const [fxPending, setFxPending] = useState<number>(0);
@@ -182,6 +125,37 @@ export default function CalculatorClient() {
     note: "",
   });
 
+  const [pdfPending, setPdfPending] = useState(false);
+  const [pdfError, setPdfError] = useState("");
+  const busyRef = useRef(false);
+
+  async function downloadPdf() {
+    if (!payments.length || pdfPending || busyRef.current) return;
+    setPdfPending(true);
+    setPdfError("");
+    try {
+      const { createSettlementPdf } = await import("@/lib/settlementPdf");
+      const blob = await createSettlementPdf({
+        people: people.map(person => ({ ...person })),
+        payments: payments.map(payment => ({ ...payment, beneficiaryIds: [...payment.beneficiaryIds] })),
+        currency: baseCurrency,
+        transfers: totals.transfers.map(transfer => ({ ...transfer })),
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `billsmarter-settlement-${new Date().toISOString().slice(0, 10)}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 30_000);
+    } catch (error) {
+      setPdfError(`PDF download failed: ${getErrorMessage(error)}`);
+    } finally {
+      setPdfPending(false);
+    }
+  }
+
   const latestFxRef = useRef<Record<string, { rate: number; source: string }>>({});
 
   /** Everyone who has been given a name — the roster payments can refer to. */
@@ -196,14 +170,13 @@ export default function CalculatorClient() {
   }, [people]);
 
   const canAdd = useMemo(() => {
-    if (fxPending > 0) return false;
+    if (fxPending > 0 || payments.length >= 5000) return false;
     if (roster.length !== count) return false;
     if (!temp.payerId) return false;
     if (!temp.beneficiaryIds.length) return false;
-    const amt = Number(temp.amount);
-    if (!Number.isFinite(amt) || amt <= 0) return false;
+    if (!validAmount(temp.amount, temp.currency)) return false;
     return true;
-  }, [count, roster.length, fxPending, temp.amount, temp.beneficiaryIds.length, temp.payerId]);
+  }, [count, roster.length, fxPending, payments.length, temp.amount, temp.currency, temp.beneficiaryIds.length, temp.payerId]);
 
   /**
    * Shrinking the roster used to leave payments pointing at people who no
@@ -215,7 +188,9 @@ export default function CalculatorClient() {
    * letting React re-run it minted fresh ids and orphaned every payment.
    */
   function applyPeopleCount(nextCount: number) {
+    if (busyRef.current) return;
     const nextPeople = resizePeople(people, nextCount);
+    if (nextCount < people.length && payments.length && !window.confirm("Removing people may delete their payments or change how costs are shared. Continue?")) {setCount(people.length);setCountInput(String(people.length));return;}
     // Nothing changed — leave any existing notice alone. The count input fires
     // this on blur as well as on change, which used to wipe the message the
     // moment focus moved.
@@ -260,17 +235,16 @@ export default function CalculatorClient() {
   }
 
   async function handleBaseCurrencyChange(nextBase: string) {
+    if (busyRef.current) return;
     const previousBase = baseCurrency;
-    setBaseCurrency(nextBase);
     setFxError("");
-    setFxNotice("");
 
-    if (payments.length === 0) return;
+    if (payments.length === 0) {setBaseCurrency(nextBase); setTemp(t => ({...t,currency:nextBase})); return;}
+    busyRef.current = true;
 
     setFxPending((n) => n + 1);
     try {
       const converted = new Map<string, Payment>();
-      let usedBackup = false;
       for (const p of payments) {
         if (p.currency === nextBase) {
           converted.set(p.id, {
@@ -285,19 +259,17 @@ export default function CalculatorClient() {
 
         const key = `${p.currency}->${nextBase}`;
         const cached = latestFxRef.current[key];
-        // Reuse the cached rate *and* the tier it came from, so a backup rate
-        // stays labelled as one on every later payment instead of only the first.
+        // Reuse the cached rate and its source for this currency pair.
         const fx = cached
           ? { rate: cached.rate, source: cached.source, base: p.currency, to: nextBase }
           : await fetchFxRate(p.currency, nextBase);
 
         latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
-        if (fx.source === "backup-table") usedBackup = true;
 
         converted.set(p.id, {
           ...p,
           baseCurrency: nextBase,
-          baseAmount: p.amount * fx.rate,
+          baseAmount: checkedConversion(p.amount, fx.rate),
           rateUsed: fx.rate,
           rateSource: fx.source,
         });
@@ -305,11 +277,8 @@ export default function CalculatorClient() {
       // `payments` is the snapshot taken before the awaits above. Merge by id
       // so anything added meanwhile survives instead of being overwritten.
       setPayments((prev) => prev.map((p) => converted.get(p.id) ?? p));
-      setFxNotice(
-        usedBackup
-          ? "FX data was temporarily unavailable. Using backup USD rates."
-          : ""
-      );
+      setBaseCurrency(nextBase);
+      setTemp(t => ({...t,currency:nextBase}));
     } catch (e: unknown) {
       // Every stored baseAmount is still expressed in the old currency, so
       // leaving the label on the new one would show a settlement that is wrong
@@ -319,14 +288,15 @@ export default function CalculatorClient() {
         `${getErrorMessage(e) || "FX conversion failed"} — still settling in ${previousBase}.`
       );
     } finally {
+      busyRef.current = false;
       setFxPending((n) => n - 1);
     }
   }
 
   async function addPayment() {
     setFxError("");
-    setFxNotice("");
-    if (!canAdd) return;
+    if (!canAdd || busyRef.current || payments.length >= 5000) return;
+    busyRef.current = true;
 
     const amt = Number(temp.amount);
     const from = temp.currency;
@@ -347,7 +317,7 @@ export default function CalculatorClient() {
         latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
 
         rateUsed = fx.rate;
-        baseAmount = amt * fx.rate;
+        baseAmount = checkedConversion(amt, fx.rate);
         rateSource = fx.source;
       }
 
@@ -369,75 +339,18 @@ export default function CalculatorClient() {
     } catch (e: unknown) {
       setFxError(getErrorMessage(e) || "Failed to add payment");
     } finally {
+      busyRef.current = false;
       setFxPending((n) => n - 1);
     }
   }
 
   function removePayment(id: string) {
+    if (busyRef.current || !window.confirm("Remove this payment?")) return;
     setPayments((prev) => prev.filter((p) => p.id !== id));
   }
 
-  const totals = useMemo(() => {
-    const paid: Record<string, number> = {};
-    const owed: Record<string, number> = {};
-
-    for (const person of roster) {
-      paid[person.id] = 0;
-      owed[person.id] = 0;
-    }
-
-    for (const p of payments) {
-      paid[p.payerId] = (paid[p.payerId] ?? 0) + p.baseAmount;
-
-      const each = p.baseAmount / p.beneficiaryIds.length;
-      for (const b of p.beneficiaryIds) owed[b] = (owed[b] ?? 0) + each;
-    }
-
-    // Net over every id that appears anywhere, not just the current roster, so
-    // a stale reference can never quietly remove money from the settlement.
-    const ids = new Set<string>([...Object.keys(paid), ...Object.keys(owed)]);
-    const net: Record<string, number> = {};
-    for (const id of ids) net[id] = (paid[id] || 0) - (owed[id] || 0);
-
-    return { paid, owed, net };
-  }, [roster, payments]);
-
-  const usesBackupRate = useMemo(
-    () => payments.some((p) => p.rateSource === "backup-table"),
-    [payments]
-  );
-
-  const transfers = useMemo(() => {
-    const creditors: { id: string; amt: number }[] = [];
-    const debtors: { id: string; amt: number }[] = [];
-
-    for (const [id, amt] of Object.entries(totals.net)) {
-      if (amt > 0.00001) creditors.push({ id, amt });
-      else if (amt < -0.00001) debtors.push({ id, amt: -amt });
-    }
-
-    creditors.sort((a, b) => b.amt - a.amt);
-    debtors.sort((a, b) => b.amt - a.amt);
-
-    const out: { fromId: string; toId: string; amt: number }[] = [];
-    let i = 0,
-      j = 0;
-
-    while (i < debtors.length && j < creditors.length) {
-      const d = debtors[i];
-      const c = creditors[j];
-      const pay = Math.min(d.amt, c.amt);
-
-      out.push({ fromId: d.id, toId: c.id, amt: pay });
-
-      d.amt -= pay;
-      c.amt -= pay;
-
-      if (d.amt <= 0.00001) i++;
-      if (c.amt <= 0.00001) j++;
-    }
-    return out;
-  }, [totals.net]);
+  const totals = useMemo(() => calculate(people, payments, baseCurrency), [people, payments, baseCurrency]);
+  const transfers = totals.transfers;
 
   return (
     <>
@@ -458,6 +371,7 @@ export default function CalculatorClient() {
               </label>
               <select
                 id="base-currency"
+                disabled={fxPending > 0}
                 className="control"
                 value={baseCurrency}
                 onChange={(e) => void handleBaseCurrencyChange(e.target.value)}
@@ -472,14 +386,8 @@ export default function CalculatorClient() {
             </div>
           </div>
 
+          {fxPending > 0 ? <p role="status" className="hint">Updating amounts… Please wait before using the settlement.</p> : null}
           {fxError ? <p className="hint danger">FX error: {fxError}</p> : null}
-          {!fxError && fxNotice ? <p className="hint warn">{fxNotice}</p> : null}
-          {usesBackupRate ? (
-            <p className="hint warn">
-              Some entries use backup rates, not live ones. Treat those amounts as
-              approximate.
-            </p>
-          ) : null}
         </div>
 
         <div className="inputSplit">
@@ -495,6 +403,7 @@ export default function CalculatorClient() {
               <label className="label" htmlFor="people-count">Count</label>
               <input
                 id="people-count"
+                disabled={fxPending > 0}
                 className="control"
                 type="number"
                 min={2}
@@ -533,6 +442,8 @@ export default function CalculatorClient() {
                   <span className="srOnly">Person {idx + 1}</span>
                   <input
                     className="personInput"
+                    disabled={fxPending > 0}
+                    maxLength={200}
                     placeholder={`Person ${idx + 1}`}
                     value={person.name}
                     onChange={(e) => {
@@ -542,7 +453,6 @@ export default function CalculatorClient() {
                       );
                     }}
                   />
-                  <DotsSixVertical className="dragDots" size={16} weight="bold" aria-hidden="true" />
                 </label>
               ))}
             </div>
@@ -570,7 +480,7 @@ export default function CalculatorClient() {
                   className="control"
                   value={temp.payerId}
                   onChange={(e) => setTemp({ ...temp, payerId: e.target.value })}
-                  disabled={roster.length === 0}
+                  disabled={roster.length === 0 || fxPending > 0}
                 >
                   <option value="">Select payer</option>
                   {roster.map((person) => (
@@ -590,7 +500,7 @@ export default function CalculatorClient() {
                   onChange={(beneficiaryIds) =>
                     setTemp((prev) => ({ ...prev, beneficiaryIds }))
                   }
-                  disabled={roster.length === 0}
+                  disabled={roster.length === 0 || fxPending > 0}
                 />
               </div>
 
@@ -601,7 +511,7 @@ export default function CalculatorClient() {
                   className="control"
                   value={temp.currency}
                   onChange={(e) => setTemp({ ...temp, currency: e.target.value })}
-                  disabled={roster.length === 0}
+                  disabled={roster.length === 0 || fxPending > 0}
                 >
                   {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -614,9 +524,10 @@ export default function CalculatorClient() {
                   className="control"
                   inputMode="decimal"
                   placeholder="0.00"
+                  maxLength={100}
                   value={temp.amount}
                   onChange={(e) => setTemp({ ...temp, amount: e.target.value })}
-                  disabled={roster.length === 0}
+                  disabled={roster.length === 0 || fxPending > 0}
                 />
               </div>
             </div>
@@ -634,14 +545,15 @@ export default function CalculatorClient() {
             <input
               className="control noteInput"
               placeholder="Note (optional) e.g., taxi / dinner"
+              maxLength={2000}
               value={temp.note}
               onChange={(e) => setTemp({ ...temp, note: e.target.value })}
-              disabled={roster.length === 0}
+              disabled={roster.length === 0 || fxPending > 0}
               aria-label="Payment note"
             />
 
             <div className="muted formHint">
-              Add payments to generate settlement results.
+              Add the receipt total. Selected people split it equally; rounding remainders follow the people list.
             </div>
           </div>
         </div>
@@ -698,7 +610,7 @@ export default function CalculatorClient() {
                         {p.note ? ` · ${p.note}` : ""}
                       </div>
                     </div>
-                    <button className="btn ghost" onClick={() => removePayment(p.id)}>
+                    <button className="btn ghost" disabled={fxPending>0} onClick={() => removePayment(p.id)}>
                       Remove
                     </button>
                   </div>
@@ -763,6 +675,13 @@ export default function CalculatorClient() {
           ) : null}
         </div>
 
+        <div className="settlementExport">
+          <button className="btn primary" type="button" onClick={() => void downloadPdf()} disabled={!payments.length || fxPending > 0 || pdfPending}>
+            {pdfPending ? "Preparing PDF…" : "Download PDF"}
+          </button>
+          <p>Keep a copy of the payments and final transfers. This page does not save your calculation after a refresh.</p>
+          {pdfError ? <p role="alert" className="hint danger">{pdfError}</p> : null}
+        </div>
         <div className="ledgerFooter">
           <span>Algorithm<br /><b>Fair split engine</b></span>
           <span>

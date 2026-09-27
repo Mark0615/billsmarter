@@ -31,12 +31,12 @@ const featureItems = [
   {
     Icon: Scales,
     title: "Fair Splitting",
-    text: "Thirteen currencies, each payment entered in the one it was actually paid in. Conversion happens once, at a live mid-market rate, into the currency you chose to settle in. Nobody argues from a half-remembered number, and anybody can check the rate themselves.",
+    text: "Thirteen currencies, each payment entered in the one it was actually paid in. Conversion happens once, using a published reference rate, into the currency you chose to settle in. Nobody argues from a half-remembered number, and anybody can check the rate themselves.",
   },
   {
     Icon: LockKey,
     title: "Data Control",
-    text: "No account, no installation, nothing stored between visits. What you type stays in your browser and is gone when you close the tab. The only thing that leaves your device is a currency pair such as JPY to TWD, with no amounts and no names attached.",
+    text: "No account or installation. Enter payments, check the settlement, then download a PDF with the amounts, payers and final transfers. The calculator does not save your entries after a refresh. Exchange-rate requests contain currency pairs, not names or amounts.",
   },
 ];
 
@@ -65,15 +65,15 @@ const faqItems = [
   },
   {
     q: "Do I need to use the same currency for every expense?",
-    a: "No. Each payment can use a different currency and is converted to the base currency automatically using live rates.",
+    a: "No. Each payment can use a different currency and is converted to the base currency automatically using reference rates.",
   },
   {
     q: "How does the split algorithm work?",
-    a: "Each person's net balance is paid minus owed. BillSmart then repeatedly matches the largest debtor with the largest creditor, which keeps the transfer count low: at most one fewer transfer than there are people.",
+    a: "Each person's net balance is paid minus owed. BillSmart then pairs debtors with creditors, which keeps the transfer count low: at most one fewer transfer than there are people.",
   },
   {
     q: "What happens if exchange rates are temporarily unavailable?",
-    a: "BillSmart shows the error rather than guessing. Rates come from European Central Bank data where the ECB publishes the currency, and a second public source for the rest, with a fixed backup table only if both are unreachable. Anything settled on the backup table is labelled as such.",
+    a: "BillSmart tries a second rate provider. If neither can supply a rate, it keeps your existing payments unchanged and asks you to retry. It never substitutes a fixed estimate for a new payment.",
   },
 ];
 
@@ -89,14 +89,14 @@ const jsonLd = {
       operatingSystem: "Any browser",
       browserRequirements: "Requires JavaScript",
       description:
-        "A free calculator that splits group expenses across 13 currencies, convertseach payment into one settlement currency at live mid-market rates, and returns a short list of who pays whom. No account required.",
+        "A free calculator that splits group expenses across 13 currencies, converts each payment into one settlement currency using reference rates, and returns a short list of who pays whom. No account required.",
       offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
       featureList: [
         "Split one payment between any subset of the group",
         "Mixed-currency entry converted to one settlement currency",
-        "Live mid-market exchange rates with a documented fallback",
+        "Reference exchange rates with a second provider",
         "Net balances reduced to a short transfer list",
-        "No account, no installation, nothing stored between visits",
+        "No account and one-click PDF settlement records",
       ],
       isAccessibleForFree: true,
       publisher: { "@id": "https://billsmarter.app/#org" },

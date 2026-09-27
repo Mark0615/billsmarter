@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -45,8 +44,7 @@ export default function Page() {
         <h3>1. The mid-market rate on the day of the expense</h3>
         <p>
           The midpoint between what banks buy and sell a currency at. It is the number
-          you get from a search engine or a currency site, and it is the rate BillSmart
-          uses, European Central Bank reference data where the ECB publishes it,
+          you get from a search engine or a currency site, BillSmart instead fetches the latest available reference data when a pair is first needed; it does not look up the expense date. Its sources are European Central Bank reference data where the ECB publishes it,
           and a second public source for the currencies it does not. New Taiwan dollars
           are in the second group, so the trip above settles on the fallback rather than
           on ECB data.
@@ -162,10 +160,8 @@ export default function Page() {
           negotiating the rules.
         </p>
         <p>
-          The <Link href="/">BillSmart calculator</Link> applies this convention
-          automatically, enter each payment in the currency it was charged in, and it
-          converts to your chosen base currency and shows the rate it used for every
-          entry, so the group can check the working rather than trust it.
+          The <Link href="/">BillSmart calculator</Link> does not retrieve historical expense-date rates. Enter each payment in the currency it was charged in, and it
+          converts to your chosen base currency and keeps the original and converted amount for every entry. For a historical or agreed rate, calculate the agreed amount and enter it directly in the settlement currency.
         </p>
       </section>
 
@@ -191,21 +187,16 @@ export default function Page() {
             <section className="articleWorked">
           <h2>Worked example</h2>
           <p>
-            The convention above, applied: one settlement currency for the whole group, every entry converted into it. Three people, three currencies, settling in New Taiwan dollars.
+            The convention above, applied: one settlement currency for the whole group, every entry converted into it. This illustration uses fixed converted amounts so the rounding is easy to check; it is not a quote of today&rsquo;s exchange rates.
           </p>
-          <figure className="articleFigure">
-            <Image
-              src="/blog/which-exchange-rate-to-use-when-splitting-a-trip.webp"
-              alt="BillSmart result panel settling yen, US dollar and New Taiwan dollar payments into New Taiwan dollars."
-              width={1350}
-              height={1128}
-              sizes="(max-width: 900px) 92vw, 820px"
-            />
-            <figcaption>
-              Settled in TWD: Chloe pays Ana NT$947.44 and Ben NT$290.52. Each payment is entered in the currency it was actually paid in; the calculator converts, not the group.
-            </figcaption>
-          </figure>
+          <p>Ana&rsquo;s payment converts to TWD 4,785, Ben&rsquo;s to TWD 4,128, and Chloe pays TWD 2,600. All three payments cover all three people. The total is TWD 11,513, split as TWD 3,838 for Ana, TWD 3,838 for Ben, and TWD 3,837 for Chloe. The one-dollar remainder follows the people list.</p>
+          <p>After subtracting each person&rsquo;s share from what they paid, Chloe owes TWD 1,237. She sends TWD 947 to Ana and TWD 290 to Ben. Enter the original payment currencies in <Link href="/">BillSmart</Link>; the exact converted values will depend on the latest available rate when you make the calculation.</p>
         </section>
-      </article>
+        <section>
+        <h2>Sources and scope</h2>
+        <p>Reference rates are informational and may differ from the rate on a bank statement. See the <a href="https://data.ecb.europa.eu/methodology/exchange-rates">ECB exchange-rate methodology</a> and <a href="https://www.exchangerate-api.com/docs/free">ExchangeRate-API update schedule</a>. BillSmart keeps conversions during the current calculation and does not retrieve a historical expense date.</p>
+        <p>For card conversions, <a href="https://www.visa.com/en-us/personal/travel/dynamic-currency-conversion">Visa explains the exchange rate and additional fees disclosed with dynamic currency conversion</a>. Compare those terms with your own card agreement. The splitting rules in this guide are suggestions for your group, not universal bank or merchant rules.</p>
+      </section>
+    </article>
   );
 }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const LAST_UPDATED = "4 August 2026";
+const LAST_UPDATED = "27 September 2026";
 
 export default function PrivacyPage() {
   return (
@@ -17,9 +17,9 @@ export default function PrivacyPage() {
         <h1>Privacy Policy</h1>
         <p className="proseMeta">Last updated: {LAST_UPDATED}</p>
         <p className="lead">
-          This policy covers billsmarter.app. In short: the calculator itself collects
-          nothing, and the site uses Google Analytics and Google advertising, both of
-          which set cookies.
+          This policy covers billsmarter.app. Calculator entries stay in your browser.
+          The site also loads Google services for analytics and advertising, which
+          may process technical information and use cookies.
         </p>
       </header>
 
@@ -35,16 +35,14 @@ export default function PrivacyPage() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>What you type into the calculator</h2>
         <p>
-          Names, amounts and currencies you enter are held in your browser tab and used
-          only to produce the result on screen. They are not transmitted to us, not
-          written to any database, and not retained after you close or reload the page.
-          We cannot see them.
+          Names, amounts and notes remain in the current page while it is open. The current calculator does not save new splits in browser storage or send these fields to our server. Earlier versions saved local history; if you used one, that older data may remain in this browser until you clear this site’s data in browser settings. Downloaded PDFs are separate files that you manage yourself.
         </p>
         <p>
           When a payment needs converting, your browser requests an exchange rate through
           this site. That request contains a currency pair only, for example{" "}
-          <code>JPY</code> to <code>TWD</code>. It contains no amounts, no names and
-          nothing that identifies you or your group. Rates are sourced from{" "}
+          <code>JPY</code> to <code>TWD</code>. The request parameters contain no amounts or names. Like other web requests,
+          the connection also exposes technical information, such as an IP address,
+          to our hosting provider. Rates are sourced from{" "}
           <a href="https://www.frankfurter.app/" rel="nofollow noopener" target="_blank">
             Frankfurter
           </a>{" "}
@@ -94,8 +92,8 @@ export default function PrivacyPage() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Advertising</h2>
         <p>
-          This site displays advertising served by Google, including Google AdSense.
-          Specifically:
+          This site is configured to use Google AdSense. Ad availability depends on
+          Google’s approval and serving settings. When Google serves ads:
         </p>
         <ul>
           <li>
@@ -138,17 +136,15 @@ export default function PrivacyPage() {
         <h2>Cookies</h2>
         <p>
           The cookies set on this site come from Google Analytics and Google advertising,
-          as described above. The calculator itself does not set cookies and does not
-          store anything on your device. You can block or delete cookies in your browser
+          as described above. The calculator itself does not set cookies or save new splits between visits. You can block or delete cookies in your browser
           settings; the calculator will continue to work normally if you do.
         </p>
         <p>
-          Where consent is required by law (the European Economic Area, the
-          UK and Switzerland), advertising and analytics cookies that require consent are
-          set only after you have given it, through Google&rsquo;s consent management
-          message. You can reopen that message to change your choice at any time. If you
-          are in one of those regions and did not see a consent request, please tell us
-          at <a href="mailto:yang10824m@gmail.com">yang10824m@gmail.com</a>.
+          If a Google privacy message is shown, use its controls to manage the
+          choices it offers. The Google settings and browser controls linked above
+          provide additional ways to manage cookies and personalised advertising.
+          For questions about a privacy message or your choices, contact{" "}
+          <a href="mailto:yang10824m@gmail.com">yang10824m@gmail.com</a>.
         </p>
       </section>
 
@@ -173,8 +169,7 @@ export default function PrivacyPage() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Your rights</h2>
         <p>
-          Because the calculator holds nothing, there is generally no personal data of
-          yours for us to export or delete. Where analytics or advertising data about you
+          The calculator does not maintain an account or server copy of your entries. Download a PDF before leaving if you need the record; remove any downloaded file through your device. Older browser-local history can be removed by clearing this site’s data in browser settings. Where analytics or advertising data about you
           is held by Google, those controls sit with Google and are linked in the
           sections above. If you believe we hold something about you and want it removed,
           email{" "}

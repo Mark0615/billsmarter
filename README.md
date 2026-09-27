@@ -1,40 +1,41 @@
-# BillSmart
+# BillSmarter
 
-Public website: [https://billsmarter.app/](https://billsmarter.app/)
+網站：[billsmarter.app](https://billsmarter.app/)。Next.js 15 / React 19。
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 本機開發
 
-## Getting Started
+使用 Node.js 22 或更新的支援版本：
 
-First, run the development server:
-
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+一般開發入口為 http://localhost:3000。首次建置需要網路下載 Inter 與 Doto 字型。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm test
+npm run lint
+npx tsc --noEmit --incremental false
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`lib/bills.ts` 包含整數單位分帳。頁面不會保存新的歷史紀錄；結算後可一鍵下載包含姓名、金額與轉帳明細的 PDF，請自行保管。
 
-## Learn More
+## Cloudflare Workers 候選部署
 
-To learn more about Next.js, take a look at the following resources:
+目前正式站仍是 Cloudflare Pages。本分支改用 OpenNext；不能直接沿用舊 Pages 的建置設定。正式切換前必須先驗證 Worker 預覽與網域設定，詳見 [改版與上線檢查](RELEASE-2026-09-27.md)。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+npm run workers:build
+npm run workers:preview
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+以上僅本機建置與預覽，不會部署。`workers:deploy` 才會修改遠端網站，僅在核准部署後使用。
 
-## Deploy on Vercel
+內容頁使用 static-assets incremental cache，FX endpoint 動態讀取公開參考匯率，不需要 R2 或 D1。圖片直接透過靜態資產提供。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+原有 `NEXT_PUBLIC_GTM_ID` 可指定 GTM 容器；未設定時使用既有容器 ID，設為空字串可停用 GTM。Google 認證 CMP 與 GTM 同意設定在後台核對，不能只靠隱私政策文字判定已完成。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [初始稽核](AUDIT-2026-09-27.md)
+- [改版與上線檢查](RELEASE-2026-09-27.md)

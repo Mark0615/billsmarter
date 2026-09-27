@@ -25,7 +25,7 @@ export const posts: Post[] = [
     summary:
       "Three people paid in three currencies on three different days. How to pick one rate for the whole group without anyone quietly losing money.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "5 min read",
   },
   {
@@ -34,7 +34,7 @@ export const posts: Post[] = [
     summary:
       "One person putting a whole trip on their card carries real risk: cancellations, partial refunds, currency moves and months of exposure.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "5 min read",
   },
   {
@@ -52,7 +52,7 @@ export const posts: Post[] = [
     summary:
       "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and Europe.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "5 min read",
   },
   {
@@ -72,7 +72,7 @@ export const posts: Post[] = [
     summary:
       "Three currencies in ten days and one person fronting the bookings. Picking a settlement currency, spreading the exposure, and charging each expense to the people it was actually for.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "6 min read",
   },
   {
@@ -82,7 +82,7 @@ export const posts: Post[] = [
     summary:
       "The four places a payment abroad quietly costs more, why whoever withdraws the cash pays fees nobody else sees, and how to log both so the split stays fair.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "6 min read",
   },
   {
@@ -102,7 +102,7 @@ export const posts: Post[] = [
     summary:
       "The drinks bill worked through in numbers, how service charges differ between Taiwan, Japan and the US, and why saying how you will split it before ordering changes what people order.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "6 min read",
   },
   {
@@ -112,7 +112,7 @@ export const posts: Post[] = [
     summary:
       "One account, one card, ninety seconds, and one person carrying the cost for months. Getting reimbursed before the show, and what to agree in case it is postponed.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-09-27",
     readingTime: "6 min read",
   },
 ];

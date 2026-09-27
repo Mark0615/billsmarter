@@ -155,9 +155,7 @@ export default function Page() {
         <p>
           Treat the refund as its own event. Whoever received it distributes it in the
           same proportion the original was split, and it is done, no recalculation of
-          anything else. In the <Link href="/">calculator</Link>, that is one negative
-          entry against the same set of people, or simply a separate transfer if the
-          rest is already settled.
+          anything else. In the <Link href="/">calculator</Link>, negative refund entries are not supported. Arrange separate transfers using the original shares, and retain the refund record alongside the original settlement.
         </p>
         <p>
           Refunds below a threshold the group agrees on (the price of a coffee each) are not worth moving. Say so once and let the booker keep them.

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 
 const links = [
@@ -17,6 +17,24 @@ const links = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    panelRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+    const keydown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {setMobileOpen(false);toggleRef.current?.focus();}
+      if (event.key === "Tab") {
+        const nodes = panelRef.current?.querySelectorAll<HTMLElement>("a,button");
+        if (!nodes?.length) return;
+        const first=nodes[0],last=nodes[nodes.length-1];
+        if(event.shiftKey && document.activeElement===first){event.preventDefault();last.focus();}
+        else if(!event.shiftKey && document.activeElement===last){event.preventDefault();first.focus();}
+      }
+    };
+    document.addEventListener("keydown",keydown);
+    return ()=>document.removeEventListener("keydown",keydown);
+  },[mobileOpen]);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -45,6 +63,7 @@ export default function Navbar() {
           <button
             type="button"
             className="mobileToggle"
+            ref={toggleRef}
             aria-label="Open navigation"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav-panel"
@@ -62,6 +81,8 @@ export default function Navbar() {
 
       <aside
         id="mobile-nav-panel"
+        ref={panelRef}
+        inert={!mobileOpen}
         className={`mobilePanel${mobileOpen ? " isOpen" : ""}`}
         aria-hidden={!mobileOpen}
       >
@@ -70,7 +91,7 @@ export default function Navbar() {
             type="button"
             className="mobileClose"
             aria-label="Close navigation"
-            onClick={() => setMobileOpen(false)}
+            onClick={() => {setMobileOpen(false);toggleRef.current?.focus();}}
           >
             <X size={22} weight="light" aria-hidden="true" />
           </button>

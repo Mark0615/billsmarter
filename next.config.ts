@@ -2,9 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // next-on-pages has no image optimizer: /_next/image returns the original
-    // bytes untouched. Serving the file directly skips a pointless hop, and
-    // assets are pre-sized to their display dimensions instead.
+    // Assets are already sized for display; keep direct static delivery.
     unoptimized: true,
   },
   async redirects() {

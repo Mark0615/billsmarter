@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -69,7 +68,7 @@ export default function Page() {
         <p>Keep a running note as the month goes, in whatever the flat already uses. The group chat is enough. One line per payment: who paid, what it was, how much.</p>
         <p>Then enter the lot into the <Link href="/">calculator</Link> in one pass at settlement. Most entries cover everybody, so they are quick. The ones that do not are the ones that matter: the shared groceries that only two of you ate, the taxi two of you took, the replacement kettle that one person insisted on.</p>
         <p>The result is a short list of transfers rather than a month of individual debts. Three flatmates with nine payments between them usually settle in two transfers.</p>
-        <p>Nothing is stored between visits, so do it in a single sitting and post the result in the chat. The chat message is the record, and it is the thing you will want if anybody queries it in three months.</p>
+        <p>When the group is ready to settle, check the amounts and click Download PDF in the settlement panel. It records the payments and final transfers. The calculator does not keep an editable history after you close or refresh the page.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -93,18 +92,7 @@ export default function Page() {
       <p>
       A month of ordinary flat costs, entered in one sitting: Ana paid the electricity, Ben the household supplies, Chloe the internet. All three split evenly.
       </p>
-      <figure className="articleFigure">
-      <Image
-      src="/blog/roommate-shared-expenses-split-guide.webp"
-      alt="BillSmart result panel showing three household bills paid by three different flatmates."
-      width={1350}
-      height={1128}
-      sizes="(max-width: 900px) 92vw, 820px"
-      />
-      <figcaption>
-      Settled in USD: Ben pays Ana $36.33, Chloe pays Ana $10.33. Three bills across three people collapse into two transfers.
-      </figcaption>
-      </figure>
+      <p>Ana paid USD 145, Ben USD 62, and Chloe USD 88: USD 295 in total. With cents allocated in roster order, Ana owes USD 98.34 and Ben and Chloe owe USD 98.33 each. Ben pays Ana USD 36.33 and Chloe pays Ana USD 10.33, matching Ana&rsquo;s USD 46.66 credit exactly.</p>
       </section>
     </article>
   );

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/terms" },
 };
 
-const LAST_UPDATED = "4 August 2026";
+const LAST_UPDATED = "27 September 2026";
 
 export default function TermsPage() {
   return (
@@ -66,8 +66,7 @@ export default function TermsPage() {
         <h2>Availability</h2>
         <p>
           The site is offered as-is and as-available. It may be changed, interrupted, or
-          discontinued at any time without notice. Because nothing you enter is stored,
-          there is nothing to recover if it goes offline.
+          discontinued at any time without notice. The calculator does not keep an editable history between visits. Download a PDF before leaving if you need a copy of the current calculation.
         </p>
       </section>
 

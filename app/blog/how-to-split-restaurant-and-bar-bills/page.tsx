@@ -35,9 +35,9 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>The service charge belongs in the number you enter</h2>
         <p>Service is handled differently in every country your group is likely to eat in, and getting it wrong is the most common way one person quietly loses money.</p>
-        <p>In Taiwan, sit-down restaurants usually add 10% service to the bill. It is printed on the receipt and it is part of what was charged.</p>
-        <p>In Japan there is no tipping, and trying to leave one causes confusion rather than pleasure. Some restaurants add a table charge instead, which appears on the bill.</p>
-        <p>In the United States the tip is not on the bill at all. The person paying decides it, adds it at the terminal, and it is frequently 18 to 20% of a total that already includes sales tax.</p>
+        <p>In Taiwan, check the menu and receipt for any service charge. If a restaurant adds a charge such as 10%, include it once in the amount you split; do not assume every restaurant uses the same policy.</p>
+        <p>In Japan, tipping is generally not customary. JNTO also notes that some venues charge for an otoshi, a small appetizer that acts as a cover charge. Check the receipt instead of assuming the food price is the whole bill.</p>
+        <p>In the United States, a voluntary tip may be added by the payer, but some restaurants already include an automatic gratuity or service charge, especially for large groups. Read the receipt before adding more, and agree which final amount the group is sharing.</p>
         <p>The rule that survives all three is the same: log the number that actually left the payer&rsquo;s account, not the number printed next to the food. If the receipt says 5,600 and the payer added 800 on top, the entry is 6,400. Everything else follows from that. There is no separate field for tax or service, and that is deliberate: putting the real total in means the extras are shared in the same proportion as the meal, rather than landing on whoever held the card.</p>
         <p>The failure mode is specific and it repeats. Somebody says &ldquo;it was about five and a half thousand, send me 700 each&rdquo;, the group sends 700 each, and the payer is 800 short because they rounded the total down and the service charge up in their head. Once is nothing. Across a weekend it adds up to a real number, and the person absorbing it usually says nothing.</p>
       </section>
@@ -62,7 +62,7 @@ export default function Page() {
         <h2>Entering it</h2>
         <p>Each of the situations above is one payment in the <Link href="/">calculator</Link>, with two facts attached: who paid, and who it covers. The eight-person dinner is two entries. The birthday meal is one entry covering seven of the eight. The round at the bar is one entry covering four.</p>
         <p>Enter each amount as it was actually paid, in the currency it was paid in, tax and service included. What comes back is a short list of who pays whom, netted off rather than settled bill by bill. On a table of eight with four separate payers, that is usually three or four transfers rather than the twenty-something individual debts it looks like on paper.</p>
-        <p>One practical note: nothing is stored between visits, so this works as a single sitting at the end of the night or the end of the trip, not as something you add to across a week. Keep a running note in the group chat as you go, then enter the lot in one pass.</p>
+        <p>When the group is ready to settle, check the amounts and click Download PDF in the settlement panel. It records the payments and final transfers. The calculator does not keep an editable history after you close or refresh the page.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -72,7 +72,8 @@ export default function Page() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Related reading</h2>
+        <h2>Sources and related reading</h2>
+        <p>JNTO explains <a href="https://www.japan.travel/en/plan/tipping-in-japan/">tipping in Japan</a> and <a href="https://www.japan.travel/en/ca/etiquette/">otoshi charges</a>. The IRS distinguishes <a href="https://www.irs.gov/businesses/small-businesses-self-employed/tip-recordkeeping-and-reporting">voluntary tips from mandatory service charges</a>. These sources explain the distinction; the restaurant’s menu and your final receipt determine your actual expense.</p>
         <ul>
           <li>
             <Link href="/blog/how-to-split-group-expense-fairly">

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | BillSmart",
   },
   description:
-    "BillSmart helps groups split expenses with live exchange rates, clear settlement results, and travel budgeting guides.",
+    "BillSmart helps groups split expenses with reference exchange rates, clear settlement results, and travel budgeting guides.",
   alternates: {
     canonical: "/",
   },

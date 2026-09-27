@@ -16,12 +16,12 @@ export default function Page() {
         <h1>How to Split Concert and Sports Event Tickets with Friends</h1>
         <PostMeta slug="how-to-split-event-tickets-with-friends" />
         <p className="lead">
-          Ticket sales for anything popular are decided in the first ninety seconds. That has one consequence everybody in the group understands and one that most of them do not.
+          Popular ticket sales can move quickly. When one person buys seats for the group, they take on more than the checkout task.
         </p>
       </header>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <p>The one they understand: somebody has to be sitting at a laptop with a card saved and a fast connection, and that person buys for everybody. On tixCraft or KKTIX for a Taiwanese show, or on an international platform for a stadium tour, there is no version of this where five people each buy their own seat and end up together.</p>
+        <p>One person may buy adjacent seats for everybody through a ticketing platform. Buying separately can make sitting together harder, depending on the event and seat selection rules. Agree who will purchase before sales open and check the event&rsquo;s own terms.</p>
         <p>The one they do not: that person is now carrying the whole cost, the whole refund risk, and the entire relationship with the ticketing platform, potentially for months. Tickets for a show in eight months are paid for today.</p>
       </section>
 
@@ -42,8 +42,8 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Postponement is the case you should plan for</h2>
-        <p>Groups plan for cancellation, which is rare and simple. The event is called off, the platform refunds the buyer, the buyer sends everybody their share back.</p>
-        <p>Postponement is more common and much messier. The show moves to a date four months later. Two of the five can no longer make it. The tickets are still valid, the platform will not refund them, and the group now has to find two people or absorb two seats.</p>
+        <p>If an event is cancelled and the buyer receives a refund, they can return each person&rsquo;s original share. Check the event&rsquo;s refund policy first: fees, deadlines and the refunded amount may differ.</p>
+        <p>Postponement can be messier. Suppose a show moves to a date four months later and two of five friends can no longer attend. Whether the tickets remain valid, can be refunded, or may be transferred depends on the event and platform terms. The group may need to find replacements or decide how to share an unrecoverable cost.</p>
         <p>Two things make this survivable, and both cost nothing at the time of purchase.</p>
         <p>Write down who paid what, with the amount and the date, somewhere that is not one person&rsquo;s memory. When a refund or a resale happens later, the money has to be distributed in the same proportions it was collected, and reconstructing those proportions eight months on is genuinely difficult.</p>
         <p>Ask people to put a note on the transfer. &ldquo;F1 grandstand&rdquo; or &ldquo;Coldplay 4/12&rdquo; on a bank transfer costs nothing to type and turns the buyer&rsquo;s transaction history into the record of who paid for what. This matters most in exactly the situation where you need it: months later, under time pressure, when a seat needs reselling.</p>
@@ -56,7 +56,7 @@ export default function Page() {
         <h2>The spending on the night is a different problem</h2>
         <p>Ticket money is large, planned, and paid by one person. Everything at the venue is small, unplanned, and paid by whoever was nearest the counter.</p>
         <p>One person buys four beers. Somebody else buys a tour shirt for themselves and one for a friend who is stuck in the queue. Two people share a taxi home and the other three take the MRT. None of these cover the whole group, and by the following morning nobody remembers any of them.</p>
-        <p>The treatment is the same as the tickets: each payment has a payer and a list of people it was actually for. Four beers bought for four of the six is one entry covering four people. The two shirts are one entry covering two. The taxi is one entry covering two.</p>
+        <p>The treatment is the same as the tickets: each payment has a payer and a list of people it was actually for. Four equally priced beers bought for four of the six can be one entry covering four people. If the two shirts cost different amounts, enter them separately so each person owes the right price. The taxi is one entry covering two.</p>
         <p>Logged that way, the small stuff nets off against the big stuff. The person who fronted the tickets is owed a lot; the person who bought the round is owed a little; the <Link href="/">calculator</Link> subtracts one from the other rather than moving both.</p>
       </section>
 
@@ -64,7 +64,7 @@ export default function Page() {
         <h2>What that looks like when you settle</h2>
         <p>Say five friends go to a show. Ana bought five tickets at 4,800 TWD each. Ben bought a round for himself and two others. Chen paid for a shared taxi home for three people.</p>
         <p>Entered as three payments with three different sets of people, the result is a short list of transfers rather than a web of individual debts. Ben and Chen do not send Ana the full ticket price and then wait to be paid back for the drinks and the taxi; the amounts cancel and only the difference moves.</p>
-        <p>Enter it in one sitting, since nothing is saved between visits, and paste the transfer list into the group chat while everybody is still in it. The night of the show is a good moment. Three weeks later is not.</p>
+        <p>When the group is ready to settle, check the amounts and click Download PDF in the settlement panel. It records the payments and final transfers. The calculator does not keep an editable history after you close or refresh the page.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>

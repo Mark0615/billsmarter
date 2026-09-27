@@ -16,14 +16,14 @@ const SITE = "https://billsmarter.app";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = (
     [
-      { url: SITE, priority: 1, changeFrequency: "weekly", updated: "2026-09-10" },
-      { url: `${SITE}/how-it-works`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-10" },
-      { url: `${SITE}/faq`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-10" },
-      { url: `${SITE}/blog`, priority: 0.7, changeFrequency: "weekly", updated: "2026-09-10" },
-      { url: `${SITE}/about`, priority: 0.5, changeFrequency: "yearly", updated: "2026-09-10" },
+      { url: SITE, priority: 1, changeFrequency: "weekly", updated: "2026-09-27" },
+      { url: `${SITE}/how-it-works`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-27" },
+      { url: `${SITE}/faq`, priority: 0.8, changeFrequency: "monthly", updated: "2026-09-27" },
+      { url: `${SITE}/blog`, priority: 0.7, changeFrequency: "weekly", updated: "2026-09-27" },
+      { url: `${SITE}/about`, priority: 0.5, changeFrequency: "yearly", updated: "2026-09-27" },
       { url: `${SITE}/contact`, priority: 0.4, changeFrequency: "yearly", updated: "2026-09-10" },
-      { url: `${SITE}/privacy`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-10" },
-      { url: `${SITE}/terms`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-10" },
+      { url: `${SITE}/privacy`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-27" },
+      { url: `${SITE}/terms`, priority: 0.3, changeFrequency: "yearly", updated: "2026-09-27" },
     ] as const
   ).map(({ updated, ...page }) => ({
     ...page,

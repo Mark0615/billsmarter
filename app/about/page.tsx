@@ -51,12 +51,10 @@ export default function AboutPage() {
           enough to get annoyed by it.
         </p>
         <p>
-          BillSmart came out of a group trip. Four of us, three currencies, one person
-          fronting the hotel, someone else covering the car, and a running note on a
-          phone that nobody trusted by day three. The existing apps all wanted everyone
-          to install something and create an account, which is a hard sell at a
-          restaurant table at eleven at night. I wanted a page you could open, use, and
-          close.
+          BillSmart is built for groups paying in different currencies: one person
+          books the hotel, another covers transport, and everyone needs a clear
+          record of who owes whom. The goal is a page people can use without
+          installing an app or creating an account.
         </p>
         <p>
           I maintain the site myself and answer the email personally. If something is
@@ -70,14 +68,14 @@ export default function AboutPage() {
         <ul>
           <li>
             Converts payments made in different currencies into one base currency using
-            published reference rates, and shows the rate used for each entry.
+            published reference rates, and keeps the original and converted amounts together.
           </li>
           <li>
             Handles uneven splits, where a given expense only applies to some of the
             group.
           </li>
           <li>
-            Reduces the resulting tangle of debts to the shortest list of transfers that
+            Reduces the resulting tangle of debts to a short list of transfers that
             settles everyone.
           </li>
         </ul>
@@ -95,8 +93,7 @@ export default function AboutPage() {
         </p>
         <ul>
           <li>
-            <strong>No accounts.</strong> Nothing to sign up for, and nothing stored
-            between visits.
+            <strong>No accounts.</strong> Nothing to sign up for. The calculator keeps entries only while the page is open. Download a PDF before refreshing if you need a record.
           </li>
           <li>
             <strong>No payments.</strong> BillSmart tells you who should pay whom. Moving
@@ -119,9 +116,7 @@ export default function AboutPage() {
         <p>
           They are written and edited by me, drawn from ordinary experience rather than
           professional financial training, and updated when something in them stops being
-          true. Where an article touches on fees or exchange rates, it points at the
-          primary source so you can check the number yourself rather than take my word
-          for it.
+          true. The exchange-rate and card-fee guides link to provider and payment-network information. Worked examples are illustrative; the actual fee depends on your bank, card, booking and agreement with your group.
         </p>
         <div className="proseNote">
           <p>

@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
         <h2>Step 2: Add everyone in the group</h2>
         <p>
           Enter the number of people and fill in their names. Names are only labels used
-          to attach payments to a person and to print the final transfer list. Everyone
+          to attach payments to a person and to download the final settlement PDF. Everyone
           who either paid for something or benefited from something needs to be in the
           list, even if they never pulled out a wallet.
         </p>
@@ -115,10 +115,9 @@ export default function HowItWorksPage() {
         <p>
           When a payment&rsquo;s currency differs from the base currency, BillSmart
           requests a rate for that specific currency pair and multiplies the amount by
-          it. The rate that was used is shown next to each payment, so you can check the
-          maths later rather than trusting a black box.
+          it. The original and converted amounts stay together for checking against receipts.
         </p>
-        <p>Rates come from three sources, in order:</p>
+        <p>Rates come from two providers, in order:</p>
         <ol>
           <li>
             <a href="https://www.frankfurter.app/" rel="nofollow noopener" target="_blank">
@@ -136,10 +135,7 @@ export default function HowItWorksPage() {
             </a>
             , used when the first source has no data for that pair.
           </li>
-          <li>
-            A small built-in fallback table, used only if both live sources are
-            unreachable.
-          </li>
+
         </ol>
         <p>
           Each pair is fetched once and reused for the rest of your session, so every
@@ -151,9 +147,7 @@ export default function HowItWorksPage() {
           <p>
             <strong>Reference rates are not your bank&rsquo;s rate.</strong> A card
             issuer typically adds a spread, and a foreign-transaction fee on top of that.
-            Expect your statement to land somewhere around 0.5&ndash;3% away from what
-            you see here. For settling up between friends that is close enough; for
-            reconciling a company expense report, use the figure on the statement.
+            Fees vary by card and bank. If the group agrees to reimburse the actual bank charge, enter the statement amount directly in the settlement currency.
           </p>
         </div>
       </section>
@@ -181,8 +175,7 @@ export default function HowItWorksPage() {
           </li>
         </ul>
         <p>
-          The net balances always sum to zero. BillSmart then repeatedly matches the
-          largest debtor with the largest creditor and moves the smaller of the two
+          The net balances always sum to zero. BillSmart sorts the debtors and creditors, then pairs them and moves the smaller of the two
           amounts, until every balance is cleared. That pairing is what keeps the
           transfer count low. You end up with at most one fewer transfer than there are
           people, and usually fewer than that.
@@ -235,38 +228,16 @@ export default function HowItWorksPage() {
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Rounding, and why a cent sometimes goes missing</h2>
-        <p>
-          Amounts are displayed to two decimal places. When a bill does not divide
-          evenly, say $10 split three ways, the underlying maths keeps the full precision
-          and only the display is rounded, so the transfer list still balances to zero.
-          What you may notice is a share showing as $3.33 three times against a $10
-          total. That is a display artefact, not an error in the settlement.
-        </p>
-        <p>
-          If your group cares about the last cent, round each transfer up for whoever is
-          paying and let the difference sit with the person who is owed the most. Nobody
-          has ever ended a friendship over three cents.
-        </p>
+        <h2>Rounding that reconciles</h2>
+        <p>Each converted payment is rounded to whole JPY, KRW and TWD, or cents for other supported currencies. It is then divided in those units. Leftover units are assigned to the first selected people in roster order.</p>
+        <p>For $10 split between Alice, Bob and Charlie, the shares are $3.34, $3.33 and $3.33. If Alice paid, Bob and Charlie each transfer $3.33 to Alice. Her balance is $6.66, exactly matching those transfers.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>What BillSmart does with your data</h2>
-        <p>
-          There is no account and no database. The names and amounts you type live in the
-          page while you have it open, and are gone when you close or reload the tab.
-        </p>
-        <p>
-          The one request that does leave your browser is the exchange-rate lookup, which
-          contains only a currency pair such as <code>JPY</code> to <code>TWD</code>, no
-          amounts, no names. Full detail is in the{" "}
-          <Link href="/privacy">privacy policy</Link>.
-        </p>
-        <p>
-          The flip side of having no database: you cannot come back to a half-finished
-          trip tomorrow. For a long trip, enter payments as you go and screenshot the
-          settlement at the end, or keep the tab open.
-        </p>
+        <h2>Keep a settlement record</h2>
+        <p>After entering payments, check the result and click Download PDF in the settlement panel. The file shows every payment, who paid, who it covered, the settlement currency, and who transfers money to whom.</p>
+        <p>The calculator does not save entries after a refresh or across devices. Download the PDF before closing the page if you need a record. PDF files are stored on your device, wherever your browser puts downloads.</p>
+        <p>Exchange-rate requests contain currency pairs, not names, amounts or notes. See the <Link href="/privacy">privacy policy</Link> for analytics and advertising details.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -274,18 +245,14 @@ export default function HowItWorksPage() {
         <p>Being honest about the limits saves you time:</p>
         <ul>
           <li>
-            <strong>Ongoing shared finances.</strong> For rent and bills every month with
-            the same people, a dedicated app with an account and history serves you
-            better.
+            <strong>Ongoing shared finances.</strong> This page does not retain an editable ledger or offer simultaneous editing. Use a shared service if you need ongoing records.
           </li>
           <li>
             <strong>Percentage or share-weighted splits.</strong> A payment is divided
-            evenly among the people selected. To give someone a double share, enter the
-            payment twice with different groups.
+            evenly among the people selected. To give someone a double share, divide the amount into separate entries with different groups; do not duplicate the full payment.
           </li>
           <li>
-            <strong>Bookkeeping and tax.</strong> Reference exchange rates are not the
-            rates an accountant or a tax authority will accept.
+            <strong>Bookkeeping and tax.</strong> Use the exchange-rate rules required by your employer or relevant authority rather than assuming this calculator meets them.
           </li>
         </ul>
       </section>

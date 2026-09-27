@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { CURRENCIES } from "@/lib/bills";
 
-export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
 // Frankfurter is ECB-backed and only quotes the reference rates the ECB
 // publishes. Confirmed against https://api.frankfurter.app/currencies
@@ -44,35 +45,12 @@ function frankfurterCovers(from: string, to: string) {
   return FRANKFURTER_CURRENCIES.has(from) && FRANKFURTER_CURRENCIES.has(to);
 }
 
-const USD_RATES: Record<string, number> = {
-  USD: 1,
-  EUR: 0.92,
-  JPY: 150,
-  KRW: 1320,
-  TWD: 31.5,
-  THB: 35.6,
-  SGD: 1.35,
-  HKD: 7.82,
-  CNY: 7.2,
-  GBP: 0.79,
-  AUD: 1.55,
-  CAD: 1.35,
-  CHF: 0.88,
-};
-
-function crossRate(from: string, to: string) {
-  const fromRate = USD_RATES[from];
-  const toRate = USD_RATES[to];
-  if (!fromRate || !toRate) return null;
-  return toRate / fromRate;
-}
-
 async function tryFrankfurter(from: string, to: string) {
   const url = new URL("https://api.frankfurter.app/latest");
   url.searchParams.set("from", from);
   url.searchParams.set("to", to);
 
-  const resp = await fetch(url.toString(), { next: { revalidate: 3600 } });
+  const resp = await fetch(url.toString(), { cache: "no-store", signal: AbortSignal.timeout(6000) });
   if (!resp.ok) return null;
 
   const data = await resp.json();
@@ -83,7 +61,7 @@ async function tryFrankfurter(from: string, to: string) {
 
 async function tryOpenErApi(from: string, to: string) {
   const url = new URL(`https://open.er-api.com/v6/latest/${from}`);
-  const resp = await fetch(url.toString(), { next: { revalidate: 3600 } });
+  const resp = await fetch(url.toString(), { cache: "no-store", signal: AbortSignal.timeout(6000) });
   if (!resp.ok) return null;
 
   const data = await resp.json();
@@ -98,8 +76,8 @@ export async function GET(req: Request) {
     const from = (searchParams.get("from") || "USD").toUpperCase().trim();
     const to = (searchParams.get("to") || "USD").toUpperCase().trim();
 
-    if (!from || !to) {
-      return NextResponse.json({ error: "Missing from/to currency" }, { status: 400 });
+    if (!CURRENCIES.includes(from) || !CURRENCIES.includes(to)) {
+      return NextResponse.json({ error: "Unsupported currency" }, { status: 400 });
     }
 
     if (from === to) {
@@ -107,23 +85,18 @@ export async function GET(req: Request) {
     }
 
     if (frankfurterCovers(from, to)) {
-      const frankfurterRate = await tryFrankfurter(from, to);
+      const frankfurterRate = await tryFrankfurter(from, to).catch(() => null);
       if (frankfurterRate) {
         return NextResponse.json({ base: from, to, rate: frankfurterRate, source: "frankfurter" });
       }
     }
 
-    const openRate = await tryOpenErApi(from, to);
+    const openRate = await tryOpenErApi(from, to).catch(() => null);
     if (openRate) {
       return NextResponse.json({ base: from, to, rate: openRate, source: "open-er-api" });
     }
 
-    const backupRate = crossRate(from, to);
-    if (backupRate) {
-      return NextResponse.json({ base: from, to, rate: backupRate, source: "backup-table" });
-    }
-
-    return NextResponse.json({ error: "No FX rate available for this pair" }, { status: 422 });
+    return NextResponse.json({ error: "Exchange rates are unavailable. Please try again; your existing payments have not changed." }, { status: 422 });
   } catch (error) {
     console.error("FX API Error", error);
     return NextResponse.json({ error: "Failed to fetch FX rate" }, { status: 500 });

@@ -1991,3 +1991,30 @@ select {
   line-height: 1.6;
   color: var(--muted, #5c6a6b);
 }
+
+/* PDF export follows the settlement rather than interrupting data entry. */
+.settlementExport {
+  display: grid;
+  gap: 9px;
+  margin-top: 22px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+}
+.settlementExport .btn {
+  width: 100%;
+  min-height: 48px;
+  background: #f2f8f3;
+  color: #24393a;
+  font-weight: 700;
+}
+.settlementExport p { margin: 0; font-size: .79rem; line-height: 1.45; color: rgba(255, 255, 255, .82); }
+.settlementExport .danger { color: #ffdbd2; }
+@media (max-width: 900px) {
+  .heroPanel { min-height: 0; padding: 22px; display: block; }
+  .heroPanel h1 { max-width: none; font-size: 2.1rem; line-height: 1.05; }
+  .heroPanel h1 br { display: none; }
+  .heroPanel h1 span.heroBrandLine { margin-bottom: 8px; }
+  .heroEyebrow { max-width: none; margin-bottom: 12px; }
+  .heroCopy { max-width: none; margin-top: 12px; font-size: .9rem; }
+  .heroDoodle, .heroFlow, .heroFootnote { display: none; }
+}

@@ -62,8 +62,8 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Settle before you land</h2>
         <p>The best time to do the arithmetic is the last evening, not the arrivals hall.</p>
-        <p>Put every payment in as it was paid, with the currency it was paid in and the people it actually covered. Choose the settlement currency. Read off the <Link href="/">transfer list</Link> and paste it into the group chat. On a three-currency trip with four people, that is usually three or four transfers, not the twelve separate debts it looks like.</p>
-        <p>One practical note. Nothing is saved between visits, so this works best as a single sitting rather than something you dip into across ten days. Keep a running note in the group chat as you go, which somebody should be doing anyway, then enter the whole thing in one pass at the end.</p>
+        <p>Put every payment in as it was paid, with the currency it was paid in and the people it actually covered. Choose the settlement currency. Read off the <Link href="/">transfer list</Link> and paste it into the group chat. On a three-currency trip with four people, that is at most three transfers, not the twelve separate debts it looks like.</p>
+        <p>When the group is ready to settle, check the amounts and click Download PDF in the settlement panel. It records the payments and final transfers. The calculator does not keep an editable history after you close or refresh the page.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>

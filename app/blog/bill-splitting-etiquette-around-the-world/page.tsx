@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -94,8 +93,9 @@ export default function Page() {
           just split it evenly?&rdquo; is equally normal.
         </p>
         <p>
-          The complication is tipping. Fifteen to twenty percent is added on top by the
-          customer, on top of tax, so the number on the menu is not the number you pay. If
+          The complication is the final total: sales tax, a voluntary tip, or an automatic
+          service charge may make it different from the menu price. Check for an
+          included charge before adding a tip. If
           your group splits evenly but tips separately, the total will not reconcile, and
           the person whose card ran the bill will absorb the gap. Decide up front whether
           the tip is shared proportionally or per person.
@@ -163,13 +163,14 @@ export default function Page() {
         <p>
           You will, occasionally, and it matters far less than it feels like in the
           moment. Offer once, read the response, and move on. Getting the next round or
-          the next meal is a complete apology in every culture listed here, and it is
-          better received than an awkward attempt to hand over exact change.
+          the next meal may be a considerate response; ask what the people involved
+          prefer rather than assuming one gesture works for everyone.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Related reading</h2>
+        <h2>Sources and related reading</h2>
+        <p>The <a href="https://www.irs.gov/businesses/small-businesses-self-employed/tip-recordkeeping-and-reporting">IRS guide to tips and service charges</a> explains why a US bill may already include a mandatory charge. The social suggestions above are starting points, not requirements or guarantees about any group.</p>
         <ul>
           <li>
             <Link href="/blog/how-to-split-restaurant-and-bar-bills">
@@ -188,18 +189,8 @@ export default function Page() {
           <p>
             The pattern underneath the whole article, run through the calculator. Ana&rsquo;s card covered the table in Tokyo; Ben picked up lunch in Seoul the next day. One card pays, the group settles privately afterwards.
           </p>
-          <figure className="articleFigure">
-            <Image
-              src="/blog/bill-splitting-etiquette-around-the-world.webp"
-              alt="BillSmart result panel showing a yen bill and a won bill settled together in US dollars."
-              width={1350}
-              height={1116}
-              sizes="(max-width: 900px) 92vw, 820px"
-            />
-            <figcaption>
-              Settled in USD: Chloe pays Ana $40.32; Dan pays Ana $34.75 and Ben $5.56. Two bills in two currencies, cleared in three transfers.
-            </figcaption>
-          </figure>
+          <p>For a fixed illustration, Ana&rsquo;s yen payment converts to USD 115.38 and Ben&rsquo;s won payment to USD 45.88. Both cover all four people. The USD 161.26 total divides into USD 40.32 each for Ana and Ben, then USD 40.31 each for Chloe and Dan.</p>
+          <p>Chloe pays Ana USD 40.31. Dan pays Ana USD 34.75 and Ben USD 5.56. These three transfers settle Ana&rsquo;s USD 75.06 credit and Ben&rsquo;s USD 5.56 credit exactly. Current reference rates will change the converted amounts.</p>
         </section>
       </article>
   );

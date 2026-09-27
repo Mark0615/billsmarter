@@ -45,3 +45,8 @@ next-env.d.ts
 /audit-blog-after/
 /design-assets/
 /design-qa*.png
+
+# Cloudflare Workers local output and bindings
+.open-next/
+.wrangler/
+.dev.vars*

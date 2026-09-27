@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -28,10 +27,10 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Where the money actually leaks</h2>
         <p>There are four places a payment abroad quietly costs more than the price on the label, and only one of them is the exchange rate.</p>
-        <p>The first is your card&rsquo;s foreign transaction fee. Most cards charge somewhere between 1.5% and 3% on anything billed in another currency. Some travel cards charge nothing. This is the single biggest difference between two people at the same table paying for identical meals.</p>
-        <p>The second is dynamic currency conversion, which is the terminal asking whether you want to be charged in TWD or in the local currency. Choosing your home currency hands the exchange rate to the merchant&rsquo;s payment processor rather than to Visa or Mastercard, and the rate they pick is worse. The prompt is designed to sound helpful. It is not. Always choose the local currency. The same question appears at ATMs, phrased as &ldquo;with conversion&rdquo; or &ldquo;without conversion&rdquo;, and the answer is the same: without.</p>
+        <p>The first is your card&rsquo;s foreign transaction fee. Fees vary by issuer and card; some travel cards waive them. Check your own card terms instead of assuming a universal percentage. This is the single biggest difference between two people at the same table paying for identical meals.</p>
+        <p>The second is dynamic currency conversion, which is the terminal asking whether you want to be charged in TWD or in the local currency. Choosing your home currency hands the exchange rate to the merchant&rsquo;s payment processor rather than to Visa or Mastercard, and may include a markup or additional fee. Compare the disclosed rate and charges; choosing local currency avoids the offered DCC conversion. The same question appears at ATMs, phrased as &ldquo;with conversion&rdquo; or &ldquo;without conversion&rdquo;, and the answer is the same: without.</p>
         <p>The third is ATM fees, which arrive in two layers. Your own bank charges for a foreign withdrawal, and the machine&rsquo;s operator often charges its own fee on top. A machine can give a perfectly reasonable exchange rate and still cost you 300 TWD in flat fees. Because most of that charge is fixed rather than proportional, withdrawing 20,000 TWD worth once costs a fraction of what four separate withdrawals of 5,000 do.</p>
-        <p>The fourth is the airport exchange counter, which is the worst rate you will see on the entire trip. Take enough local cash to get from the airport to where you are sleeping, and get the rest from a bank ATM in town.</p>
+        <p>The fourth is the airport exchange counter, where rates and commissions may be less competitive. Compare the net amount you receive rather than assuming one location is always cheapest. Take enough local cash to get from the airport to where you are sleeping, and get the rest from a bank ATM in town.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -93,18 +92,12 @@ export default function Page() {
       <p>
       The hybrid strategy, entered as it actually happened: Ana&rsquo;s card at a restaurant in Japan, Ben&rsquo;s cash at a night market in Taiwan. The calculator does not need to know which was cash and which was card, only the currency and the amount.
       </p>
-      <figure className="articleFigure">
-      <Image
-      src="/blog/cash-vs-card-payments-when-traveling.webp"
-      alt="BillSmart result panel showing a card payment in yen and a cash payment in New Taiwan dollars settled together."
-      width={1350}
-      height={980}
-      sizes="(max-width: 900px) 92vw, 820px"
-      />
-      <figcaption>
-      Settled in USD: Chloe pays Ben $22.76 and Ana $17.47. The cash payment carries exactly the same weight as the card one.
-      </figcaption>
-      </figure>
+      <p>Using fixed converted amounts for illustration, Ana&rsquo;s card payment counts as USD 57.69 and Ben&rsquo;s cash payment as USD 62.98. All three share USD 120.67: Ana owes USD 40.23, Ben and Chloe USD 40.22 each. Chloe pays Ana USD 17.46 and Ben USD 22.76, exactly her USD 40.22 share. The live conversion will depend on the latest available reference rate.</p>
+      </section>
+      <section>
+        <h2>Sources and scope</h2>
+        <p>Reference rates are informational and may differ from the rate on a bank statement. See the <a href="https://data.ecb.europa.eu/methodology/exchange-rates">ECB exchange-rate methodology</a> and <a href="https://www.exchangerate-api.com/docs/free">ExchangeRate-API update schedule</a>. BillSmart keeps conversions during the current calculation and does not retrieve a historical expense date.</p>
+        <p>For card conversions, <a href="https://www.visa.com/en-us/personal/travel/dynamic-currency-conversion">Visa explains the exchange rate and additional fees disclosed with dynamic currency conversion</a>. Compare those terms with your own card agreement. The splitting rules in this guide are suggestions for your group, not universal bank or merchant rules.</p>
       </section>
     </article>
   );

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PostMeta from "../PostMeta";
@@ -29,7 +28,7 @@ const checklist = [
   },
   {
     title: "5. Settlement currency and rate convention",
-    body: "Pick the currency the group will actually transfer in, usually where you all live, not where you are going, and agree to use mid-market rates on the day of each expense. Card fees stay with whoever's card charged them.",
+    body: "Pick the currency the group will actually transfer in, usually where you all live. Agree whether to use a rate you record on each expense date or the latest reference rate when you settle. BillSmart uses the latter; it does not retrieve historical rates. Decide separately how to handle card fees.",
   },
   {
     title: "6. What counts as shared",
@@ -37,7 +36,7 @@ const checklist = [
   },
   {
     title: "7. Who is tracking, and where",
-    body: "One person, one place, visible to everyone. A shared note, a chat thread, or entries added to a calculator as you go. Two people tracking separately is worse than nobody tracking.",
+    body: "Choose one shared note or chat thread for receipts while travelling. BillSmart does not retain an editable trip history after a refresh, so enter the recorded payments together when you settle and download the PDF before leaving.",
   },
   {
     title: "8. The rounding threshold",
@@ -78,7 +77,7 @@ export default function Page() {
             &ldquo;Money admin so we never have to talk about it again: aiming for roughly
             NT$2,000 a night each. I&rsquo;ll book flights, Ana books the house, whoever
             books, everyone sends their share within a week. Everything settles in TWD at
-            whatever the rate was on the day. Shared = transport, house, anything we all
+            the latest reference rate when we settle. Shared = transport, house, anything we all
             do. Food and extras are on whoever had them. I&rsquo;ll keep the running list.
             Anything under NT$100 we don&rsquo;t bother chasing. If someone drops out
             after we&rsquo;ve booked, that person covers their own share.&rdquo;
@@ -115,7 +114,7 @@ export default function Page() {
         <h2>At the end</h2>
         <p>
           Put the payments into the <Link href="/">calculator</Link>, choose your
-          settlement currency, and share the resulting transfer list in the chat. Because
+          settlement currency, download the PDF, and share the resulting transfer list in the chat. Because
           it settles on net balances rather than transaction by transaction, a week of
           tangled spending between five people usually collapses into three or four
           transfers.
@@ -152,18 +151,8 @@ export default function Page() {
           <p>
             Point 6 in practice: shared costs shared, optional activities charged to whoever took part. Five people, one ryokan for everybody, a cable car three of them rode, and a coffee the other two had.
           </p>
-          <figure className="articleFigure">
-            <Image
-              src="/blog/group-trip-money-checklist.webp"
-              alt="BillSmart result panel for five people, showing one shared accommodation cost and two subset activities."
-              width={1350}
-              height={1398}
-              sizes="(max-width: 900px) 92vw, 820px"
-            />
-            <figcaption>
-              Settled in USD: Dan and Eve pay Ana $44.23 each, Chloe pays Ana $42.31, Ben pays Ana $7.69. Four transfers instead of five people reconciling three separate bills.
-            </figcaption>
-          </figure>
+          <p>For an illustrative fixed conversion, Ana paid USD 192.30 for the five-person stay, Ben paid USD 46.15 for a cable car covering Ana, Ben and Chloe, and Chloe paid USD 11.54 for coffee covering Dan and Eve. The five people therefore owe USD 53.85, 53.84, 53.84, 44.23 and 44.23 respectively after cents are allocated in roster order.</p>
+          <p>The final transfers are Ben → Ana USD 7.69, Chloe → Ana USD 42.30, and Dan and Eve → Ana USD 44.23 each. Together those four transfers equal Ana&rsquo;s USD 138.45 credit. Live exchange rates will produce different converted amounts; the fixed numbers here only demonstrate the split.</p>
         </section>
       </article>
   );

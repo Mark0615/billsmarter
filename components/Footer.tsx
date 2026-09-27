@@ -69,6 +69,7 @@ export default function Footer() {
 
       <div className="siteFooterBase">
         <p>© {new Date().getFullYear()} BillSmart</p>
+        <p>Reference rates: Frankfurter and <a href="https://www.exchangerate-api.com">Rates By Exchange Rate API</a>.</p>
         <p>
           Results are suggestions, not financial advice. Always confirm amounts before
           transferring money.

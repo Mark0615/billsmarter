@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 
 type Option = { value: string; label: string };
@@ -25,6 +25,8 @@ export default function PayToDropdown({
   showSelectAll = true,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const menuId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const boxRef = useRef<HTMLDivElement | null>(null);
 
   // ✅ 用 useMemo 固定，避免每次 render 依賴變動造成 hooks warning
@@ -83,8 +85,10 @@ export default function PayToDropdown({
   }
 
   return (
-    <div className="payTo" ref={boxRef}>
+    <div className="payTo" ref={boxRef} onKeyDown={e=>{if(e.key==="Escape"){setOpen(false);triggerRef.current?.focus();}}}>
       <button
+        ref={triggerRef}
+        aria-controls={menuId}
         type="button"
         className="payToTrigger"
         onClick={() => !disabled && setOpen((v) => !v)}
@@ -96,7 +100,7 @@ export default function PayToDropdown({
       </button>
 
       {open && !disabled ? (
-        <div className="payToMenu" role="listbox" aria-label="Pay to">
+        <div id={menuId} className="payToMenu" role="group" aria-label="People included in this payment">
           {showSelectAll ? (
             <label style={{ display: "flex", gap: 10, padding: "8px 8px" }}>
               <input type="checkbox" checked={isAllSelected} onChange={toggleAll} />
