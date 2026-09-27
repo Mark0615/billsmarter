@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { posts } from "./blog/posts";
 
+export const dynamic = "force-static";
+
 const SITE = "https://billsmarter.app";
 
 /**

@@ -8,9 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/*.test.mjs",
-    "workers:build": "opennextjs-cloudflare build",
-    "workers:preview": "opennextjs-cloudflare preview",
-    "workers:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "pages:build": "next build",
+    "pages:preview": "wrangler pages dev out --compatibility-date=2026-02-21 --compatibility-flags=nodejs_compat"
   },
   "dependencies": {
     "@next/third-parties": "^15.5.26",
@@ -23,12 +22,10 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@opennextjs/cloudflare": "1.20.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-config-next": "^15.5.26",
     "tailwindcss": "^4",

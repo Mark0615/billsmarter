@@ -22,18 +22,18 @@ npm run build
 
 `lib/bills.ts` 包含整數單位分帳。頁面不會保存新的歷史紀錄；結算後可一鍵下載包含姓名、金額與轉帳明細的 PDF，請自行保管。
 
-## Cloudflare Workers 候選部署
+## Cloudflare Pages 部署
 
-目前正式站仍是 Cloudflare Pages。本分支改用 OpenNext；不能直接沿用舊 Pages 的建置設定。正式切換前必須先驗證 Worker 預覽與網域設定，詳見 [改版與上線檢查](RELEASE-2026-09-27.md)。
+正式站沿用現有 Cloudflare Pages 專案與 `billsmarter.app` 網域。Next.js 輸出靜態頁至 `out`；`functions/api/fx/latest.ts` 提供原有 `/api/fx/latest` 匯率 API。PDF 由瀏覽器產生，不需伺服器儲存。
 
 ```sh
-npm run workers:build
-npm run workers:preview
+npm run pages:build
+npm run pages:preview
 ```
 
-以上僅本機建置與預覽，不會部署。`workers:deploy` 才會修改遠端網站，僅在核准部署後使用。
+預覽預設在 http://localhost:8788/；以上不會修改正式站。Cloudflare Pages 原專案需將建置指令設為 `npm run pages:build`，輸出目錄設為 `out`。確認預覽分支正常後，再更新 `main` 讓既有 GitHub 自動部署生效。`/calculator` 的 301 轉址由 `public/_redirects` 提供。
 
-內容頁使用 static-assets incremental cache，FX endpoint 動態讀取公開參考匯率，不需要 R2 或 D1。圖片直接透過靜態資產提供。
+公開頁面是靜態檔案；只有匯率查詢會呼叫 Pages Function，不需要 R2 或 D1。圖片直接透過靜態資產提供。
 
 原有 `NEXT_PUBLIC_GTM_ID` 可指定 GTM 容器；未設定時使用既有容器 ID，設為空字串可停用 GTM。Google 認證 CMP 與 GTM 同意設定在後台核對，不能只靠隱私政策文字判定已完成。
 

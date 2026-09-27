@@ -55,16 +55,16 @@ test('amount grammar rejects ambiguous, negative and excessive inputs', () => {
     assert.equal(bills.validAmount('100.50', 'TWD'), false);
     assert.equal(bills.validAmount('100', 'TWD'), true);
 });
-const route = load('../app/api/fx/latest/route.ts', { 'next/server': { NextResponse: { json: (data, options) => ({ data, status: options?.status ?? 200 }) } }, '@/lib/bills': bills });
+const fx = load('../lib/fx.ts', { './bills': bills });
 test('FX network exceptions fall through to the secondary provider', async () => {
     const original = globalThis.fetch;
     const calls = [];
     globalThis.fetch = async (url) => { calls.push(String(url)); if (calls.length === 1)
         throw new Error('offline'); return { ok: true, json: async () => ({ rates: { EUR: 0.9 } }) }; };
     try {
-        const r = await route.GET(new Request('https://example.test/api/fx/latest?from=USD&to=EUR'));
+        const r = await fx.fxResponse(new Request('https://example.test/api/fx/latest?from=USD&to=EUR'));
         assert.equal(r.status, 200);
-        assert.equal(r.data.source, 'open-er-api');
+        assert.equal((await r.json()).source, 'open-er-api');
         assert.equal(calls.length, 2);
     }
     finally {
@@ -75,8 +75,8 @@ test('no fabricated FX when all sources fail; unsupported codes rejected', async
     const original = globalThis.fetch;
     globalThis.fetch = async () => { throw new Error('offline'); };
     try {
-        assert.equal((await route.GET(new Request('https://example.test/api/fx/latest?from=USD&to=EUR'))).status, 422);
-        assert.equal((await route.GET(new Request('https://example.test/api/fx/latest?from=INVALID&to=INVALID'))).status, 400);
+        assert.equal((await fx.fxResponse(new Request('https://example.test/api/fx/latest?from=USD&to=EUR'))).status, 422);
+        assert.equal((await fx.fxResponse(new Request('https://example.test/api/fx/latest?from=INVALID&to=INVALID'))).status, 400);
     }
     finally {
         globalThis.fetch = original;

@@ -22,7 +22,7 @@
 
 ## 送審前剩餘工作
 
-1. **先讓候選版公開，才談送審。** 新 Workers 部署與網域切換尚未執行。部署後從外部重新檢查首頁、指南、API、手機、PDF、robots、sitemap、ads.txt、canonical 及 404；在 Search Console 的 URL 檢查確認關鍵頁取得新版內容。不要把本機測試等同正式站驗收。
+1. **先讓候選版公開，才談送審。** 候選版已改為現有 Cloudflare Pages 專案可用的靜態輸出與 Pages Function；仍須更新 Pages 建置設定並由 GitHub 部署。正式站更新後從外部重新檢查首頁、指南、API、手機、PDF、robots、sitemap、ads.txt、canonical 及 404；在 Search Console 的 URL 檢查確認關鍵頁取得新版內容。不要把本機測試等同正式站驗收。
 2. **核對可查核資訊與作者資料。** 文章中的票券退改／轉讓、各地收費、卡片與匯率規則已收斂概括說法；後續如寫入特定平台或銀行規則，須連到對應官方資料。About／Contact 的作者與聯絡資訊需由站主確認屬實。Google 沒有規定每篇都必須有外部連結。
 3. **核對廣告與同意設定。** AdSense 的 Privacy & messaging 已發布，但原始碼無法證明 GTM／AdSense 在每個適用地區的同意前行為，也還無法確認 Auto ads 的實際版位。正式站更新後檢查廣告不遮住輸入與 PDF。這屬政策與體驗檢查，不能直接推斷為 9/3 的 low-value 原因。
 4. **確認索引與後台重新抓取。** 使用 Search Console URL 檢查確認首頁、How it works 與核心指南讀到新版本；在 AdSense Sites 頁確認 `ads.txt` 狀態是否更新。已發布的 CMP 和「No current issues」不等於內容審核會通過。
