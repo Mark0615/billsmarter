@@ -20,7 +20,7 @@ const checklist = [
   },
   {
     title: "3. Reimbursement deadline for upfront costs",
-    body: "'Within a week of booking' is the standard worth adopting. Large bookings should be settled before the trip starts, never folded into the final tally.",
+    body: "Agree a deadline that works for your group. If a large booking is reimbursed before departure, mark it as settled in your shared note and do not add the same cost to the final BillSmart calculation again.",
   },
   {
     title: "4. The cancellation rule",
@@ -32,7 +32,7 @@ const checklist = [
   },
   {
     title: "6. What counts as shared",
-    body: "The default that causes fewest arguments: transport, accommodation and anything the whole group does together is shared. Food, drinks, souvenirs and optional activities are charged to whoever took part.",
+    body: "Name the people who benefited from each payment. Accommodation may cover all four travellers, while a Lawson snack or coffee bought for one friend covers only that person. Decide whether any cost is a treat before recording it as a debt.",
   },
   {
     title: "7. Who is tracking, and where",
@@ -40,7 +40,7 @@ const checklist = [
   },
   {
     title: "8. The rounding threshold",
-    body: "Below what amount do you not bother? Pick something like the price of a coffee. It kills the entire category of arguments about small change and costs nobody anything real.",
+    body: "If you want to ignore small costs, choose a threshold together before the trip. Make clear whether a small purchase is a gift or will be included in the final split; a coffee can still matter when one friend repeatedly pays for the group.",
   },
 ];
 
@@ -51,9 +51,10 @@ export default function Page() {
         <h1>The Group Trip Money Checklist</h1>
         <PostMeta slug="group-trip-money-checklist" />
         <p className="lead">
-          Almost every money argument on a group trip traces back to a decision nobody
-          made. These eight take five minutes before anyone books anything, and they are
-          worth more than any amount of careful tracking afterwards.
+          These eight decisions help a group agree what to record and how to settle it.
+          The checklist is based on the problem behind BillSmart: on a March 2025 trip to
+          Japan with three friends, I paid for our hotel in TWD before departure while
+          friends later covered small purchases for me in JPY.
         </p>
       </header>
 
@@ -74,19 +75,18 @@ export default function Page() {
         </p>
         <div className="proseNote">
           <p>
-            &ldquo;Money admin so we never have to talk about it again: aiming for roughly
+            &ldquo;Money plan for the trip: aiming for roughly
             NT$2,000 a night each. I&rsquo;ll book flights, Ana books the house, whoever
             books, everyone sends their share within a week. Everything settles in TWD at
             the latest reference rate when we settle. Shared = transport, house, anything we all
             do. Food and extras are on whoever had them. I&rsquo;ll keep the running list.
-            Anything under NT$100 we don&rsquo;t bother chasing. If someone drops out
+            Anything under NT$100 can be a treat if we agree. If someone drops out
             after we&rsquo;ve booked, that person covers their own share.&rdquo;
           </p>
         </div>
         <p>
-          It reads as slightly over-organised, and that is the point. Nobody objects to it
-          in advance. Everybody objects to the equivalent conversation in an airport
-          lounge at the end of the trip.
+          This is a template, not a transcript of my group chat. Replace the numbers and
+          choices with what your own group actually agrees to.
         </p>
       </section>
 
@@ -113,16 +113,16 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>At the end</h2>
         <p>
-          Put the payments into the <Link href="/">calculator</Link>, choose your
+          Put the unpaid shared payments into the <Link href="/">calculator</Link>, choose your
           settlement currency, download the PDF, and share the resulting transfer list in the chat. Because
           it settles on net balances rather than transaction by transaction, a week of
           tangled spending between five people usually collapses into three or four
           transfers.
         </p>
         <p>
-          Send the list, let people pay, and do not reopen it for small refunds that arrive
-          afterwards, handle those separately. The value of a settlement is that it is
-          final.
+          If a booking was already reimbursed, leave it out rather than charging the group
+          twice. If a refund arrives later, agree how to return it to the original payers;
+          the calculator does not support negative refund entries.
         </p>
       </section>
 

@@ -9,7 +9,7 @@ import {
 } from "@phosphor-icons/react";
 import PayToDropdown from "./PayToDropdown";
 
-import { CURRENCIES, MAX_AMOUNT, calculate, decimalsFor, formatMoney, validAmount, type Person, type Payment } from "@/lib/bills";
+import { CURRENCIES, MAX_AMOUNT, calculate, decimalsFor, describeRate, formatMoney, validAmount, type Person, type Payment } from "@/lib/bills";
 
 function checkedConversion(amount: number, rate: number) {
   const value = amount * rate;
@@ -70,7 +70,7 @@ function getErrorMessage(err: unknown) {
   }
 }
 
-type FxResult = { rate: number; source: string; base: string; to: string };
+type FxResult = { rate: number; source: string; base: string; to: string; date?: string; fetchedAt?: string };
 
 async function fetchFxRate(from: string, to: string): Promise<FxResult> {
   const url = new URL("/api/fx/latest", window.location.origin);
@@ -130,7 +130,7 @@ export default function CalculatorClient() {
   const busyRef = useRef(false);
 
   async function downloadPdf() {
-    if (!payments.length || pdfPending || busyRef.current) return;
+    if (!payments.length || roster.length !== count || pdfPending || busyRef.current) return;
     setPdfPending(true);
     setPdfError("");
     try {
@@ -156,7 +156,7 @@ export default function CalculatorClient() {
     }
   }
 
-  const latestFxRef = useRef<Record<string, { rate: number; source: string }>>({});
+  const latestFxRef = useRef<Record<string, FxResult>>({});
 
   /** Everyone who has been given a name — the roster payments can refer to. */
   const roster = useMemo(
@@ -165,7 +165,15 @@ export default function CalculatorClient() {
   );
   const nameById = useMemo(() => {
     const m = new Map<string, string>();
-    for (const p of people) m.set(p.id, sanitizeName(p.name));
+    const counts = new Map<string, number>();
+    for (const p of people) {
+      const name = sanitizeName(p.name);
+      if (name) counts.set(name.toLocaleLowerCase(), (counts.get(name.toLocaleLowerCase()) ?? 0) + 1);
+    }
+    for (const [index, p] of people.entries()) {
+      const name = sanitizeName(p.name);
+      m.set(p.id, !name ? `Person ${index + 1} (name required)` : counts.get(name.toLocaleLowerCase())! > 1 ? `${name} (#${index + 1})` : name);
+    }
     return m;
   }, [people]);
 
@@ -253,6 +261,8 @@ export default function CalculatorClient() {
             baseAmount: p.amount,
             rateUsed: 1,
             rateSource: "identity",
+            rateDate: undefined,
+            rateFetchedAt: undefined,
           });
           continue;
         }
@@ -260,11 +270,9 @@ export default function CalculatorClient() {
         const key = `${p.currency}->${nextBase}`;
         const cached = latestFxRef.current[key];
         // Reuse the cached rate and its source for this currency pair.
-        const fx = cached
-          ? { rate: cached.rate, source: cached.source, base: p.currency, to: nextBase }
-          : await fetchFxRate(p.currency, nextBase);
+        const fx = cached ?? await fetchFxRate(p.currency, nextBase);
 
-        latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
+        latestFxRef.current[key] = fx;
 
         converted.set(p.id, {
           ...p,
@@ -272,6 +280,8 @@ export default function CalculatorClient() {
           baseAmount: checkedConversion(p.amount, fx.rate),
           rateUsed: fx.rate,
           rateSource: fx.source,
+          rateDate: fx.date,
+          rateFetchedAt: fx.fetchedAt,
         });
       }
       // `payments` is the snapshot taken before the awaits above. Merge by id
@@ -307,18 +317,20 @@ export default function CalculatorClient() {
       let rateUsed = 1;
       let baseAmount = amt;
       let rateSource = "identity";
+      let rateDate: string | undefined;
+      let rateFetchedAt: string | undefined;
 
       if (from !== to) {
         const key = `${from}->${to}`;
         const cached = latestFxRef.current[key];
-        const fx = cached
-          ? { rate: cached.rate, source: cached.source, base: from, to }
-          : await fetchFxRate(from, to);
-        latestFxRef.current[key] = { rate: fx.rate, source: fx.source };
+        const fx = cached ?? await fetchFxRate(from, to);
+        latestFxRef.current[key] = fx;
 
         rateUsed = fx.rate;
         baseAmount = checkedConversion(amt, fx.rate);
         rateSource = fx.source;
+        rateDate = fx.date;
+        rateFetchedAt = fx.fetchedAt;
       }
 
       const p: Payment = {
@@ -331,6 +343,8 @@ export default function CalculatorClient() {
         baseAmount,
         rateUsed,
         rateSource,
+        rateDate,
+        rateFetchedAt,
         note: temp.note?.trim() || undefined,
       };
 
@@ -484,7 +498,7 @@ export default function CalculatorClient() {
                 >
                   <option value="">Select payer</option>
                   {roster.map((person) => (
-                    <option key={person.id} value={person.id}>{person.name}</option>
+                    <option key={person.id} value={person.id}>{nameById.get(person.id)}</option>
                   ))}
                 </select>
               </div>
@@ -494,7 +508,7 @@ export default function CalculatorClient() {
                 <PayToDropdown
                   options={roster.map((person) => ({
                     value: person.id,
-                    label: person.name,
+                    label: nameById.get(person.id) ?? person.name,
                   }))}
                   selected={temp.beneficiaryIds}
                   onChange={(beneficiaryIds) =>
@@ -568,7 +582,7 @@ export default function CalculatorClient() {
           </div>
 
           <div className="balances">
-            {roster.map((person) => {
+            {people.map((person) => {
               const net = totals.net[person.id] || 0;
               const cls = net >= 0 ? "amt pos" : "amt neg";
               const sign = net >= 0 ? "+" : "−";
@@ -577,7 +591,7 @@ export default function CalculatorClient() {
                   <div className="balancePerson">
                     <UserCircle size={18} weight="light" aria-hidden="true" />
                     <div>
-                      <div className="big">{person.name}</div>
+                      <div className="big">{nameById.get(person.id)}</div>
                       <div className={cls}>
                         {sign} {baseCurrency} {formatMoney(Math.abs(net), baseCurrency)}
                       </div>
@@ -609,6 +623,7 @@ export default function CalculatorClient() {
                         · {baseCurrency} {formatMoney(p.baseAmount, baseCurrency)}
                         {p.note ? ` · ${p.note}` : ""}
                       </div>
+                      {describeRate(p) ? <div className="itemRate">{describeRate(p)}</div> : null}
                     </div>
                     <button className="btn ghost" disabled={fxPending>0} onClick={() => removePayment(p.id)}>
                       Remove
@@ -651,7 +666,7 @@ export default function CalculatorClient() {
               </article>
             ))
           ) : (
-            roster.map((person) => {
+            people.map((person) => {
               const net = totals.net[person.id] || 0;
               return (
                 <article className="ledgerEntry" key={person.id}>
@@ -659,7 +674,7 @@ export default function CalculatorClient() {
                   <div className="ledgerPerson">
                     <UserCircle size={21} weight="light" aria-hidden="true" />
                     <div>
-                      <strong>{person.name}</strong>
+                      <strong>{nameById.get(person.id)}</strong>
                       <span>{net < 0 ? "Owes" : "Balance"}</span>
                       <small>{baseCurrency}</small>
                     </div>
@@ -676,9 +691,10 @@ export default function CalculatorClient() {
         </div>
 
         <div className="settlementExport">
-          <button className="btn primary" type="button" onClick={() => void downloadPdf()} disabled={!payments.length || fxPending > 0 || pdfPending}>
+          <button className="btn primary" type="button" onClick={() => void downloadPdf()} disabled={!payments.length || roster.length !== count || fxPending > 0 || pdfPending}>
             {pdfPending ? "Preparing PDF…" : "Download PDF"}
           </button>
+          {payments.length > 0 && roster.length !== count ? <p role="status">Fill every name before downloading the settlement record.</p> : null}
           <p>Keep a copy of the payments and final transfers. This page does not save your calculation after a refresh.</p>
           {pdfError ? <p role="alert" className="hint danger">{pdfError}</p> : null}
         </div>

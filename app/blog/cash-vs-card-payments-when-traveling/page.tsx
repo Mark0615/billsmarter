@@ -22,6 +22,7 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <p>The question is not really cash or card. Both work. It is which one you reach for in which situation, and what happens to the person who ends up carrying the group&rsquo;s money.</p>
+        <p>On a March 2025 trip to Japan with three friends, I paid for three hotel nights in TWD before departure, while friends later covered Lawson and coffee purchases for me in JPY cash. That is the kind of mixed record this guide is about. I am not publishing their private amounts; the numerical examples below are illustrative.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -67,7 +68,7 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>A practical split</h2>
-        <p>For most trips the mix that causes the least friction is roughly four fifths card, one fifth cash, adjusted for where you are going. More cash for Japan and Taiwan, less for Sweden or the Netherlands, and a fixed rule that the big shared bookings go on one person&rsquo;s fee-free card if the group has one.</p>
+        <p>There is no useful fixed card-to-cash ratio. Check which payment methods your accommodation, transport and smaller shops accept, then carry enough local cash for places that do not take your card. For group expenses, record who actually paid and whether the payment was a shared cost or a treat.</p>
         <p>Then settle in the currency you will actually transfer in, and use one rate convention for the whole group. <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">Which exchange rate to use when splitting a trip</Link> compares the four options. If five friends from Taipei spend a week in Japan, the settlement currency is TWD, because that is what the transfers between you will be made in. Settling in yen just means everyone converts a second time.</p>
       </section>
 

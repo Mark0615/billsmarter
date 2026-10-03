@@ -89,3 +89,19 @@ test('converted half-cent rounds to the nearest settlement cent', () => {
     assert.equal(result.paid.a, 1.01);
     assert.equal(result.owed.a, 0.34);
 });
+
+test('each converted payment can show the rate, source, provider date and fetch time used', async () => {
+    const original = globalThis.fetch;
+    globalThis.fetch = async () => ({ ok: true, json: async () => ({ date: '2026-10-03', rates: { EUR: 0.9 } }) });
+    try {
+        const response = await fx.fxResponse(new Request('https://example.test/api/fx/latest?from=USD&to=EUR'));
+        const data = await response.json();
+        assert.equal(data.date, '2026-10-03');
+        assert.equal(data.source, 'frankfurter');
+        assert.match(data.fetchedAt, /^\d{4}-\d{2}-\d{2}T/);
+        assert.match(bills.describeRate({ ...payment(10), currency: 'USD', baseCurrency: 'EUR', rateUsed: data.rate, rateSource: data.source, rateDate: data.date, rateFetchedAt: data.fetchedAt }), /1 USD = 0.9 EUR · Frankfurter \(ECB\) · Rate date 2026-10-03 · fetched/);
+        assert.equal(bills.describeRate(payment(10)), null);
+    } finally {
+        globalThis.fetch = original;
+    }
+});

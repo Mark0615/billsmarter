@@ -124,11 +124,11 @@ export default function HomePage() {
             <p className="heroEyebrow">Free · Mixed-currency group expense splitting</p>
             <h1>
               <span className="heroBrandLine">BillSmart</span>
-              The
+              The{" "}
               <br />
-              Smartest Split
+              Smartest Split{" "}
               <br />
-              For Any
+              For Any{" "}
               <br />
               Expense
             </h1>

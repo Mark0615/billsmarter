@@ -5,7 +5,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "Bill-Splitting Etiquette Around the World",
   description:
-    "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and continental Europe, and how to handle it when you get it wrong.",
+    "Questions to ask before paying a group bill abroad, with practical examples from Taiwan and Japan and source-backed notes on service charges and tipping.",
   alternates: { canonical: "/blog/bill-splitting-etiquette-around-the-world" },
 };
 
@@ -16,81 +16,75 @@ export default function Page() {
         <h1>Bill-Splitting Etiquette Around the World</h1>
         <PostMeta slug="bill-splitting-etiquette-around-the-world" />
         <p className="lead">
-          Asking to split a bill by item is completely normal in one country and mildly
-          embarrassing in the next. Knowing which one you are in saves a small amount of
-          money and a large amount of standing around at the register.
+          Do not assume the restaurant can divide one group bill across several cards.
+          Ask early how the venue handles payment, then agree with your group whether
+          you are splitting evenly, by item, or settling privately afterwards.
         </p>
       </header>
 
       <div className="proseNote">
         <p>
           <strong>A caveat worth stating first.</strong> These are tendencies, not rules.
-          Age, city, formality of the occasion and the specific people at the table all
-          matter more than nationality. Treat the below as a starting expectation you
-          adjust within about ten minutes of arriving.
+          The venue and the people at your table matter more than nationality. My
+          Taiwan–Japan example comes from a real trip; the other country notes are
+          questions to check locally, not a report of my own experience in every place.
         </p>
       </div>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Taiwan</h2>
         <p>
-          Among friends and colleagues of similar age, splitting evenly (AA制) is
-          unremarkable, and mobile transfers make settling up afterwards effortless. Many
-          groups will have one person pay the whole bill at the register and everyone
-          transfer their share before they have left the restaurant.
+          In my own friend group, one person often pays at the register and the others
+          transfer their shares afterwards. It is worth asking before ordering whether
+          people expect an even split or only want to pay for what they ordered.
         </p>
         <p>
-          The thing that surprises visitors is the opposite pattern: treating. If someone
-          invited you, is significantly older, or is celebrating something, expect a
-          genuine contest to pay. Offering once or twice and then accepting graciously is
-          the correct move; insisting past that point is not politeness, it is refusing a
-          gesture. Reciprocating next time is how the ledger actually clears.
+          Treating is a different agreement from splitting. If someone offers to cover a
+          celebration meal, ask whether it is a treat before entering it as a group debt.
+          A calculator should not turn a gift into an amount the recipient never agreed to
+          repay.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Japan</h2>
         <p>
-          Splitting evenly (割り勘, <em>warikan</em>) is the default among peers, and it
-          really does mean evenly. Itemising who ate what is unusual outside close friends,
-          and many group dinners are booked as a fixed per-person course precisely so the
-          question never arises.
+          Groups may agree to split evenly (割り勘, <em>warikan</em>), but that is a
+          decision for the people eating together, not a rule imposed by the country.
+          If some people ordered much more, agree whether to separate those items first.
         </p>
         <p>
-          Practically: you generally pay at a register on the way out rather than at the
-          table, and many restaurants will not split a bill across multiple cards. One
-          person pays the total and the group settles between themselves. Bring some cash
-          even if you rarely use it at home, and decide who is paying before you get to the
-          counter rather than negotiating in front of a queue.
+          Payment procedures vary by venue. Japan National Tourism Organization advises
+          travellers to check accepted payment methods; some smaller businesses still
+          require cash. Decide who will pay before reaching the counter, then settle
+          privately if the restaurant issues one bill.
         </p>
         <p>
-          At work-adjacent dinners the hierarchy usually decides: a senior colleague often
-          covers more, or the company does. Offering your share is still correct; being
-          waved off is a normal outcome.
+          At a work dinner, ask who is hosting or whether the company covers the meal.
+          Do not assume a personal split when the bill is being treated as hospitality.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>South Korea</h2>
         <p>
-          A long-standing pattern is that the eldest or the most senior person pays,
-          particularly at a first venue. Where a group is more equal, rounds get shared
-          across the evening instead, one person covers dinner, another covers the second
-          venue, another the third. Over a few outings it balances.
+          Do not infer who should pay from age alone. Ask whether one person is hosting,
+          whether the group is taking turns across venues, or whether everyone expects
+          a transfer after the meal.
         </p>
         <p>
-          Splitting the individual bill is increasingly common among younger groups and
-          nobody will find it strange, but the rotating-host pattern is still the one you
-          are most likely to walk into.
+          Those choices lead to different records. A hosted dinner is not a debt; a
+          rotating round may be a gift or an informal exchange; a shared bill needs a
+          clear payer and participants.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>United States</h2>
         <p>
-          The most split-friendly of the lot. Asking for separate checks is routine, and
-          servers will often run multiple cards without being asked twice. &ldquo;Shall we
-          just split it evenly?&rdquo; is equally normal.
+          Ask for separate checks before ordering if you need them. Whether a restaurant
+          can divide one bill across several cards is a venue policy, so do not wait until
+          the end to find out.
         </p>
         <p>
           The complication is the final total: sales tax, a voluntary tip, or an automatic
@@ -105,49 +99,44 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>United Kingdom and Ireland</h2>
         <p>
-          In restaurants, splitting is unremarkable and service is often already added to
-          the bill for larger tables, check before adding more.
+          Check the bill before calculating shares. VisitBritain notes that an optional
+          service charge is sometimes added by restaurants; the amount on the final bill,
+          rather than the menu subtotal, is the figure to divide.
         </p>
         <p>
-          In pubs, the operative custom is rounds: one person buys drinks for the whole
-          group, and the next round falls to someone else. Trying to pay for only your own
-          drink in a group that is buying rounds reads as opting out socially rather than
-          financially. If you are drinking less than the others, saying so early is fine;
-          quietly skipping your turn is what gets noticed.
+          If friends suggest buying rounds, agree whether the rounds are informal treats
+          or costs to settle later. Someone drinking less can opt out before the first
+          round instead of discovering an assumed obligation afterwards.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Continental Europe</h2>
         <p>
-          Highly variable, but a few things travel well. Service is frequently included in
-          the price, so the tipping arithmetic that complicates American bills mostly
-          disappears, rounding up is common, a percentage calculation is not.
+          There is no useful single rule for all of continental Europe. Service charges,
+          tipping and card splitting differ by country and establishment. Read the menu
+          and receipt, then ask how the restaurant can take payment.
         </p>
         <p>
-          Splitting evenly is usually easy; splitting by item across many cards is more
-          often met with reluctance, especially at busy times or in smaller
-          establishments. In much of the region the practical approach is the same as
-          Japan: one card pays, the group settles privately afterwards.
+          If one card must cover the table, keep the receipt and settle within the group.
+          The same method works anywhere: record the actual payer, receipt total and the
+          people the expense covered.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>The pattern underneath all of this</h2>
         <p>
-          Two questions cover almost every country you will visit:
+          Two questions are more useful than memorising national stereotypes:
         </p>
         <ul>
           <li>
-            <strong>Does the restaurant split the bill, or do you?</strong> In much of
-            Asia and continental Europe the answer is you. In the US and UK, often the
-            restaurant.
+            <strong>Can this venue split the bill?</strong> Ask before ordering if separate
+            checks or multiple cards matter to your group.
           </li>
           <li>
-            <strong>Is paying a social act or an accounting one?</strong> Where treating
-            carries meaning (Taiwan, Korea, Japan at certain tables), an insistent
-            attempt to pay exactly your share can misfire. Where it does not, precision is
-            simply efficient.
+            <strong>Is this a treat or a shared expense?</strong> Confirm what the payer
+            intends before entering the bill as money owed.
           </li>
         </ul>
         <p>
@@ -170,7 +159,7 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Sources and related reading</h2>
-        <p>The <a href="https://www.irs.gov/businesses/small-businesses-self-employed/tip-recordkeeping-and-reporting">IRS guide to tips and service charges</a> explains why a US bill may already include a mandatory charge. The social suggestions above are starting points, not requirements or guarantees about any group.</p>
+        <p>The <a href="https://www.irs.gov/businesses/small-businesses-self-employed/tip-recordkeeping-and-reporting">IRS guide</a> distinguishes US tips and mandatory service charges. <a href="https://www.visitbritain.com/en/plan-your-trip/useful-information">VisitBritain</a> discusses optional service charges, and <a href="https://www.japan.travel/en/plan/cashless-payments-in-japan/">Japan National Tourism Organization</a> advises checking payment methods and carrying cash for smaller establishments. These sources support specific payment facts; the group-splitting suggestions are editorial advice, not national rules.</p>
         <ul>
           <li>
             <Link href="/blog/how-to-split-restaurant-and-bar-bills">

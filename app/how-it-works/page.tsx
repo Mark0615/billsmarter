@@ -143,6 +143,13 @@ export default function HowItWorksPage() {
           at all, BillSmart shows an error instead of quietly saving a wrong converted
           amount.
         </p>
+        <p>
+          A cross-currency payment displays the exact rate used, provider, provider rate
+          date and the UTC time BillSmart fetched it. The PDF carries the same details.
+          The rate date may be earlier than the fetch time because these are published
+          reference rates, not live card quotes. Changing the base currency recalculates
+          existing payments and updates their rate details.
+        </p>
         <div className="proseNote">
           <p>
             <strong>Reference rates are not your bank&rsquo;s rate.</strong> A card

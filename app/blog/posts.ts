@@ -16,7 +16,7 @@ export const posts: Post[] = [
     summary:
       "Eight decisions that take five minutes in the group chat and prevent every common money argument on a trip — plus a message you can copy and send.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-10-04",
     readingTime: "4 min read",
   },
   {
@@ -25,7 +25,7 @@ export const posts: Post[] = [
     summary:
       "Three people paid in three currencies on three different days. How to pick one rate for the whole group without anyone quietly losing money.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "5 min read",
   },
   {
@@ -52,7 +52,7 @@ export const posts: Post[] = [
     summary:
       "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and Europe.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "5 min read",
   },
   {
@@ -72,7 +72,7 @@ export const posts: Post[] = [
     summary:
       "Three currencies in ten days and one person fronting the bookings. Picking a settlement currency, spreading the exposure, and charging each expense to the people it was actually for.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "6 min read",
   },
   {
@@ -82,7 +82,7 @@ export const posts: Post[] = [
     summary:
       "The four places a payment abroad quietly costs more, why whoever withdraws the cash pays fees nobody else sees, and how to log both so the split stays fair.",
     publishedAt: "2026-02-26",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "6 min read",
   },
   {

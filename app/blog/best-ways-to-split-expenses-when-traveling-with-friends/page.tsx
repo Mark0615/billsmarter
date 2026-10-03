@@ -19,9 +19,28 @@ export default function Page() {
         <h1>The Best Way to Split Expenses When Traveling with Friends</h1>
         <PostMeta slug="best-ways-to-split-expenses-when-traveling-with-friends" />
         <p className="lead">
-          A single-country trip is an arithmetic problem. A multi-country trip is a different problem, and most groups do not notice the difference until they are in an airport lounge on the last night trying to reconstruct ten days across three currencies.
+          Even a single-country trip can mix currencies: you might book a hotel in TWD before departure, then pay for food in JPY abroad. Add more countries or people paying on different days, and the final bill gets harder to reconstruct.
         </p>
       </header>
+
+      <section style={{ display: "grid", gap: "12px" }}>
+        <h2>The trip behind this tool</h2>
+        <p>
+          In March 2025, I travelled to Japan with three friends. Before leaving Taiwan,
+          I paid in TWD for three nights of hotel accommodation. In Japan, friends bought
+          things for me at Lawson and coffee shops with JPY cash. That left us with a
+          practical question: how do we compare those receipts and settle in one currency
+          without forgetting who actually paid? This happened; the amounts in the
+          examples below are illustrative, not my friends&rsquo; private transactions.
+        </p>
+        <p>
+          The useful record is one line per payment: original amount and currency, payer,
+          and who benefited. Decide the currency for the final transfers separately. If
+          the group agrees to use current reference rates, BillSmart can convert the
+          Japanese payments and show the rate used for each one. It cannot recover the
+          card or cash rate from March 2025.
+        </p>
+      </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <p>Here is the shape of it. Four friends fly to Zurich, spend three days in Switzerland paying in francs, take a train to Milan and spend five days paying in euros, then finish with three days in London paying in pounds. One person books the first hotel because they got up early enough to find it. The same person ends up putting the train tickets on their card because they were standing at the machine. By day six they have fronted more than everyone else combined, in two currencies, and nobody has written anything down.</p>
@@ -32,7 +51,7 @@ export default function Page() {
         <h2>Why converting as you go does not work</h2>
         <p>The instinct is to convert each expense into your home currency in your head as it happens. It fails for three reasons.</p>
         <p>People use different rates. One person looks it up on their phone, another remembers what it was two days ago, a third uses the number their bank showed them, which includes their card&rsquo;s fee. By the end of the trip there are four versions of the same dinner, and each person believes theirs.</p>
-        <p>The rates move. Not by much over ten days, but enough that an expense converted on day two and an expense converted on day nine are not being treated the same way, for no reason connected to what anybody bought.</p>
+        <p>The rates can move. An expense converted on day two and one converted on day nine may use different reference dates, even if the group intended to settle every payment using one agreed convention.</p>
         <p>And it doubles the work. Every entry now has an original amount and a converted amount, and the converted one is the one that gets typed in, which means the original is lost. When somebody queries a number three weeks later there is nothing to check it against, because the original is gone.</p>
         <p>The alternative is to record what was actually paid, in the currency it was actually paid in, and convert once at the end. Three hundred and forty francs is entered as three hundred and forty francs. Ninety euros is entered as ninety euros. The conversion happens in one place, with one rate convention, applied to everything. <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">Which exchange rate to use when splitting a trip</Link> sets out the options and which one is worth defaulting to.</p>
       </section>

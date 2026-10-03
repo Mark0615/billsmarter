@@ -13,11 +13,21 @@ export type Payment = {
     baseAmount: number;
     rateUsed: number;
     rateSource: string;
+    rateDate?: string;
+    rateFetchedAt?: string;
     note?: string;
 };
 export const MAX_AMOUNT = 1000000000;
 export function decimalsFor(currency: string) { return ['JPY', 'KRW', 'TWD'].includes(currency) ? 0 : 2; }
 export function formatMoney(value: number, currency: string) { return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimalsFor(currency), maximumFractionDigits: decimalsFor(currency) }).format(value); }
+export function describeRate(payment: Payment) {
+    if (payment.currency === payment.baseCurrency) return null;
+    const rate = String(payment.rateUsed);
+    const source = payment.rateSource === 'frankfurter' ? 'Frankfurter (ECB)' : payment.rateSource === 'open-er-api' ? 'ExchangeRate-API' : payment.rateSource;
+    const date = payment.rateDate ? `Rate date ${payment.rateDate}` : 'Rate date unavailable';
+    const fetched = payment.rateFetchedAt ? `fetched ${payment.rateFetchedAt.replace('T', ' ').slice(0, 19)} UTC` : 'fetch time unavailable';
+    return `1 ${payment.currency} = ${rate} ${payment.baseCurrency} · ${source} · ${date} · ${fetched}`;
+}
 export function validAmount(raw: string, currency = "USD") {
     const pattern = decimalsFor(currency) === 0 ? /^\d+$/ : /^\d+(\.\d{1,2})?$/;
     return pattern.test(raw.trim()) && Number(raw) > 0 && Number(raw) <= MAX_AMOUNT;

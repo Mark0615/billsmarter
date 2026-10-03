@@ -57,6 +57,14 @@ export default function AboutPage() {
           installing an app or creating an account.
         </p>
         <p>
+          A trip to Japan with three friends in March 2025 made the problem concrete for me.
+          I paid for three hotel nights in Taiwan dollars while we were still in Taiwan;
+          friends later covered small purchases for me at Lawson and coffee shops in yen.
+          The receipts were in different currencies even though we were settling one trip.
+          I have left out the original amounts here because they are private; the worked
+          numbers in the guides are examples, not a record of that trip.
+        </p>
+        <p>
           I maintain the site myself and answer the email personally. If something is
           wrong or missing, telling me is genuinely the fastest way to get it fixed, {" "}
           <Link href="/contact">contact page</Link>.

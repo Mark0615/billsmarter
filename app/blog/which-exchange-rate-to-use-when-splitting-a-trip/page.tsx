@@ -5,7 +5,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "Which Exchange Rate Should You Use When Splitting a Trip?",
   description:
-    "Three people paid in three currencies on three different days. Here is how to pick one exchange rate for the whole group without anyone quietly losing money.",
+    "How to agree on a rate method for mixed-currency group expenses, and how BillSmart records the rate, source and date used for each payment.",
   alternates: {
     canonical: "/blog/which-exchange-rate-to-use-when-splitting-a-trip",
   },
@@ -25,6 +25,25 @@ export default function Page() {
       </header>
 
       <section style={{ display: "grid", gap: "12px" }}>
+        <h2>Why I needed this comparison</h2>
+        <p>
+          On a March 2025 Japan trip with three friends, I paid for three hotel nights in
+          TWD before departure. Friends covered Lawson and coffee purchases for me in JPY
+          cash during the trip. Those are two different kinds of receipts in one group
+          settlement. I do not have a verified rate or amount to publish from that trip,
+          so the arithmetic below uses clearly marked examples.
+        </p>
+        <p>
+          For an old trip like that, today&rsquo;s reference rate is not the historical rate
+          we actually faced. If the group agrees to use statement amounts or an
+          expense-date rate, calculate that amount first and enter it in the settlement
+          currency. BillSmart&rsquo;s automatic conversion uses the latest available
+          provider rate when the pair is first needed, and now shows its source and date
+          alongside the payment.
+        </p>
+      </section>
+
+      <section style={{ display: "grid", gap: "12px" }}>
         <h2>The problem, stated plainly</h2>
         <p>
           On a week in Japan, three friends from Taiwan spend across two currencies. One
@@ -41,18 +60,18 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Four rates that all have a claim to being correct</h2>
 
-        <h3>1. The mid-market rate on the day of the expense</h3>
+        <h3>1. A reference rate on the day of the expense</h3>
         <p>
-          The midpoint between what banks buy and sell a currency at. It is the number
-          you get from a search engine or a currency site, BillSmart instead fetches the latest available reference data when a pair is first needed; it does not look up the expense date. Its sources are European Central Bank reference data where the ECB publishes it,
+          A published reference rate gives the group one number that does not depend on
+          any traveller&rsquo;s card. BillSmart instead fetches the latest available rate
+          when a pair is first needed; it does not look up the expense date. Its sources are European Central Bank reference data where the ECB publishes it,
           and a second public source for the currencies it does not. New Taiwan dollars
           are in the second group, so the trip above settles on the fallback rather than
           on ECB data.
         </p>
         <p>
-          It is neutral. Nobody in the group can accuse it of favouring the person who
-          happened to use a particular card. It is also the only one of the four that is
-          easy for everyone to verify independently.
+          It avoids favouring the person who happened to use a particular card. Keep the
+          exact rate, source and date used so everybody can check the calculation later.
         </p>
 
         <h3>2. The rate your card actually charged</h3>
@@ -64,8 +83,8 @@ export default function Page() {
           transaction fee of a few percent and the other does not.
         </p>
         <p>
-          Using statement rates means the group is quietly subsidising whoever brought the
-          worst card.
+          If the group shares statement costs, agree whether card fees are shared too.
+          Otherwise different cards can make identical purchases cost different amounts.
         </p>
 
         <h3>3. The rate on the day you settle up</h3>
@@ -82,10 +101,10 @@ export default function Page() {
           memorable, 1 TWD to 4.7 JPY, say. Everyone uses that number for everything.
         </p>
         <p>
-          It is not the most accurate method, and it does not need to be. Currency moves
-          of one or two percent are noise next to the size of the errors people actually
-          make, like forgetting a taxi. The advantage is that anyone at the table can do
-          the maths on a napkin.
+          It is not the most accurate method. The advantage is that anyone at the table
+          can do the maths on a napkin. BillSmart has no manual rate field, so using this
+          method means calculating each agreed amount yourself and entering it directly
+          in the settlement currency.
         </p>
       </section>
 
@@ -93,10 +112,9 @@ export default function Page() {
         <h2>What to actually do</h2>
         <div className="proseNote">
           <p>
-            <strong>For most trips:</strong> use the mid-market rate, applied uniformly to
-            everyone. Whoever pays foreign transaction fees absorbs their own fees, the
-            same way they would if they had travelled alone. It is neutral, verifiable,
-            and it takes no negotiation.
+            <strong>A simple default:</strong> agree to use the same published reference
+            rate method for everyone. Decide separately whether card and cash withdrawal
+            fees stay with the payer or become shared expenses.
           </p>
         </div>
         <p>
@@ -110,10 +128,8 @@ export default function Page() {
             Enter it as a separate expense rather than fudging the rate.
           </li>
           <li>
-            <strong>The currency moved sharply mid-trip.</strong> A move of five percent
-            or more over a week is unusual, and it is worth agreeing on a single date for
-            everything rather than letting the timing of each purchase decide who pays
-            more.
+            <strong>The currency moved sharply mid-trip.</strong> If the difference would
+            materially change what a friend owes, agree on a rate date before settling.
           </li>
         </ul>
       </section>
@@ -124,14 +140,14 @@ export default function Page() {
         <h3>Dynamic currency conversion</h3>
         <p>
           The card terminal asks whether you would like to be charged in your home
-          currency instead of the local one. Say no. Every time. That option lets the
-          merchant&rsquo;s payment processor set the exchange rate, and it is reliably
-          worse than the one your card network would have used, often by several
-          percent, which dwarfs any of the choices above.
+          currency instead of the local one. That option lets the merchant&rsquo;s payment
+          processor set the exchange rate and may add a markup or fee. Compare the
+          disclosed terms with your card&rsquo;s terms; choosing the local currency avoids
+          the offered DCC conversion.
         </p>
         <p>
           The same prompt appears at ATMs abroad: &ldquo;with conversion&rdquo; or
-          &ldquo;without conversion&rdquo;. Choose without.
+          &ldquo;without conversion&rdquo;. Check the displayed rate and fees before choosing.
         </p>
 
         <h3>Assuming the rate is fixed the moment you tap</h3>
@@ -154,10 +170,10 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Agree on it in the group chat, before you fly</h2>
         <p>
-          Two sentences is enough: &ldquo;Everything settles in TWD at the mid-market rate
-          on the day of each expense. Card fees are your own.&rdquo; Nobody has to think
-          about it again, and the person who eventually does the maths is not also
-          negotiating the rules.
+          Two sentences can settle the rule: &ldquo;Everything settles in TWD using the
+          latest available reference rate when we calculate. Card fees stay with whoever
+          paid them.&rdquo; This matches BillSmart&rsquo;s automatic conversion. If you agree
+          on expense-date rates instead, calculate those amounts separately first.
         </p>
         <p>
           The <Link href="/">BillSmart calculator</Link> does not retrieve historical expense-date rates. Enter each payment in the currency it was charged in, and it
