@@ -144,11 +144,11 @@ export default function HowItWorksPage() {
           amount.
         </p>
         <p>
-          A cross-currency payment displays the exact rate used, provider, provider rate
-          date and the UTC time BillSmart fetched it. The PDF carries the same details.
-          The rate date may be earlier than the fetch time because these are published
-          reference rates, not live card quotes. Changing the base currency recalculates
-          existing payments and updates their rate details.
+          A cross-currency payment displays an approximate rate rounded to two decimal
+          places, and the PDF carries the same short line. BillSmart uses the full rate
+          for the converted amount, so multiplying by the displayed approximation may
+          differ slightly. These are published reference rates, not live card quotes.
+          Changing the base currency recalculates existing payments.
         </p>
         <div className="proseNote">
           <p>

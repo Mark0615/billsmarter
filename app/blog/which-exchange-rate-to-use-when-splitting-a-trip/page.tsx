@@ -5,7 +5,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "Which Exchange Rate Should You Use When Splitting a Trip?",
   description:
-    "How to agree on a rate method for mixed-currency group expenses, and how BillSmart records the rate, source and date used for each payment.",
+    "How to agree on a rate method for mixed-currency group expenses, and how BillSmart shows an approximate conversion rate for each payment.",
   alternates: {
     canonical: "/blog/which-exchange-rate-to-use-when-splitting-a-trip",
   },
@@ -38,8 +38,8 @@ export default function Page() {
           we actually faced. If the group agrees to use statement amounts or an
           expense-date rate, calculate that amount first and enter it in the settlement
           currency. BillSmart&rsquo;s automatic conversion uses the latest available
-          provider rate when the pair is first needed, and now shows its source and date
-          alongside the payment.
+          provider rate when the pair is first needed, and shows a short, two-decimal
+          approximation alongside the payment.
         </p>
       </section>
 
@@ -71,7 +71,9 @@ export default function Page() {
         </p>
         <p>
           It avoids favouring the person who happened to use a particular card. Keep the
-          exact rate, source and date used so everybody can check the calculation later.
+          original and converted amount so everybody can check the settlement later.
+          The short rate shown by BillSmart is rounded for readability; its conversion
+          uses the full provider rate.
         </p>
 
         <h3>2. The rate your card actually charged</h3>

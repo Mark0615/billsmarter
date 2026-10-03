@@ -22,11 +22,8 @@ export function decimalsFor(currency: string) { return ['JPY', 'KRW', 'TWD'].inc
 export function formatMoney(value: number, currency: string) { return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimalsFor(currency), maximumFractionDigits: decimalsFor(currency) }).format(value); }
 export function describeRate(payment: Payment) {
     if (payment.currency === payment.baseCurrency) return null;
-    const rate = String(payment.rateUsed);
-    const source = payment.rateSource === 'frankfurter' ? 'Frankfurter (ECB)' : payment.rateSource === 'open-er-api' ? 'ExchangeRate-API' : payment.rateSource;
-    const date = payment.rateDate ? `Rate date ${payment.rateDate}` : 'Rate date unavailable';
-    const fetched = payment.rateFetchedAt ? `fetched ${payment.rateFetchedAt.replace('T', ' ').slice(0, 19)} UTC` : 'fetch time unavailable';
-    return `1 ${payment.currency} = ${rate} ${payment.baseCurrency} · ${source} · ${date} · ${fetched}`;
+    if (payment.rateUsed > 0 && payment.rateUsed < 0.005) return `1 ${payment.currency} < 0.01`;
+    return `1 ${payment.currency} ≈ ${payment.rateUsed.toFixed(2)}`;
 }
 export function validAmount(raw: string, currency = "USD") {
     const pattern = decimalsFor(currency) === 0 ? /^\d+$/ : /^\d+(\.\d{1,2})?$/;
