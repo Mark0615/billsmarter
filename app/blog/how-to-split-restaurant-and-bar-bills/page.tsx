@@ -28,7 +28,7 @@ export default function Page() {
         <h2>Separate the drinks from the food</h2>
         <p>This is the only rule that changes the arithmetic much, and it is worth doing before you try anything more sophisticated.</p>
         <p>Take the shared food, the plates that arrived in the middle and got passed around, and split that across everybody who ate. Take the alcohol and split it across whoever drank it. Two lines instead of one.</p>
-        <p>An example with real numbers. Eight people at dinner. The food comes to 5,600 TWD including service. Two bottles of wine come to 2,400 TWD, and four people drank them. Under an even split everybody pays 1,000. Under the two-line split, everybody pays 700 for food, the four drinkers pay an extra 600 each, and the designated driver pays 700 instead of 1,000.</p>
+        <p>An illustrative eight-person dinner: shared food costs TWD 5,600 including service, and two bottles of wine cost TWD 2,400. Four people drank the wine. Splitting the TWD 8,000 total evenly would charge everyone TWD 1,000. Entering the food and wine separately makes food TWD 700 per person, plus TWD 600 for each wine drinker. The designated driver pays TWD 700 rather than TWD 1,000.</p>
         <p>That 300 difference is small. What matters is that the driver did not have to ask for it. The reason people resent even splits at a bar is rarely the money. It is having to choose between paying for something they did not have and being the person who raises it.</p>
       </section>
 
@@ -39,7 +39,7 @@ export default function Page() {
         <p>In Japan, tipping is generally not customary. JNTO also notes that some venues charge for an otoshi, a small appetizer that acts as a cover charge. Check the receipt instead of assuming the food price is the whole bill.</p>
         <p>In the United States, a voluntary tip may be added by the payer, but some restaurants already include an automatic gratuity or service charge, especially for large groups. Read the receipt before adding more, and agree which final amount the group is sharing.</p>
         <p>The rule that survives all three is the same: log the number that actually left the payer&rsquo;s account, not the number printed next to the food. If the receipt says 5,600 and the payer added 800 on top, the entry is 6,400. Everything else follows from that. There is no separate field for tax or service, and that is deliberate: putting the real total in means the extras are shared in the same proportion as the meal, rather than landing on whoever held the card.</p>
-        <p>The failure mode is specific and it repeats. Somebody says &ldquo;it was about five and a half thousand, send me 700 each&rdquo;, the group sends 700 each, and the payer is 800 short because they rounded the total down and the service charge up in their head. Once is nothing. Across a weekend it adds up to a real number, and the person absorbing it usually says nothing.</p>
+        <p>A separate, fully checkable service-charge example: eight people share a final TWD 6,400 receipt equally. The person whose card paid owes TWD 800 themselves and should receive TWD 800 from each of the other seven, TWD 5,600 in total. If they ask for only TWD 700 each after recalling an earlier subtotal, they collect TWD 4,900 and absorb an extra TWD 700. Enter the final paid amount from the receipt so the calculation includes service once.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>

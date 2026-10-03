@@ -23,7 +23,7 @@ export const posts: Post[] = [
     slug: "which-exchange-rate-to-use-when-splitting-a-trip",
     title: "Which Exchange Rate Should You Use When Splitting a Trip?",
     summary:
-      "Three people paid in three currencies on three different days. How to pick one rate for the whole group without anyone quietly losing money.",
+      "A Taiwan–Japan trip with TWD hotel costs and JPY cash purchases shows why a group needs to agree on one exchange-rate method.",
     publishedAt: "2026-08-05",
     updatedAt: "2026-10-04",
     readingTime: "5 min read",
@@ -32,25 +32,25 @@ export const posts: Post[] = [
     slug: "who-should-pay-the-deposit-group-travel",
     title: "Who Should Pay the Deposit? Handling Big Upfront Bookings",
     summary:
-      "One person putting a whole trip on their card carries real risk: cancellations, partial refunds, currency moves and months of exposure.",
+      "An upfront hotel booking needs a reimbursement plan, a cancellation rule and an agreed amount before the trip begins.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "5 min read",
   },
   {
     slug: "how-to-split-bills-when-incomes-are-different",
     title: "How to Split Bills When Everyone Earns Different Amounts",
     summary:
-      "Proportional splitting with the arithmetic worked through, where an even split starts to hurt, and how to raise it without it being awkward.",
+      "Income-based shares and opt-in expenses solve different problems. See the arithmetic and what BillSmart can record directly.",
     publishedAt: "2026-08-05",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-10-04",
     readingTime: "5 min read",
   },
   {
     slug: "bill-splitting-etiquette-around-the-world",
     title: "Bill-Splitting Etiquette Around the World",
     summary:
-      "Separate checks are routine in some countries and awkward in others. What to expect in Taiwan, Japan, Korea, the US, the UK and Europe.",
+      "Questions to ask before paying a group bill abroad, with firsthand Taiwan context and sourced notes on payment methods and service charges.",
     publishedAt: "2026-08-05",
     updatedAt: "2026-10-04",
     readingTime: "5 min read",
@@ -90,9 +90,9 @@ export const posts: Post[] = [
     title:
       "Roommate Shared Expenses: The Costs That Actually Cause Arguments",
     summary:
-      "Rent is never the problem. Bi-monthly utility bills that do not line up with monthly rent, the person who always buys the loo roll, guests, and moving out mid-cycle.",
+      "Record shared supplies and bills with different service periods, including a worked example for a flatmate leaving mid-cycle.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-10",
+    updatedAt: "2026-10-04",
     readingTime: "6 min read",
   },
   {
@@ -102,7 +102,7 @@ export const posts: Post[] = [
     summary:
       "The drinks bill worked through in numbers, how service charges differ between Taiwan, Japan and the US, and why saying how you will split it before ordering changes what people order.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "6 min read",
   },
   {
@@ -110,9 +110,9 @@ export const posts: Post[] = [
     title:
       "How to Split Concert and Sports Event Tickets with Friends",
     summary:
-      "One account, one card, ninety seconds, and one person carrying the cost for months. Getting reimbursed before the show, and what to agree in case it is postponed.",
+      "Agree on ticket reimbursement, exchange-rate method and resale risk before one person pays for the group.",
     publishedAt: "2026-03-08",
-    updatedAt: "2026-09-27",
+    updatedAt: "2026-10-04",
     readingTime: "6 min read",
   },
 ];

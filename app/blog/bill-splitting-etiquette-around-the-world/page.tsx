@@ -25,9 +25,11 @@ export default function Page() {
       <div className="proseNote">
         <p>
           <strong>A caveat worth stating first.</strong> These are tendencies, not rules.
-          The venue and the people at your table matter more than nationality. My
-          Taiwan–Japan example comes from a real trip; the other country notes are
-          questions to check locally, not a report of my own experience in every place.
+          The venue and the people at your table matter more than nationality. The
+          Taiwan friend-group practice below is my own experience. My Japan trip
+          involved mixed-currency payments, but it cannot establish a rule for every
+          Japanese restaurant. The other country notes are questions to check locally,
+          not reports of my own experience in every place.
         </p>
       </div>
 

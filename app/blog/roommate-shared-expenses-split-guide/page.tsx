@@ -4,7 +4,7 @@ import PostMeta from "../PostMeta";
 
 export const metadata: Metadata = {
   title: "Roommate Shared Expenses: The Costs That Actually Cause Arguments",
-  description: "Rent is never the problem. Bi-monthly utility bills that do not line up with monthly rent, the person who always buys the loo roll, guests, and moving out mid-cycle.",
+  description: "How to record shared supplies and bills that cover different periods, including an example of a flatmate moving out mid-cycle.",
   alternates: { canonical: '/blog/roommate-shared-expenses-split-guide' },
 };
 
@@ -15,7 +15,9 @@ export default function Page() {
         <h1>Roommate Shared Expenses: The Costs That Actually Cause Arguments</h1>
         <PostMeta slug="roommate-shared-expenses-split-guide" />
         <p className="lead">
-          Nobody falls out over rent. Rent is one number, everybody knows it, and it arrives on the same day every month.
+          Rent has a due date everyone can see. Supplies, utilities and guests are harder
+          to track because different people pay at different times and a bill may cover
+          more than one settlement period.
         </p>
       </header>
 
@@ -25,12 +27,8 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>The billing cycles do not line up, and that is the real problem</h2>
-        <p>In Taiwan, rent is monthly. Electricity from Taipower arrives every two months. Water is usually every two months as well, on a different schedule. Gas is often monthly. Internet is monthly, on whatever date the contract started.</p>
-        <p>So in a given month one flatmate pays rent, another pays an electricity bill covering two months of which one is already settled, and a third pays for water covering a period that overlaps neither. Trying to make these balance inside a single month is what produces the recurring argument about whether somebody already paid for something.</p>
-        <p>Two approaches work, and mixing them does not.</p>
-        <p>Settle on a fixed date regardless of what has arrived. Pick the last weekend of the month. Everything paid since the last settlement goes in, whatever period it covers. Over a year this evens out completely, and it stops anybody having to reason about billing periods at all.</p>
-        <p>Or settle per bill as it arrives. This is more work but it is exact, and it suits flats where somebody is likely to move out mid-cycle.</p>
-        <p>What does not work is settling sometimes, which is what most flats actually do. The bill that was paid but never settled is the one that surfaces four months later when somebody is moving out.</p>
+        <p>A household might pay rent monthly while an electricity or water bill covers a different period. Check the dates on each actual bill rather than assuming every Taiwan supplier or property uses the same schedule.</p>
+        <p>Two approaches can work. You can settle every payment received since the last agreed settlement date, or wait and settle each bill when it arrives. Keep a record of which bill was included so it is not charged again. If someone moves in or out, check the service period and agree how to divide it rather than assuming that paying on one date makes the whole bill that month&rsquo;s expense.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -50,17 +48,17 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Subscriptions, repairs, guests and pets</h2>
-        <p>Subscriptions sit on one person&rsquo;s account and cost a small amount every month, which makes collecting them monthly disproportionately annoying. Collect several months at once. Nobody minds paying six months of a streaming service in one transfer; everybody minds being asked for 150 NT twelve times a year.</p>
-        <p>Repairs divide three ways. Normal wear and tear is the landlord&rsquo;s, and it is worth checking the lease rather than assuming. Damage caused by one person is theirs. Things the flat chooses to buy or hire, such as a monthly cleaner for the shared areas, are split by person rather than by room, because the shared areas are shared.</p>
-        <p>Guests are the one nobody agrees in advance. Somebody&rsquo;s partner stays four nights a week and uses the hot water, the electricity and the kitchen. There is no correct answer, but there is a correct time to discuss it, which is before it has been happening for three months. The same logic applies to money generally, and <Link href="/blog/how-to-split-bills-when-incomes-are-different">how to split bills when incomes are different</Link> covers the harder version of it. A common landing point is that occasional guests are free and anybody effectively living there contributes.</p>
-        <p>Pets belong entirely to their owner. Food, litter, vet bills, and any damage to shared furniture. Everybody enjoying the cat does not make the cat a shared expense.</p>
+        <p>Subscriptions sit on one person&rsquo;s account and may be small enough that monthly transfers feel cumbersome. If everyone agrees, collect several months at once and keep a note of which months have been covered. That prevents the same subscription from appearing again in a later settlement.</p>
+        <p>Do not enter a repair as a roommate debt until you know who is responsible. In Taiwan, the <a href="https://pip.moi.gov.tw/Publicize/Info/G1020">Ministry of the Interior&rsquo;s residential lease terms</a> address repair responsibility and exceptions for agreed tenant responsibilities or damage attributable to a tenant. Check your signed lease and discuss the specific damage with the landlord. If the flatmates independently agree to buy a shared kettle or hire a cleaner, record the actual payer and the people who agreed to share that cost.</p>
+        <p>Guests can change how the household uses hot water, electricity and shared supplies. If someone is staying regularly, agree whether and how they contribute before the arrangement becomes routine. Occasional visits and an additional resident need not follow the same rule. <Link href="/blog/how-to-split-bills-when-incomes-are-different">Splitting bills when incomes are different</Link> covers another reason flatmates may choose unequal shares.</p>
+        <p>Pet food and veterinary bills generally belong to the pet owner unless the household explicitly agrees otherwise. Do not turn enjoying someone&rsquo;s cat into an assumed shared expense.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Moving in and moving out</h2>
         <p>This is where unrecorded spending becomes an actual dispute rather than a mild annoyance.</p>
-        <p>When somebody leaves mid-cycle, the flat has to work out which bills covered which period and what proportion of them belongs to the person leaving. If the flat has been settling on a fixed date, this is a short conversation. If it has been settling occasionally, it is an argument, because the outgoing flatmate is being asked to pay a share of a two-month electricity bill for a period they were only present for half of.</p>
-        <p>The deposit is separate from all of this and should stay separate. It is the landlord&rsquo;s to return and the tenant&rsquo;s to receive. Folding it into the flat&rsquo;s internal accounting is how it disappears.</p>
+        <p>Here is an illustrative calculation, not a claim about actual monthly electricity use. A TWD 3,000 bill covers August and September. Three flatmates lived there in August; one left before September, leaving two. If everyone agrees to allocate half the bill to each month, the person who left owes TWD 500 for August. The other two owe TWD 1,250 each: TWD 500 for August and TWD 750 for September. Those shares add back to TWD 3,000. BillSmart cannot infer dates or occupancy or divide one payment into unequal shares. Settle these agreed shares from the original bill separately; entering the full TWD 3,000 as one shared payment would divide it equally.</p>
+        <p>Keep the rental deposit separate from ordinary shared expenses. Use the lease and deposit receipt to record who paid it and how any returned amount should be distributed.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>

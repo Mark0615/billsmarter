@@ -154,7 +154,10 @@ export default function HowItWorksPage() {
           <p>
             <strong>Reference rates are not your bank&rsquo;s rate.</strong> A card
             issuer typically adds a spread, and a foreign-transaction fee on top of that.
-            Fees vary by card and bank. If the group agrees to reimburse the actual bank charge, enter the statement amount directly in the settlement currency.
+            Fees vary by card and bank. If the group wants to reimburse the actual bank
+            charge or use a past rate, calculate and settle it from the original receipt
+            and statement outside BillSmart. Entering only the converted amount here
+            would make the PDF show a payment currency different from the receipt.
           </p>
         </div>
       </section>
@@ -256,7 +259,10 @@ export default function HowItWorksPage() {
           </li>
           <li>
             <strong>Percentage or share-weighted splits.</strong> A payment is divided
-            evenly among the people selected. To give someone a double share, divide the amount into separate entries with different groups; do not duplicate the full payment.
+            evenly among the people selected. You can enter itemized portions separately,
+            but the PDF will list them as separate entries; keep the original receipt.
+            For a single payment with arbitrary percentage shares, calculate and settle
+            the agreed amounts outside this tool.
           </li>
           <li>
             <strong>Bookkeeping and tax.</strong> Use the exchange-rate rules required by your employer or relevant authority rather than assuming this calculator meets them.

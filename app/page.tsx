@@ -43,7 +43,7 @@ const featureItems = [
 const useCaseItems = [
   {
     title: "Living with Roommates",
-    desc: "Rent is never the argument. The friction is in the small overlapping spending: the household supplies one person keeps replacing, bills that arrive every two months against rent that arrives monthly, groceries only half the flat eats.",
+    desc: "Rent has a visible due date. Shared supplies, bills covering different periods and groceries only some flatmates use can be harder to settle, especially when someone moves out.",
     link: "/blog/roommate-shared-expenses-split-guide",
   },
   {

@@ -17,9 +17,9 @@ export default function Page() {
         <h1>Who Should Pay the Deposit? Handling Big Upfront Bookings</h1>
         <PostMeta slug="who-should-pay-the-deposit-group-travel" />
         <p className="lead">
-          Flights and accommodation are usually booked months early, by one person, on one
-          card, for an amount that dwarfs everything else on the trip. It is the single
-          largest source of group-money problems, and almost nobody plans for it.
+          A large booking often lands on one person&rsquo;s card before the trip begins.
+          Agree when and how the others will reimburse them, and what happens if the
+          booking changes. Those decisions matter more than the final division.
         </p>
       </header>
 
@@ -31,8 +31,9 @@ export default function Page() {
         </p>
         <ul>
           <li>
-            <strong>Cash flow.</strong> Six months of a large balance on a card, possibly
-            interest-bearing, possibly crowding out their own spending.
+            <strong>Cash flow.</strong> The buyer must pay the card statement even if
+            friends have not reimbursed them yet. Delayed repayment can strain their
+            budget or create card interest if they cannot pay the statement in full.
           </li>
           <li>
             <strong>Collection.</strong> Chasing four adults for money is a social cost
@@ -44,14 +45,14 @@ export default function Page() {
             the whole trip dies, who eats the non-refundable portion?
           </li>
           <li>
-            <strong>Currency.</strong> On a foreign booking, the rate is fixed the day
-            they paid. If the group reimburses six months later at a different rate,
-            someone gains and someone loses.
+            <strong>Currency.</strong> A foreign-currency price, the card&rsquo;s final
+            statement amount and a published reference rate may differ. The group needs
+            to agree which amount it is reimbursing.
           </li>
         </ul>
         <p>
-          None of these are hypothetical, and all of them are cheap to solve in advance
-          and expensive to solve afterwards.
+          These are foreseeable questions. Agreeing on them before anyone books is easier
+          than reconstructing the agreement after a cancellation.
         </p>
       </section>
 
@@ -64,17 +65,21 @@ export default function Page() {
           ready.
         </p>
         <p>
-          Large upfront bookings should never be inside the running trip tally. Settle
-          them separately and early, then let the day-to-day expenses be their own
-          exercise. It keeps the eventual settlement small enough that nobody is stressed
-          by it.
+          A practical option is to settle large bookings separately and early. If a
+          booking has already been reimbursed, leave it out of the final trip calculation
+          so nobody pays twice. If it is still unpaid, include it once with the other
+          expenses when the group settles.
         </p>
         <div className="proseNote">
           <p>
-            <strong>Why this matters more than it sounds:</strong> if the big items are
-            already square, a mistake in the trip tally is worth a few hundred dollars,
-            not a few thousand. Errors stop being frightening, and people stop
-            double-checking each other.
+            <strong>Illustrative four-person example:</strong> one traveller pays TWD
+            24,000 for three hotel nights before a Japan trip. Each person&rsquo;s agreed
+            share is TWD 6,000, so the other three each transfer TWD 6,000 before
+            departure. During the trip, a friend pays for a convenience-store purchase
+            in JPY on someone else&rsquo;s behalf. Record that later JPY payment in the
+            final calculation, but not the hotel that was already reimbursed. This
+            resembles the mixed-currency situation behind BillSmart; the amounts here
+            are invented examples, not my friends&rsquo; receipts.
           </p>
         </div>
       </section>
@@ -97,13 +102,12 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Rule three: decide the cancellation rule before you book</h2>
         <p>
-          Ten seconds in the group chat, months before it matters. There are only three
-          reasonable answers, and any of them works as long as it was agreed:
+          Put the rule in the group chat before paying. Three possible agreements are:
         </p>
         <ul>
           <li>
-            <strong>Personal risk.</strong> If you drop out, you lose your share. The
-            default, and the fairest for the people still going.
+            <strong>Personal risk.</strong> A person who drops out covers their
+            non-refundable share, if everyone accepted that rule before booking.
           </li>
           <li>
             <strong>Shared risk.</strong> The group absorbs a cancellation together.
@@ -118,30 +122,32 @@ export default function Page() {
         </ul>
         <p>
           Note the asymmetry that makes this urgent: on a rented house, one person leaving
-          does not reduce the bill at all. Everyone else&rsquo;s share goes up. Nobody
-          expects that until it happens.
+          may not reduce the bill at all. The remaining travellers then need to decide
+          who covers the missing share under their agreed rule.
         </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
-        <h2>Rule four: fix the exchange rate at the moment of booking</h2>
+        <h2>Rule four: agree on the reimbursement amount</h2>
         <p>
-          If the booking was in a foreign currency, fix the rate on the day it was paid
-          rather than the day people reimburse. Reimbursing at a later rate means the
-          group is unintentionally speculating on currency, with the booker taking the
-          whole position, and on a deposit paid six months out, that position is
-          large and lasts a long time.
+          If the booking was charged in a foreign currency, decide whether to share the
+          final card-statement amount or convert the original price using a documented
+          reference rate on an agreed date. A card transaction may settle after the
+          purchase, and fees can change the final cost. Neither method is automatically
+          fairer; the group should know which amount it is accepting.
         </p>
         <p>
-          This is a deliberate exception to the convention we recommend everywhere else.
-          For ordinary trip spending the answer is the mid-market rate applied uniformly,
-          with card fees staying on the card that charged them; see{" "}
+          BillSmart fetches the latest available reference rate when a currency pair is
+          first needed. It does not retrieve the rate on a past booking date or offer a
+          manual-rate field. For a historical reference rate or the final card statement,
+          calculate and settle that large booking separately, keeping the original
+          foreign-currency receipt and transfer records. Entering only the converted
+          amount as a new payment would make the PDF show a different payment currency
+          from the actual receipt. For the other rate choices, see{" "}
           <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">
             which exchange rate to use when splitting a trip
           </Link>
-          . A single large upfront booking is the case where pinning the rate to the
-          booking date is worth the inconsistency, because the exposure is concentrated on
-          one person for months rather than spread across everyone for a week.
+          .
         </p>
       </section>
 
@@ -168,14 +174,14 @@ export default function Page() {
         <div className="proseNote">
           <p>
             &ldquo;Flights: I&rsquo;ll book, everyone sends their share within a week.
-            House: Ana books, same deal. Big bookings settle at the rate on the booking date. If
-            someone drops out after we&rsquo;ve booked, that person covers their own
-            share.&rdquo;
+            House: Ana books, same deal. For foreign-currency bookings we share the
+            final card-statement amount, including its fee. If someone drops out, they
+            cover their non-refundable share. Does that work for everyone?&rdquo;
           </p>
         </div>
         <p>
-          Nobody has ever objected to this message. Its entire value is that it exists
-          before there is money at stake, when agreeing costs nothing.
+          This is a template, not a report of what every group accepts. Change the rate
+          and cancellation rules to fit your booking, then get agreement before paying.
         </p>
       </section>
 
@@ -197,7 +203,9 @@ export default function Page() {
             <section className="articleWorked">
           <h2>Worked example</h2>
           <p>
-            One person fronting a large booking, exactly the exposure this article is about. Ana put the villa deposit on her card; Ben picked up groceries. Both split evenly across the four.
+            An alternative illustrative case where the large booking has not yet been
+            reimbursed: Ana put the villa deposit on her card; Ben picked up groceries.
+            Both still need to be settled, so both appear in this calculation.
           </p>
           <figure className="articleFigure">
             <Image

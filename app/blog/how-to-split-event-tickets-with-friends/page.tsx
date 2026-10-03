@@ -22,12 +22,12 @@ export default function Page() {
 
       <section style={{ display: "grid", gap: "12px" }}>
         <p>One person may buy adjacent seats for everybody through a ticketing platform. Buying separately can make sitting together harder, depending on the event and seat selection rules. Agree who will purchase before sales open and check the event&rsquo;s own terms.</p>
-        <p>The one they do not: that person is now carrying the whole cost, the whole refund risk, and the entire relationship with the ticketing platform, potentially for months. Tickets for a show in eight months are paid for today.</p>
+        <p>Once one person buys the tickets, they carry the cost and become the platform&rsquo;s contact for changes or refunds, potentially for months. Decide how the group will reimburse them and keep the purchase confirmation.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Get paid back before the show, not after</h2>
-        <p>The default in most groups is to settle on the night. For ordinary spending that is fine. For tickets bought months in advance it is the wrong way round.</p>
+        <p>Waiting until the event means the buyer fronts everyone&rsquo;s tickets for weeks or months. Agree on a reimbursement date when you buy.</p>
         <p>Reimburse within a week of the purchase. The reason is not that anybody will forget, it is that the buyer is otherwise lending the group a meaningful sum for a long time, and the size of that loan is invisible to everybody except them. Four grandstand seats at 6,000 TWD each is 24,000 TWD sitting on one person&rsquo;s credit card statement, and it will appear on that statement whether or not the group has got round to it.</p>
         <p>This also protects the group. If somebody drops out four months before the show, the question of who absorbs that seat is much easier to discuss when everybody has already paid than when the buyer is still owed for all of it.</p>
       </section>
@@ -35,9 +35,11 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Agree the exchange rate before you ask for money</h2>
         <p>If the tickets were priced in another currency, say which rate you are dividing by before anyone transfers anything.</p>
-        <p>The default worth using is the mid-market rate on the day of purchase, the number a search engine gives you, which everybody in the group can check for themselves.</p>
-        <p>Dividing your card statement instead looks more accurate and is not. It charges the group for your card&rsquo;s foreign transaction fee, so whoever brought the worst card quietly gets subsidised by everybody else. Fees belong to the card that charged them. There is a fuller comparison in <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">which exchange rate to use when splitting a trip</Link>.</p>
-        <p>State the number in the group chat when you ask for the money. &ldquo;Tickets were 180 GBP each, I&rsquo;m using 40.2 TWD to the pound, so 7,236 each.&rdquo; Nobody has ever argued with a number that was stated in advance and could be checked.</p>
+        <p>A dated published reference rate keeps the conversion independent of the buyer&rsquo;s card. Sharing the final card-statement amount instead reimburses what the buyer actually paid, including any spread or fee. Neither is automatically the right rule; agree whether the group shares card costs. There is a fuller comparison in <Link href="/blog/which-exchange-rate-to-use-when-splitting-a-trip">which exchange rate to use when splitting a trip</Link>.</p>
+        <div className="proseNote">
+          <p><strong>Illustrative ticket purchase:</strong> four friends buy four JPY 12,000 tickets on one card, JPY 48,000 total. If they agree on a documented rate of 1 JPY = TWD 0.22, the shared amount is TWD 10,560, or TWD 2,640 each. If the final card statement is TWD 10,800 and they choose to share that actual cost instead, it is TWD 2,700 each. The TWD 240 difference stays with the buyer under the first rule and is shared under the second. These are invented figures, not a claim about a particular card or date.</p>
+        </div>
+        <p>BillSmart cannot look up a past purchase-date rate or accept a manual rate. Settle either agreed TWD amount above using the original ticket receipt and transfer records outside the tool. Entering it as a new TWD payment would make the PDF show a currency different from the actual JPY purchase. If the group instead agrees to BillSmart&rsquo;s latest reference rate and the tickets are still unpaid, enter the original JPY payment with the buyer as payer and all four ticket holders selected. Once the buyer has been reimbursed, leave that purchase out of the later event-night calculation to avoid charging it twice.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -45,11 +47,11 @@ export default function Page() {
         <p>If an event is cancelled and the buyer receives a refund, they can return each person&rsquo;s original share. Check the event&rsquo;s refund policy first: fees, deadlines and the refunded amount may differ.</p>
         <p>Postponement can be messier. Suppose a show moves to a date four months later and two of five friends can no longer attend. Whether the tickets remain valid, can be refunded, or may be transferred depends on the event and platform terms. The group may need to find replacements or decide how to share an unrecoverable cost.</p>
         <p>Two things make this survivable, and both cost nothing at the time of purchase.</p>
-        <p>Write down who paid what, with the amount and the date, somewhere that is not one person&rsquo;s memory. When a refund or a resale happens later, the money has to be distributed in the same proportions it was collected, and reconstructing those proportions eight months on is genuinely difficult.</p>
+        <p>Write down who paid what, with the amount and the date, somewhere that is not one person&rsquo;s memory. Save the ticket confirmation and each transfer record. A BillSmart PDF records the calculation but does not prove which transfers were actually sent. When a refund or resale happens later, those payment records tell the buyer what each person contributed.</p>
         <p>Ask people to put a note on the transfer. &ldquo;F1 grandstand&rdquo; or &ldquo;Coldplay 4/12&rdquo; on a bank transfer costs nothing to type and turns the buyer&rsquo;s transaction history into the record of who paid for what. This matters most in exactly the situation where you need it: months later, under time pressure, when a seat needs reselling.</p>
         <p>Decide the drop-out rule when you buy, not when somebody drops out. Either the person who cannot come is responsible for finding a replacement or selling their seat, or the group absorbs it. Both are reasonable. Neither is a conversation you want to have for the first time when it is already happening.</p>
         <p>Check whether the tickets can be transferred at all before you assume a seat can be resold. Large venues and platforms increasingly tie tickets to the buyer&rsquo;s identity, which is aimed at scalping but catches ordinary groups too. If the tickets are in one person&rsquo;s name and cannot be reassigned, &ldquo;sell your seat&rdquo; is not an option that exists, and the group is choosing between absorbing the cost and having somebody attend who was not originally coming. Knowing which situation you are in changes what the fair answer looks like.</p>
-        <p>There is a related trap with the money. If a seat is resold at a different price from the one it was bought at, the difference belongs to whoever bore the risk, and that is worth stating in advance too. A seat bought at 4,800 and resold at 3,000 has lost 1,800, and if nobody agreed who carries that, the answer defaults to whoever happened to hold the account.</p>
+        <p>There is a related question about a resale loss. A seat bought at TWD 4,800 and resold at TWD 3,000 has lost TWD 1,800. Decide who bears that difference when the group sets its drop-out rule; the ticketing account holder should not become responsible merely because their name was on the purchase.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
@@ -57,12 +59,12 @@ export default function Page() {
         <p>Ticket money is large, planned, and paid by one person. Everything at the venue is small, unplanned, and paid by whoever was nearest the counter.</p>
         <p>One person buys four beers. Somebody else buys a tour shirt for themselves and one for a friend who is stuck in the queue. Two people share a taxi home and the other three take the MRT. None of these cover the whole group, and by the following morning nobody remembers any of them.</p>
         <p>The treatment is the same as the tickets: each payment has a payer and a list of people it was actually for. Four equally priced beers bought for four of the six can be one entry covering four people. If the two shirts cost different amounts, enter them separately so each person owes the right price. The taxi is one entry covering two.</p>
-        <p>Logged that way, the small stuff nets off against the big stuff. The person who fronted the tickets is owed a lot; the person who bought the round is owed a little; the <Link href="/">calculator</Link> subtracts one from the other rather than moving both.</p>
+        <p>Logged that way, expenses that are still unpaid net against each other. The <Link href="/">calculator</Link> can combine an unpaid ticket purchase with venue spending, or you can settle tickets first and calculate only the new spending on event night.</p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>What that looks like when you settle</h2>
-        <p>Say five friends go to a show. Ana bought five tickets at 4,800 TWD each. Ben bought a round for himself and two others. Chen paid for a shared taxi home for three people.</p>
+        <p>Say five friends go to a show. Ana bought five tickets at TWD 4,800 each and has not yet been reimbursed. Ben bought a round for himself and two others. Chen paid for a shared taxi home for three people.</p>
         <p>Entered as three payments with three different sets of people, the result is a short list of transfers rather than a web of individual debts. Ben and Chen do not send Ana the full ticket price and then wait to be paid back for the drinks and the taxi; the amounts cancel and only the difference moves.</p>
         <p>When the group is ready to settle, check the amounts and click Download PDF in the settlement panel. It records the payments and final transfers. The calculator does not keep an editable history after you close or refresh the page.</p>
       </section>

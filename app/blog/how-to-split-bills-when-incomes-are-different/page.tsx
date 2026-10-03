@@ -6,7 +6,7 @@ import PostMeta from "../PostMeta";
 export const metadata: Metadata = {
   title: "How to Split Bills When Everyone Earns Different Amounts",
   description:
-    "Proportional splitting with the actual arithmetic worked through, including the disposable-income method, where an even split starts to hurt, and how to raise it without it being awkward.",
+    "Compare income-based and opt-in expense splits with worked amounts, and see which parts BillSmart can calculate directly.",
   alternates: {
     canonical: "/blog/how-to-split-bills-when-incomes-are-different",
   },
@@ -19,24 +19,24 @@ export default function Page() {
         <h1>How to Split Bills When Everyone Earns Different Amounts</h1>
         <PostMeta slug="how-to-split-bills-when-incomes-are-different" />
         <p className="lead">
-          An even split is fair when everyone is roughly in the same financial position.
-          When they are not, it quietly forces the lowest earner to either overspend or
-          opt out, and opting out is the part that damages the friendship.
+          An even split is easy to calculate, but it is not always what a group wants.
+          Income-based shares can work for a household that agrees to disclose incomes;
+          friends may prefer a shared budget with expensive activities left opt-in.
+          These are different agreements, so decide which one you mean before paying.
         </p>
       </header>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Why an even split stops working</h2>
         <p>
-          A NT$3,000 dinner split four ways is NT$750 each. For someone earning NT$120,000
-          a month that is a rounding error. For someone earning NT$38,000 it is a
-          meaningful share of what they have left after rent.
+          A NT$3,000 dinner split four ways is NT$750 each. The same amount can feel very
+          different to friends with different budgets or obligations. The useful question
+          is whether everyone agreed to that restaurant and that split before ordering.
         </p>
         <p>
-          The visible symptom is not complaint. It is the friend who is suddenly busy
-          every time the group picks a restaurant, or who orders a starter and says they
-          ate earlier. Uneven incomes do not usually produce arguments about money; they
-          produce people quietly dropping out of the group.
+          If one person keeps opting out of group plans, ask about the budget without
+          asking them to justify their salary. A cheaper plan can solve the problem before
+          any formula is needed.
         </p>
       </section>
 
@@ -88,13 +88,23 @@ export default function Page() {
           someone&rsquo;s situation. The highest earner here might be repaying a student
           loan the others do not have.
         </p>
+        <p>
+          <strong>How to settle this example:</strong> if the first flatmate paid the
+          full NT$36,000, the second transfers them NT$12,000 and the third transfers
+          NT$15,000. BillSmart has no percentage field and would split a single
+          NT$36,000 payment evenly; use the agreed proportional calculation and original
+          receipt outside the tool. Dividing it into three calculator entries would make
+          its PDF look like three separate payments instead of the one payment that
+          actually happened.
+        </p>
       </section>
 
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Method 2: Split by disposable income</h2>
         <p>
-          Same maths, but each person first subtracts their genuinely fixed obligations, loan repayments, family support, medical costs. What remains is what they can
-          actually choose how to spend, and the split runs on that.
+          This uses the same calculation after each person subtracts obligations they
+          agree to consider, such as loan repayments or family support. The remaining
+          amounts, rather than gross incomes, determine the shares.
         </p>
         <p>
           Two friends both earn NT$70,000. One sends NT$20,000 a month to their parents.
@@ -114,18 +124,16 @@ export default function Page() {
       <section style={{ display: "grid", gap: "12px" }}>
         <h2>Method 3: Split the base, not the extras</h2>
         <p>
-          The one that works best for friend groups, because it never requires anyone to
-          say a number out loud.
+          This is an option for friend groups that do not want to discuss incomes.
         </p>
         <p>
           Shared costs everyone benefits from equally get split evenly: the taxi, the
           Airbnb, the rental car. Anything discretionary is charged to whoever chose it, the wine, the upgraded room, the tasting menu, the tour nobody else wanted.
         </p>
         <p>
-          This sidesteps income entirely and lands in roughly the right place anyway,
-          because people self-select into the spending they can afford. It also removes
-          the specific resentment that does the most damage: a light drinker subsidising
-          a heavy one.
+          It avoids charging someone for an optional purchase they did not choose, such
+          as making a non-drinker pay for a bottle of wine. It does not guarantee that
+          the overall plan fits everyone&rsquo;s budget, so set that budget first.
         </p>
         <p>
           Practically, it means logging one dinner as two or three entries rather than
@@ -214,7 +222,10 @@ export default function Page() {
             <section className="articleWorked">
           <h2>Worked example</h2>
           <p>
-            The structure this article argues for, entered as two lines: the house split evenly across everyone, and the expensive dinner charged only to the two who went.
+          A separate opt-in example, distinct from the income-based calculation above:
+          the house is split evenly across everyone, and the expensive dinner is charged
+          only to the two who went. This is the kind of split the calculator handles
+          directly without anyone disclosing a salary.
           </p>
           <figure className="articleFigure">
             <Image

@@ -104,9 +104,9 @@ export default function Page() {
         </p>
         <p>
           It is not the most accurate method. The advantage is that anyone at the table
-          can do the maths on a napkin. BillSmart has no manual rate field, so using this
-          method means calculating each agreed amount yourself and entering it directly
-          in the settlement currency.
+          can do the maths on a napkin. BillSmart has no manual rate field. Calculate and
+          settle amounts using that fixed rate outside the tool, keeping the original
+          foreign-currency receipts with your group&rsquo;s transfer records.
         </p>
       </section>
 
@@ -178,8 +178,7 @@ export default function Page() {
           on expense-date rates instead, calculate those amounts separately first.
         </p>
         <p>
-          The <Link href="/">BillSmart calculator</Link> does not retrieve historical expense-date rates. Enter each payment in the currency it was charged in, and it
-          converts to your chosen base currency and keeps the original and converted amount for every entry. For a historical or agreed rate, calculate the agreed amount and enter it directly in the settlement currency.
+          The <Link href="/">BillSmart calculator</Link> does not retrieve historical expense-date rates. When your group agrees to its latest available reference rate, enter each payment in the currency actually charged; the tool keeps the original and converted amount. For a historical or manually agreed rate, calculate and settle separately from the original receipts. Entering only the converted amount as a new payment would misstate the currency in the PDF.
         </p>
       </section>
 
